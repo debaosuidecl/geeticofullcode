@@ -1,0 +1,52 @@
+.Row {
+  display: flex;
+  padding: 10px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  /* flex: 1; */
+  flex-flow: column;
+  /* height: 30px; */
+}
+.Col {
+  display: flex;
+  flex-flow: column;
+  flex: 1;
+  width: 100%;
+  /* background: gold; */
+  /* text-align: center; */
+  align-items: flex-start;
+  justify-content: center;
+  /* margin: auto; */
+}
+.Col label {
+  font-weight: 100;
+}
+.Col input,
+.Col select,
+.Col textarea {
+  width: 100%;
+  outline: none;
+  padding: 10px;
+  border: none;
+
+  background: rgb(247, 247, 247);
+}
+
+.Col textarea {
+  resize: none;
+  width: 100%;
+  min-height: 200px;
+}
+
+@media (min-width: 600px) {
+  .Col input,
+  .Col select,
+  .Col textarea {
+    width: 80%;
+  }
+  .Row {
+    flex-flow: row;
+    align-items: flex-end;
+  }
+}

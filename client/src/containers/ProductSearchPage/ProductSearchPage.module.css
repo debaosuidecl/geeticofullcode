@@ -1,0 +1,48 @@
+.ProductsCont {
+  display: grid;
+  padding: 10px;
+  justify-content: center;
+
+  grid-template-columns: minmax(auto, 270px) minmax(auto, 270px);
+
+  grid-gap: 8px;
+
+  /* grid-template-areas:
+    'item1 item2 item3 item4'
+    'item1 item5 item6 item7'
+    'item8 item8 item6 item10'
+    'item11 item12 item9 item9'; */
+}
+
+h2.CategoryPage {
+  /* margin-top: 60px; */
+  font-weight: 100;
+  color: #1d2647;
+  background: white;
+  box-shadow: 0px 3px 10px #bbb;
+  border-radius: 4px;
+  border-top: 5px solid #1d2647;
+  padding: 10px 10px;
+  font-size: 16px;
+  width: 80%;
+  margin: 100px auto 20px;
+  /* margin-bottom: 10px; */
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
+}
+
+@media (min-width: 750px) {
+  .ProductsCont {
+    grid-template-columns:
+      minmax(auto, 270px) minmax(auto, 270px) minmax(auto, 270px)
+      minmax(auto, 270px);
+  }
+}
+
+@media (min-width: 930px) {
+  .ProductsCont {
+    grid-template-columns:
+      minmax(auto, 270px) minmax(auto, 270px) minmax(auto, 270px)
+      minmax(auto, 270px);
+  }
+}

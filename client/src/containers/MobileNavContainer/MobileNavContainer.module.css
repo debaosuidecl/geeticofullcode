@@ -1,0 +1,129 @@
+.NavContainer {
+  height: 100px;
+  width: 100%;
+}
+.singleSuggestion {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+.shoppingCart {
+  font-size: 20px;
+}
+.Counter {
+  font-size: 8px;
+  /* display: none; */
+}
+.productImage {
+  width: 30px;
+  border-radius: 50%;
+  margin-right: 13px;
+  border: 1px solid #eee;
+}
+.avatar {
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.suggestions {
+  position: absolute;
+  width: 100%;
+  overflow-y: scroll;
+  background: #fff;
+  box-shadow: 1px 2px 10px #bbb;
+  z-index: 5000;
+  top: 35px;
+  left: 0px;
+  height: 140px;
+}
+.SearchContainer {
+  margin: auto;
+  width: 100%;
+  position: relative;
+}
+.MobileOnly {
+  display: block;
+}
+.IconNavItems {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  background: white;
+  padding-top: 10px;
+  color: rgb(161, 158, 158);
+  box-shadow: 0px 1px 12px #999;
+  align-items: center;
+  /* height: 40px; */
+}
+.IconNavItems svg {
+  cursor: pointer;
+  font-size: 20px;
+}
+.NavIcon {
+  text-align: center;
+}
+.NavIcon p {
+  font-size: 12px;
+}
+.TopMobileNavItem {
+  /* height: 50px; */
+  background: white;
+  display: flex;
+  justify-content: flex-start;
+  z-index: 1000;
+}
+.TogglerLogoCont {
+  display: flex;
+  justify-content: flex-start;
+  flex: 1;
+  align-items: center;
+}
+
+.CheckoutIconContainer {
+  display: flex;
+  flex: 5;
+  /* background: green; */
+  justify-content: flex-end;
+  align-items: center;
+}
+.CheckoutIcon {
+  color: rgb(161, 158, 158);
+  margin-right: 20px;
+  position: relative;
+  padding: 2px;
+}
+.CheckoutIcon p {
+  position: absolute;
+  top: 0;
+  /* color: orange; */
+  color: #6ce001;
+
+  font-weight: bolder;
+  background: white;
+
+  border-radius: 50%;
+  padding: 1px 5px;
+  font-size: 10px;
+  box-shadow: 1px -1px 1px #bbb;
+  right: -15px;
+}
+.Header {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 25px;
+  font-family: 'Kaushan Script', cursive;
+  /* color: #1d2647; */
+  color: #6ce001;
+}
+@media (min-width: 950px) {
+  .MobileOnly {
+    display: none;
+  }
+  .NavContainer {
+    /* height: 60px; */
+    width: 100%;
+  }
+}

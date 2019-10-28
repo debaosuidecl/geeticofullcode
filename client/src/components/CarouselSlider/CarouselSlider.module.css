@@ -1,0 +1,66 @@
+.ButtonContainer {
+  width: 100px;
+  font-size: 13px;
+  margin: 0px auto -10px;
+}
+.CaptionContainer {
+  padding-top: 0px;
+  /* background: green; */
+  /* padding-top: 50px; */
+}
+.CarouselContainer {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 1000px;
+  position: relative;
+}
+.Caption {
+  background: grey;
+}
+.ItemTitle {
+  font-size: 20px;
+  display: none;
+}
+.ItemDescription {
+  font-size: 15px;
+  display: none;
+}
+
+@media (min-width: 720px) {
+  .ItemTitle {
+    font-size: 20px;
+    display: block;
+  }
+  .ItemDescription {
+    font-size: 15px;
+    display: block;
+  }
+  .ButtonContainer {
+    margin: 0px auto -30px;
+  }
+}
+@media (min-width: 950px) {
+  .ButtonContainer {
+    width: 200px;
+    margin: auto;
+  }
+
+  .CarouselContainer {
+    width: 80%;
+    margin: 0 auto;
+    max-width: 1000px;
+  }
+  .ItemTitle {
+    font-size: 30px;
+    margin-top: 50px;
+  }
+  .ItemDescription {
+    font-size: 15px;
+    display: block;
+  }
+}
+@media (max-width: 450px) {
+  .ButtonContainer {
+    margin: 0px auto -30px;
+  }
+}

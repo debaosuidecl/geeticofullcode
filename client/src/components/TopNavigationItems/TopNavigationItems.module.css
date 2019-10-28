@@ -1,0 +1,115 @@
+.NavigationItems {
+  display: block;
+  margin: 0 0 0 0;
+  padding: 0 0 0px 0;
+  min-height: 55px;
+}
+
+.productImage {
+  width: 30px;
+  border-radius: 50%;
+  margin-right: 13px;
+  border: 1px solid #eee;
+}
+.singleSuggestion {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.suggestions {
+  position: absolute;
+  width: 80%;
+  overflow-y: scroll;
+  background: #fff;
+  box-shadow: 1px 2px 10px #bbb;
+  z-index: 5000;
+  top: 35px;
+  left: 0px;
+  height: 140px;
+  z-index: 9999;
+}
+.CheckoutButton {
+  margin-right: 15px;
+}
+.CheckOutDrop {
+  position: relative;
+}
+.CartNumber {
+  background: white;
+  border-radius: 4px;
+  padding: 1px 4px;
+  /* color: orange; */
+  color: #41549b;
+
+  margin-left: 3px;
+}
+
+@media (min-width: 950px) {
+  .NavigationItems {
+    display: flex;
+    justify-content: center;
+    flex-flow: row;
+    align-items: center;
+
+    /* background: rgb(253, 113, 31); */
+    background: #1d2647;
+    /* background: #4a9207; */
+
+    width: 100%;
+  }
+  .editDrop {
+    position: relative;
+    z-index: 9999;
+  }
+  .fullName {
+    color: white;
+  }
+  .avatar {
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  .Header {
+    padding: 0;
+    margin: 0;
+    margin-right: 10px;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Kaushan Script', cursive;
+    color: white;
+  }
+  .Help {
+    color: white;
+    cursor: pointer;
+
+    font-size: 13px;
+    padding: 15px 10px;
+    margin: 0 20px 0 30px;
+    transition: 0.5s;
+  }
+  .Help:hover {
+    color: #1d2647;
+    background: white;
+    transition: 0.5s;
+  }
+  .InputContainer {
+    width: 300px;
+    display: flex;
+    position: relative;
+    justify-items: flex-start;
+    margin-right: 25px;
+  }
+  .CheckoutButton {
+    background: #6ce001;
+
+    border: none;
+    color: white;
+    padding: 5px 12px;
+  }
+
+  .CheckoutButton .CartIconContainer {
+    margin-right: 10px;
+  }
+}

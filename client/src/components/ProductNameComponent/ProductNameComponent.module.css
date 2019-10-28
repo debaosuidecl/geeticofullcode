@@ -1,0 +1,18 @@
+h2.productName {
+  font-family: 'Kaushan Script', cursive;
+  font-size: 30px;
+}
+.productNameInput {
+}
+
+.productNameInputCont .productNameInput {
+  width: 100%;
+  border: none;
+  font-size: 30px;
+  background: rgb(250, 248, 248);
+  outline: none;
+}
+
+.productNameInputCont div {
+  color: red;
+}

@@ -1,0 +1,46 @@
+.SearchInput {
+  border: none;
+  padding: 8px;
+  width: 90%;
+  height: 35px;
+  background: #eee;
+  outline: none;
+  z-index: 10000;
+  position: relative;
+}
+.InputContainer {
+  width: 100%;
+}
+
+.Button {
+  padding: 8px;
+  border: none;
+  /* background: orange; */
+  background: #6ce001;
+  color: white;
+  cursor: pointer;
+  width: 10%;
+  z-index: 10000;
+  position: relative;
+}
+@media (min-width: 950px) {
+  .SearchInput {
+    border: none;
+    padding: 9.2px;
+    width: 80%;
+    height: 33px;
+    background: white;
+    outline: none;
+  }
+
+  .Button {
+    padding: 8px;
+    border: none;
+    /* background: orange; */
+    background: #6ce001;
+
+    color: white;
+    cursor: pointer;
+    width: 20%;
+  }
+}

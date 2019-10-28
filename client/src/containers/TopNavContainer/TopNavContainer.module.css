@@ -1,0 +1,15 @@
+.NavContainer {
+  background: rgb(243, 116, 31);
+  display: flex;
+  /* height: 60px; */
+}
+
+.DesktopOnly {
+  display: none;
+}
+
+@media (min-width: 950px) {
+  .DesktopOnly {
+    display: block;
+  }
+}

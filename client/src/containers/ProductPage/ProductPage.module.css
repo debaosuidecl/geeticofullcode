@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script');
+
+.ProductHeader {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  /* font-family: 'Kaushan Script', cursive; */
+  text-align: left;
+  /* margin: auto; */
+  margin-top: 20px;
+  margin: 0;
+  width: 80%;
+  font-size: 24px;
+  color: #6ce001;
+  font-weight: 100;
+}
+.HeaderProdCont {
+  display: flex;
+  width: 80%;
+  margin: 10px auto;
+  justify-content: space-between;
+  align-items: center;
+}
+.HeaderProdCont p {
+  margin: 0;
+  color: #053da3;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  cursor: pointer;
+}
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 80%;
+  margin: 30px auto;
+}
+.card {
+  display: inline-block;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+
+  padding: 0px 0;
+}
+.grid-container img {
+  max-width: 400px;
+
+  width: 100%;
+  cursor: pointer;
+  height: 100%;
+  transition: 0.8s;
+}
+
+.grid-container img:hover {
+  box-shadow: 0px 3px 11px #999;
+  transition: 0.8s;
+}
+.item1 {
+  grid-row-start: 1;
+  grid-row-end: 3;
+  grid-area: item1;
+}
+.item2 {
+  grid-area: item2;
+}
+.item3 {
+  grid-area: item3;
+}
+.item4 {
+  grid-area: item4;
+}
+.item5 {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-area: item5;
+}
+.item6 {
+  grid-row-start: 2;
+  grid-row-end: 4;
+  grid-area: item6;
+}
+.item7 {
+  grid-area: item7;
+}
+.item8 {
+  grid-row-start: 3;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-area: item8;
+}
+.item9 {
+  grid-row-start: 4;
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-area: item9;
+}
+
+.item10 {
+  grid-area: item10;
+}
+
+.item11 {
+  grid-area: item11;
+}
+
+.item12 {
+  grid-area: item12;
+}
+
+.item8 img,
+.item9 img {
+  max-width: 100% !important;
+}
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  display: flex;
+  width: 80%;
+  margin: 30px auto;
+}
+.grid-container {
+  display: grid;
+
+  justify-content: center;
+
+  grid-template-columns: minmax(auto, 400px) minmax(auto, 400px);
+
+  grid-template-areas:
+    'item1 item2'
+    'item1 item5'
+    'item8 item8'
+    'item11 item12'
+    'item3 item4'
+    'item6 item7'
+    'item6 item10'
+    'item9 item9';
+  grid-gap: 4px;
+}
+.ProductsCont {
+  display: grid;
+
+  justify-content: center;
+
+  grid-template-columns: minmax(auto, 270px) minmax(auto, 270px);
+
+  grid-gap: 10px;
+
+  /* grid-template-areas:
+    'item1 item2 item3 item4'
+    'item1 item5 item6 item7'
+    'item8 item8 item6 item10'
+    'item11 item12 item9 item9'; */
+}
+@media (min-width: 750px) {
+  .ProductsCont {
+    grid-template-columns:
+      minmax(auto, 270px) minmax(auto, 270px) minmax(auto, 270px)
+      minmax(auto, 270px);
+  }
+}
+
+@media (min-width: 930px) {
+  .ProductsCont {
+    grid-template-columns:
+      minmax(auto, 270px) minmax(auto, 270px) minmax(auto, 270px)
+      minmax(auto, 270px);
+  }
+  .grid-container {
+    display: grid;
+
+    justify-content: center;
+
+    grid-template-columns:
+      minmax(auto, 270px) minmax(auto, 270px) minmax(auto, 270px)
+      minmax(auto, 270px);
+
+    grid-gap: 4px;
+
+    grid-template-areas:
+      'item1 item2 item3 item4'
+      'item1 item5 item6 item7'
+      'item8 item8 item6 item10'
+      'item11 item12 item9 item9';
+  }
+}

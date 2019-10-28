@@ -1,0 +1,262 @@
+/* .Checkout {
+  margin: 70px auto;
+} */
+@import url('https://fonts.googleapis.com/css?family=Signika&display=swap');
+.Navigator {
+  margin: 100px auto 0px;
+  width: 100%;
+  padding-bottom: 50px;
+}
+.Checkout {
+  display: flex;
+  margin: auto;
+
+  flex-flow: column;
+}
+.Left,
+.Right {
+  /* background: white; */
+  min-height: 300px;
+  padding: 13px;
+  /* flex: 1; */
+}
+.Error {
+  border-left: 9px solid rgb(146, 4, 4);
+  background: rgb(207, 20, 20);
+  color: white;
+  font-size: 13px;
+  width: 80%;
+  margin: 5px auto;
+  padding: 10px 2px;
+}
+.continueWithPaystack img {
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+.scaleAnim {
+  animation: scaleAnim 0.8s infinite;
+}
+.continueWithPaystack {
+  display: flex;
+  padding: 40px 0px;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+.spinnerCont {
+  position: fixed;
+  z-index: 10000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.continueCont {
+  animation: scaleAnim 0.8s infinite ease-in-out;
+  width: 100%;
+  text-align: center;
+}
+.Error p {
+  font-weight: 100;
+  padding-left: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.Left {
+  flex: 1.5;
+}
+.Right {
+  flex: 1;
+}
+.CheckoutHeader {
+  display: flex;
+  border-bottom: 1px solid #eee;
+  /* background: #000; */
+  align-items: center;
+  padding-bottom: 13px;
+  justify-content: space-between;
+}
+.CheckoutContent {
+  padding: 10px;
+  border-top: 5px solid #41549b;
+
+  /* margin-bottom: 20px; */
+  background: white;
+  box-shadow: 0px 3px 14px #bbb;
+  border-bottom: 1px solid #eee;
+}
+.SummaryCont {
+  background: white;
+  border-top: 5px solid #41549b;
+  padding: 20px 0;
+  box-shadow: 0px 3px 14px #bbb;
+
+  width: 98%;
+  margin: 0 auto;
+}
+.OrderTypeMajor {
+  background: white;
+  box-shadow: 0px 3px 14px #bbb;
+
+  border-top: 5px solid #41549b;
+  /* padding: 20px 0; */
+
+  width: 98%;
+  /* min-height: 300px; */
+  margin: 0 auto;
+}
+.CheckoutHeader h2 {
+  color: #41549b;
+  padding-left: 10px;
+
+  font-family: 'Signika', sans-serif;
+}
+
+.RightHeading {
+  padding: 13px 7px;
+  display: flex;
+  /* justify-content: space-between; */
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  /* font-size: 15px; */
+  /* background: #000; */
+  font-size: 13px;
+}
+.PlaceOrderCont {
+  margin-top: 40px;
+  position: fixed;
+  background: white;
+  z-index: 1000;
+  /* right: 0; */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 2%;
+  /* background: #000; */
+  text-align: center;
+}
+.titleNoBold,
+.titleLarge {
+  margin: 0;
+  padding-left: 20px;
+  /* background: gold; */
+  flex: 2;
+}
+.value,
+.valueLarge {
+  /* background: #eee; */
+  flex: 1;
+}
+.titleLarge,
+.valueLarge {
+  font-size: 18px;
+  font-weight: 1000;
+}
+.titleNoBold,
+.value {
+  /* background: #000; */
+  align-self: center;
+  font-weight: 100;
+  font-size: 13px;
+}
+
+.OrderType {
+  margin-top: 40px;
+}
+
+.OrderType h4 {
+  font-weight: 100;
+  margin: 0;
+  display: inline;
+  font-size: 20px;
+  /* padding-left: 10px; */
+  /* background: yellow; */
+  color: #444;
+  cursor: pointer;
+  transform: scale(1);
+  font-family: 'Signika', sans-serif;
+  transition: 0.4s;
+}
+
+.checkBox {
+  width: 14px;
+  /* display: inline; */
+  background: white;
+  border: 2px solid #444;
+  margin-left: 10px;
+  cursor: pointer;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 3px;
+  transition: 0.4s;
+}
+.selected {
+  background: #41549b;
+  border: 2px solid #41549b;
+  transition: 0.4s;
+}
+.selectedText {
+  transform: scale(1.2) !important;
+  transition: 0.4s;
+  color: #41549b !important;
+}
+
+.OrderTypeCont {
+  /* background: #000; */
+  display: flex;
+  justify-content: center;
+
+  flex-flow: column;
+  align-items: center;
+}
+.OrderTypeCont,
+.OrderTypeDesc {
+  /* background: grey; */
+  min-height: 50px;
+  padding: 30px 0px;
+  /* padding: 20px; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  border-bottom: 1px solid #eee;
+}
+.OrderTypeDesc {
+  background: #bbb;
+  color: white;
+  font-size: 13px;
+  transition: 0.5s;
+  height: 110px;
+  padding: 16px;
+  position: relative;
+}
+
+.OrderTypeDesc p {
+  position: absolute;
+  transition: 0.4s;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+}
+@media (min-width: 940px) {
+  .Navigator {
+    width: 95%;
+  }
+  .DesktopOnly {
+    display: flex;
+  }
+  .Checkout {
+    flex-flow: row;
+    justify-content: space-between;
+  }
+}
+
+@keyframes scaleAnim {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}

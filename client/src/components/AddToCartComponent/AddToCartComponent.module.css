@@ -1,0 +1,96 @@
+.AddToCartComponent {
+  margin: 20px auto;
+  display: flex;
+  flex-flow: column-reverse;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+  position: relative;
+}
+/* .AddToCartComponent input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border: none;
+  outline: none;
+  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
+}
+
+.ChangeQuant button {
+  height: 40px;
+  width: 40px;
+  color: #bbb;
+
+  border: 1px solid #bbb;
+  background: none;
+
+}
+
+.AddToCartButton {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+  min-width: 230px;
+}
+ */
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.ButtonCont {
+  text-align: center;
+  width: 100%;
+  transition: 0.4s;
+}
+.Rotate90 {
+  transform: rotateX(90deg) !important;
+}
+.changeCont {
+  position: absolute;
+  z-index: 10;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  justify-content: center;
+  transition: 0.4s;
+}
+.changeCont input {
+  width: 50%;
+  /* max-width: 30px; */
+  outline: none;
+  border: none;
+  border: 1px solid #364ea1;
+  text-align: center;
+  height: 38px;
+}
+.changeCont button {
+  height: 38px;
+  width: 20%;
+  border: none;
+  outline: none;
+  background: #364ea1;
+  /* background: #6ce001; */
+  color: white;
+}
+@media (min-width: 940px) {
+  .AddToCartComponent {
+    margin: 20px 0px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .AddToCartButton {
+    margin-bottom: 0px;
+    width: 70%;
+  }
+}

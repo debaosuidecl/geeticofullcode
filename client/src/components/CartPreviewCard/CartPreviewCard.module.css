@@ -1,0 +1,51 @@
+.CartCard {
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+.CartCard img {
+  height: 40px;
+}
+
+.ImgCont,
+.Total,
+.Delete {
+  flex: 2;
+}
+.Delete {
+  color: #3a4b86;
+  text-align: right;
+  padding-right: 10px;
+}
+.Total {
+  text-align: left;
+  padding-left: 6px;
+}
+.productName {
+  font-size: 12px;
+  margin: 0;
+  flex: 5;
+  text-align: left;
+  /* background: #ddd; */
+}
+.changeCont {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+.changeCont input {
+  max-width: 30px;
+  outline: none;
+  border: none;
+  border: 1px solid #3a4b86;
+  text-align: center;
+  height: 18px;
+}
+.changeCont button {
+  height: 18px;
+  border: none;
+  outline: none;
+  background: #3a4b86;
+  /* background: #6ce001; */
+  color: white;
+}

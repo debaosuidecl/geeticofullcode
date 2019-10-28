@@ -1,0 +1,59 @@
+.ProductImagesCont {
+  min-height: 500px;
+  width: 100%;
+  flex: 1;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: column;
+  /* margin: 10px 0px; */
+  border-bottom: 1px solid #eee;
+  position: relative;
+  /* z-index: 100000; */
+}
+.MainImageCont {
+  /* background: green; */
+  text-align: center;
+}
+/* .ModalImage {
+} */
+.LightboxCont {
+  position: relative;
+  z-index: 1000000;
+}
+.OtherImagesCont {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.OtherImagesCont img {
+  border: 1px solid #eee;
+  cursor: pointer;
+
+  /* background: green; */
+  /* 
+  display: flex;
+  justify-content: flex-end; */
+}
+.MainImageCont .previewImage {
+  max-width: 400px;
+  width: 100%;
+  cursor: zoom-in;
+}
+.DeleteImageCont {
+  position: relative;
+}
+.DeleteImage {
+  position: absolute;
+  /* right: 0; */
+  /* box-shadow: 1px 1px 1px #444; */
+  background: none;
+  border-radius: 13px;
+}
+
+@media (min-width: 900px) {
+  .ProductImagesCont {
+    border-right: 1px solid #eee;
+  }
+}

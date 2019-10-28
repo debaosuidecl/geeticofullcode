@@ -1,0 +1,29 @@
+.NavigationItems {
+  display: block;
+  margin: 0 0 0 0;
+  padding: 0;
+  min-height: 37px;
+}
+/* .NavigationItems li:first-child > a {
+  font-weight: 600;
+  color: #222;
+  font-size: 12px;
+} */
+
+@media (min-width: 950px) {
+  .NavigationItems {
+    display: flex;
+    justify-content: center;
+    flex-flow: row;
+    align-items: center;
+    float: left;
+    /* background: orange; */
+    /* background: #6ce001; */
+    background: #41549b;
+
+    box-shadow: 1px 1px 5px #333;
+    width: 100%;
+
+    position: absolute;
+  }
+}

@@ -1,0 +1,85 @@
+.ProductDetailCard {
+  /* margin-top: 3px; */
+  margin: 0px 0px 25px;
+}
+.priceContainer {
+  margin-bottom: 20px;
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+.ProductDetailCard strong {
+  /* margin-top: 50px; */
+  font-size: 13px;
+}
+.ProductDetailTopHalf {
+  background: white;
+  border: 1px solid #c8cfe9;
+  min-height: 500px;
+  display: flex;
+  position: relative;
+  flex-flow: column-reverse;
+}
+.reviewAndOrderCont {
+  display: flex;
+  /* flex-flow: column; */
+  justify-content: flex-start;
+  align-items: center;
+}
+.SearchTagsCont {
+  display: flex;
+  /* justify-content: space-around; */
+}
+
+.Tag {
+  background: #eee;
+  color: #555;
+  margin-right: 2px;
+  padding: 7px;
+  border-radius: 4px;
+}
+
+.ReviewCont {
+  display: flex;
+  /* flex-flow: column; */
+  justify-content: flex-start;
+  margin-right: 20px;
+  align-items: center;
+}
+.ReviewCont span {
+  padding-left: 10px;
+}
+
+.ProductTextCont {
+  min-height: 500px;
+  display: flex;
+  flex-flow: column;
+  padding: 14px;
+  /* height: 100%; */
+  width: 100%;
+  flex: 1;
+  /* background: rgb(248, 248, 248); */
+}
+
+/* .ProductTextCont  */
+.ProductTextCont span.price {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #6ce001;
+  font-size: 27px;
+}
+
+@media (min-width: 900px) {
+  .ProductDetailCard strong {
+    /* margin-top: 50px; */
+    font-size: 18px;
+  }
+  .ReviewCont {
+    flex-flow: row;
+  }
+  .ProductImagesCont {
+    border-right: 1px solid #eee;
+  }
+  .ProductDetailTopHalf {
+    flex-flow: row;
+  }
+}

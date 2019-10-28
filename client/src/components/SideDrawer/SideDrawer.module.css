@@ -1,0 +1,174 @@
+.DropDown {
+  z-index: 130;
+  top: 0px;
+  background: rgba(255, 255, 255, 1);
+  width: 100%;
+  position: fixed;
+  box-shadow: 0px 3px 3px #ccc;
+  left: 0px;
+  /* min-height: 600px; */
+  height: 100vh;
+  overflow-y: scroll;
+}
+.CategoriesHeader {
+  color: #333;
+  padding-left: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #6ce001;
+  font-size: 15px;
+}
+.NavigationItemsContainer {
+  color: #6ce001;
+  position: relative;
+}
+.MobileOnly {
+  display: block;
+  transition: 0.2s all ease;
+}
+
+.Dropped {
+  left: -100%;
+  /* transition: 0.5s all ease; */
+  transition: none;
+}
+
+.FourBoxLayout {
+  border: 0.02px solid #ccc;
+  /* border-bottom: 0.02px solid #ccc; */
+  margin-bottom: 10px;
+  color: rgb(156, 152, 152);
+  width: 80%;
+  margin: 0px auto 20px;
+}
+
+.ContactUsHelpTrackCartCont {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+}
+
+.ContactUsHelpTrackCartCont:nth-child(1) {
+  border-bottom: 0.2px solid #ccc;
+}
+.ContactUsHelpTrackCartCont div {
+  flex: 1;
+}
+.ContactUsHelpTrackCartCont div:nth-child(2) p {
+  border-left: 0.2px solid #ccc;
+}
+.ContactUsHelpTrackCartCont div p {
+  padding: 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 12px;
+}
+.ContactUsHelpTrackCartCont div p:hover {
+  box-shadow: 2px 2px 2px rgb(170, 169, 169);
+  color: #6ce001;
+  transition: 0.4s all ease;
+}
+.ContactUsHelpTrackCartCont div p svg {
+  margin-right: 10px;
+}
+.ContactUsHelpTrackCartCont div p:hover svg {
+  color: #6ce001;
+  /* transform: rotate(90deg); */
+  transition: 0.3s ease-in;
+}
+
+.SelectedCatHeader {
+  /* padding-left: 10px; */
+  padding: 10px;
+  color: white;
+  font-size: 26px;
+  font-weight: 100;
+  background: #222;
+  margin: 0;
+}
+.SelectedSubCategory {
+  padding: 8px 8px 8px 47px;
+  background: #222;
+  font-size: 23px;
+  margin: 0;
+}
+
+.SelectedCatHeaderBackButton {
+  padding-right: 10px;
+  cursor: pointer;
+}
+.SelectedCatHeaderBackButton:hover {
+  color: #6ce001;
+}
+.AuthButtons {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 20px;
+}
+.SellerTypes svg {
+  color: #6ce001;
+  margin-bottom: 0px;
+}
+.SellerTypes {
+  display: flex;
+  justify-content: space-evenly;
+}
+.SellerTypes .Type {
+  cursor: pointer;
+  text-align: center;
+}
+.AuthButtons {
+  margin-top: 30px;
+}
+.TogglerLogoCont {
+  /* position: relative;
+  z-index: 200px; */
+  display: flex;
+  justify-content: flex-start;
+  /* flex: 1; */
+  align-items: center;
+}
+.AuthButtons > button {
+  padding: 5px 50px;
+  background: none;
+  border: 0.11px solid #6ce001;
+  outline: none;
+  color: #6ce001;
+
+  /* width: 17.5%; */
+}
+.AuthButtons > button:hover {
+  background: #444;
+  border: none;
+  color: white;
+}
+
+.SecondLevelListContainer,
+.ThirdLevelListContainer {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.SecondLevelListContainer > .SecondLevelList,
+.ThirdLevelListContainer > .ThirdLevelList {
+  list-style: none;
+  padding: 10px;
+  border-bottom: 0.2px solid #ccc;
+  margin: auto;
+  cursor: pointer;
+}
+.SecondLevelListContainer > .SecondLevelList:hover,
+.ThirdLevelListContainer > .ThirdLevelList:hover {
+  box-shadow: 3px 3px 3px #ccc;
+}
+
+@media (min-width: 950px) {
+  .MobileOnly {
+    display: none;
+  }
+}

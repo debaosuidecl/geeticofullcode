@@ -1,0 +1,63 @@
+.MultiCarouselContainer {
+  width: 80%;
+  max-width: 1000px;
+  margin: 20px auto;
+  position: relative;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+.MultiCarouselContainer > .CarouselHeader {
+  font-family: "Kaushan Script", cursive;
+  overflow: hidden;
+}
+
+.CarouselHeader > h4 {
+  font-size: 20px;
+  color: orange;
+  float: left;
+}
+.CarouselHeader > a {
+  float: right;
+  margin: 10px;
+}
+
+.LinkContainer {
+  text-align: right;
+}
+
+.LeftButton,
+.RightButton {
+  padding: 15px;
+  background: none;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  font-size: 80px;
+  color: orange;
+  opacity: 0.2;
+  transition: 0.3s all ease;
+}
+.LeftButton:hover,
+.RightButton:hover {
+  opacity: 1;
+}
+.LeftButton {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.RightButton {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 100;
+}

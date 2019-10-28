@@ -1,0 +1,232 @@
+.Navigator {
+  margin: 90px auto 0px;
+  width: 90%;
+}
+.CartCont {
+  display: flex;
+  margin: auto;
+  /* justify-content: ; */
+  /* width: 90%; */
+  flex-flow: column;
+}
+.Left,
+.Right {
+  /* background: white; */
+  min-height: 300px;
+  padding: 13px;
+  /* flex: 1; */
+}
+.Left {
+  /* flex: 2; */
+  width: 100%;
+  margin-bottom: 30px;
+}
+.Right {
+  display: none;
+  flex: 1;
+  /* box-shadow: 1px 2px 11px #bbb; */
+  right: 0;
+  /* min-width: 450px; */
+  width: 40%;
+  position: fixed;
+}
+.ContinueShoppingCont,
+.ProceedToCheckout {
+  margin: 10px auto;
+  justify-content: center;
+  /* background: #000; */
+  display: flex;
+  max-width: 400px;
+  text-align: center;
+}
+
+.ProceedToCheckout button {
+  border: none;
+  outline: none;
+  padding: 8px;
+  border-radius: 5px;
+  margin: 8px;
+  color: white;
+}
+.ProceedToCheckout button:nth-child(1) {
+  background: #41549b;
+}
+.ProceedToCheckout button:nth-child(2) {
+  background: rgb(75, 240, 42);
+}
+.CartHeader {
+  display: flex;
+  border-bottom: 1px solid #eee;
+  /* background: #000; */
+  align-items: center;
+  padding-bottom: 13px;
+  justify-content: space-between;
+}
+.CartHeader > span.EmptyCart {
+  color: rgb(245, 165, 165);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.CartHeader > span.EmptyCart:hover {
+  color: red;
+  transition: 0.3s;
+}
+
+.CartContent {
+  padding: 20px;
+  border-top: 5px solid #41549b;
+
+  /* margin-bottom: 20px; */
+  background: white;
+  border-bottom: 1px solid #eee;
+}
+.CartContent h2 {
+  color: #41549b;
+  font-family: 'Signika', sans-serif;
+}
+.Header {
+  display: flex;
+  padding-top: 13px;
+  justify-content: center;
+}
+
+.NoItemInCart {
+  text-align: center;
+  min-height: 200px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  font-family: 'Kaushan Script', cursive;
+
+  align-items: center;
+}
+
+.PriceHeader,
+.ProductHeader {
+  flex: 1;
+}
+.QuantityHeader,
+.SubTotalHeader {
+  flex: 2;
+}
+
+.DesktopOnly {
+  display: none;
+}
+
+.SummaryCont {
+  background: white;
+  box-shadow: 1px 2px 19px rgb(218, 217, 217);
+  border-top: 5px solid #41549b;
+  padding-top: 20px;
+  /* padding-bottom: 20px; */
+  width: 98%;
+  /* min-height: 300px; */
+  margin: 0 auto;
+}
+.SummarySubTotal {
+  padding: 0 20px;
+  font-size: 16px;
+}
+.ShippingCost {
+  padding: 0 20px 20px;
+  /* font-size: 15px; */
+
+  font-size: 13px;
+}
+.FinalCost {
+  padding: 0 20px 0px;
+  /* font-size: 15px; */
+
+  font-size: 13px;
+  border-bottom: 1px solid #eee;
+
+  /* border-bottom: 1px solid #eee; */
+}
+.largeTitle,
+.largeValue {
+  font-size: 24px;
+}
+
+.ShippingCost,
+.SummarySubTotal,
+.FinalCost {
+  display: flex;
+  justify-content: space-between;
+}
+.title {
+  font-weight: 1000;
+}
+.BottomStickyCheckout {
+  /* display: none; */
+  background: white;
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+  box-shadow: 1px 2px 20px #eee;
+}
+.mobileSummary {
+  margin: 20px auto 80px;
+  width: 100%;
+}
+@media (min-width: 940px) {
+  .mobileSummary {
+    display: none;
+  }
+  .BottomStickyCheckout {
+    display: none;
+  }
+  .Left,
+  .Right {
+    /* background: white; */
+    min-height: 300px;
+    padding: 13px;
+    /* flex: 1; */
+  }
+  .Left {
+    /* flex: 2; */
+    width: 60%;
+    margin-bottom: 30px;
+  }
+  .Right {
+    display: block;
+    flex: 1;
+    /* box-shadow: 1px 2px 11px #bbb; */
+    right: 0;
+    /* min-width: 450px; */
+    width: 40%;
+    position: fixed;
+  }
+  .DesktopOnly {
+    display: flex;
+  }
+  .CartCont {
+    flex-flow: row;
+    justify-content: space-between;
+  }
+  .ContinueShoppingCont,
+  .ProceedToCheckout {
+    /* margin: 20px auto; */
+    justify-content: center;
+    /* background: #000; */
+    display: flex;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  .ProceedToCheckout button {
+    border: none;
+    outline: none;
+    padding: 10px;
+    /* margin-right: 8px; */
+    color: white;
+  }
+  .ProceedToCheckout button:nth-child(1) {
+    background: #41549b;
+  }
+  .ProceedToCheckout button:nth-child(2) {
+    background: rgb(75, 240, 42);
+  }
+}

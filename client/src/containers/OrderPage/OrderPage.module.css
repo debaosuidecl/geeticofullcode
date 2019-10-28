@@ -1,0 +1,148 @@
+.Container {
+  /* overflow-y: scroll; */
+  /* height: 390px; */
+  /* width: */
+  border-top: 1px solid #eee;
+  /* margin-bottom: 40px; */
+}
+
+.OrderCont {
+  /* margin-top: 110px; */
+  max-width: 1020px;
+  margin: 100px auto 0px;
+  display: flex;
+  padding-bottom: 100px;
+  flex-flow: column;
+  justify-content: space-around;
+}
+
+.FilterCont {
+  flex: 1;
+  /* margin-right: 20px; */
+}
+
+.OrderFilter {
+  width: 90%;
+  /* max-width: 500px; */
+}
+
+.OrderCard {
+  flex: 2;
+  width: 90%;
+  /* margin: 20px; */
+}
+.OrderCard,
+.OrderFilter {
+  background: white;
+  /* border-top: 9px solid hsl(227, 41%, 43%); */
+  min-height: 400px;
+  margin: 0 auto;
+  /* width: 90%; */
+  box-shadow: 1px 2px 10px #bbb;
+  border-radius: 10px;
+  /* max-width: 1000px; */
+}
+.OrderFilter {
+  /* background: white; */
+  /* border-top: 9px solid hsl(227, 41%, 43%); */
+  min-height: 200px;
+
+  /* box-shadow: 1px 2px 10px #bbb;
+  border-radius: 10px; */
+  /* max-width: 1000px; */
+}
+.spinnerCont {
+  position: fixed;
+  z-index: 10000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.Options {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+.Options p {
+  padding: 14px;
+  margin: 0;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  cursor: pointer;
+}
+.Options p:hover {
+  box-shadow: 1px 1px 10px #eee;
+}
+
+.OrderFilter h2 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 14px;
+}
+.OrderHeader h2,
+.OrderFilter h2 {
+  color: #41549b;
+  padding-top: 20px;
+  /* padding-left: 10px; */
+
+  font-family: 'Signika', sans-serif;
+}
+.OrderHeader {
+  display: flex;
+  padding-left: 10px;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-flow: column;
+}
+
+.OrderSuccess {
+  text-align: center;
+}
+.OrderSuccess img {
+  width: 200px;
+}
+.OrderSuccess p {
+  font-size: 20px;
+  margin: 0;
+  padding: 10px;
+  color: #41549b;
+  font-family: 'Signika', sans-serif;
+}
+.displayCont {
+  /* margin: 20px; */
+  /* margin-left: 10px; */
+  width: 100%;
+  /* margin-top: 10px; */
+  margin: 10px auto 0px;
+}
+.displayOrderText {
+  background: #bbb;
+  width: 100%;
+  padding: 4px;
+  color: white;
+  border-radius: 2px;
+  /* margin-top: 15px; */
+  /* margin-top: 90px; */
+
+  /* margin: 0; */
+  /* margin: 20px; */
+}
+@media (min-width: 950px) {
+  .OrderCard {
+    width: 90%;
+  }
+  .OrderCont {
+    /* margin-top: 110px; */
+    max-width: 1220px;
+    margin: 100px auto 0px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+  }
+  /* .OrderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: row;
+  } */
+}
