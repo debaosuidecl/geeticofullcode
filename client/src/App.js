@@ -13,7 +13,8 @@ class App extends Component {
     this.props.onTryAutoSignIn();
   }
   // static isDevelopment = false;
-  static domain = process.env.NODE_ENV === 'development' ? 'http://localhost:5000/' : '/';
+  static domain = '/';
+  // static domain = process.env.NODE_ENV === 'development' ? 'http://localhost:5000/' : '/';
   static allowedCategories = [
     'Beer, Wine & Spirit',
     'Food Cupboard',

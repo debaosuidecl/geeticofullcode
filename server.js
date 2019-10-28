@@ -29,22 +29,15 @@ app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/userauth', require('./routes/api/frontendUserAuth'));
 app.use('/api/userorders', require('./routes/api/frontEndOrders'));
 
-
 if (process.env.NODE_ENV === 'production') {
-
-
-  
   app.use(express.static('client/build'));
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
-
-
-
 }
 //set port
 const PORT = process.env.PORT || 5000;
-var server_host = process.env.YOUR_HOST || '0.0.0.0';
+var server_host = process.env.YOUR_HOST || '142.93.39.91';
 
 app.listen(PORT, server_host, () =>
   console.log(`Server Started on port ${PORT}`)
