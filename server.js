@@ -36,7 +36,6 @@ if (process.env.NODE_ENV === 'production') {
       path.resolve(__dirname, 'clientseller', 'build', 'index.html')
     );
   });
-  // app.get("/seller/*")
 
   app.use(express.static('client/build'));
   app.get('*', (req, res) => {
