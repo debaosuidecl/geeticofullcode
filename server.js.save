@@ -13,7 +13,7 @@ app.use('/public', express.static(__dirname + '/public'));
 // app.use(express.static('./public'));
 app.use(express.json({ extended: false }));
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Origin', '*'); // update to match the domai you will make the request from
   res.header('Access-Control-Allow-Headers', '*');
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
   res.header('Access-Control-Request-Headers', 'GET, PUT, POST, DELETE');
@@ -36,6 +36,7 @@ if (process.env.NODE_ENV === 'production') {
       path.resolve(__dirname, 'clientseller', 'build', 'index.html')
     );
   });
+  // app.get("/seller/*")
 
   app.use(express.static('client/build'));
   app.get('*', (req, res) => {
@@ -46,10 +47,10 @@ if (process.env.NODE_ENV === 'production') {
 const PORT = process.env.PORT || 5000;
 // var server_host = process.env.YOUR_HOST || '142.93.39.91';
 
-
+<<<<<<< HEAD
 app.listen(PORT, () =>
   console.log(`Server Started on port ${PORT}`)
 );
-
+=======
 app.listen(PORT, () => console.log(`Server Started on port ${PORT}`));
-
+>>>>>>> 88c50f67ba09ae07a20411d60dedbd6bb46e7a84
