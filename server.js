@@ -47,10 +47,10 @@ if (process.env.NODE_ENV === 'production') {
 const PORT = process.env.PORT || 5000;
 // var server_host = process.env.YOUR_HOST || '142.93.39.91';
 
-<<<<<<< HEAD
+
 app.listen(PORT, () =>
   console.log(`Server Started on port ${PORT}`)
 );
-=======
+
 app.listen(PORT, () => console.log(`Server Started on port ${PORT}`));
->>>>>>> 88c50f67ba09ae07a20411d60dedbd6bb46e7a84
+
