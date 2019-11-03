@@ -18,13 +18,14 @@ export class Home extends Component {
   }
   state = {
     cardDetails: {
-      analytics: {
-        title: 'Analytics',
-        desc:
-          'Checkout your order count, profit, customer base and much more. Project your annual revenue and set benchmarks',
-        imageLink: OrderManagementIcon,
-        navLink: '/sellerpage/analytics'
-      },
+      // analytics: {
+      //   title: 'Analytics',
+      //   desc:
+      //     'Checkout your order count, profit, customer base and much more. Project your annual revenue and set benchmarks',
+      //   imageLink: OrderManagementIcon,
+      //   navLink: '/sellerpage/analytics'
+      // },
+
       Products: {
         title: 'Products',
         desc: 'View, upload and edit product details.',
@@ -39,7 +40,8 @@ export class Home extends Component {
       // },
       OrderManagement: {
         title: 'Orders',
-        desc: 'Manage customer orders, select logistics company of your choice',
+        desc:
+          'Manage customer orders. change the status of the orders, filter orders by status and so much more.',
         imageLink: OrderManagementIcon,
         navLink: '/sellerpage/order'
       }
@@ -62,7 +64,7 @@ export class Home extends Component {
               <h2>Start Selling on Geetico</h2>
               {/* <button className={classes.desktopOnly}>Learn How</button> */}
             </div>
-            <div className={classes.AddProductCTACont}>
+            {/* <div className={classes.AddProductCTACont}>
               <div className={classes.ProductImageContainer}>
                 <img src={ProductIcon} alt='' />
               </div>
@@ -80,7 +82,7 @@ export class Home extends Component {
                   Add Product
                 </button>
               </div>
-            </div>
+            </div> */}
             {/*  End of Conditional First Product Render */}
           </div>
           <hr />

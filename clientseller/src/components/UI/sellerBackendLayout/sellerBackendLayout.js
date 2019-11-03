@@ -32,19 +32,19 @@ class sellerBackendLayout extends Component {
         active: this.props.history.location.pathname === '/sellerpage/order',
         icon: faCartArrowDown,
         link: '/sellerpage/order'
-      },
+      }
       // 'Inventory Management': {
       //   active:
       //     this.props.history.location.pathname === '/sellerpage/inventory',
       //   icon: faWarehouse,
       //   link: '/sellerpage/inventory'
       // },
-      Analytics: {
-        active:
-          this.props.history.location.pathname === '/sellerpage/analytics',
-        icon: faChartBar,
-        link: '/sellerpage/analytics'
-      }
+      // Analytics: {
+      //   active:
+      //     this.props.history.location.pathname === '/sellerpage/analytics',
+      //   icon: faChartBar,
+      //   link: '/sellerpage/analytics'
+      // }
     }
   };
   onClickedHandler = navItem => {};
