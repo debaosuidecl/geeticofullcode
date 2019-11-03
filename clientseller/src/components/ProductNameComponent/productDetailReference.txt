@@ -1,0 +1,125 @@
+import React from 'react';
+import { Lightbox } from 'react-modal-image';
+import StarRatingComponent from 'react-star-rating-component';
+
+import classes from './ProductDetailCard.module.css';
+export default function ProductDetailCard({
+  details,
+  previewOpen,
+  previewOpenHandler,
+  selectLink,
+  setActiveLink
+}) {
+  const {
+    productURL,
+    productName,
+    price,
+    description,
+    category,
+    tags,
+    productQuantity
+  } = details;
+  return (
+    <div className={classes.ProductDetailCard}>
+      <div className={classes.ProductDetailTopHalf}>
+        <div className={classes.ProductImagesCont}>
+          {/* This container holds both main and preview Image */}
+          <div className={classes.MainImageCont}>
+            <img
+              src={`http://localhost:5000/${selectLink}`}
+              alt={productName}
+              className={classes.previewImage}
+              onClick={previewOpenHandler}
+            />
+
+            {previewOpen && (
+              <div className={classes.LightboxCont}>
+                <Lightbox
+                  showRotate
+                  medium={`http://localhost:5000/${selectLink}`}
+                  large={`http://localhost:5000/${selectLink}`}
+                  alt={productName}
+                  onClose={previewOpenHandler}
+                />
+              </div>
+            )}
+          </div>
+          <div className={classes.OtherImagesCont}>
+            {productURL.map((img, i) => {
+              return (
+                <img
+                  height='70'
+                  key={i}
+                  src={`http://localhost:5000/${img}`}
+                  onClick={() => setActiveLink(img)}
+                />
+              );
+            })}
+          </div>
+        </div>
+        <div className={classes.ProductTextCont}>
+          {/* Product Name */}
+          <h2 className={classes.productName}>{productName}</h2>
+          {/* Price */}
+          <div className={classes.priceContainer}>
+            <span className={classes.price}>
+              &#x20A6;{' '}
+              {parseFloat(price.toString().replace(/,/g, ''))
+                .toFixed(0)
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            </span>{' '}
+            <span> /per pc</span>
+          </div>
+          {/* Quantity  */}
+          <div className={classes.QuantityCont}>
+            <span>Quantity: </span>{' '}
+            <span className={classes.productQuantity}>{productQuantity}</span>
+          </div>
+          {/* Description */}
+          <div className={classes.Description}>
+            <h2>
+              <strong>Description</strong>
+            </h2>
+            <p>{description}</p>
+          </div>
+          <div className={classes.Category}>
+            <h3>
+              <strong>Category</strong>
+            </h3>
+            <p>{category}</p>
+          </div>
+
+          <div className={classes.reviewAndOrderCont}>
+            <div className={classes.ReviewCont}>
+              <StarRatingComponent
+                name='rate1'
+                starCount={5}
+                value={0}
+                emptyStarColor='#bbb'
+                // onStarClick={this.onStarClick.bind(this)}
+              />{' '}
+              <span>0 Reviews</span>
+            </div>
+            <div className={classes.OrderCont}>
+              <span>0 Orders</span>
+            </div>
+          </div>
+
+          <h4>
+            <strong>Search Tags</strong>
+          </h4>
+          <div className={classes.SearchTagsCont}>
+            {tags &&
+              tags.map((tag, i) => {
+                return (
+                  <span className={classes.Tag} key={i}>
+                    {tag}
+                  </span>
+                );
+              })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

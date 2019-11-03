@@ -1,0 +1,17 @@
+.NavigationItems {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  /* font-size: 30px; */
+}
+
+.desktopOnly {
+  display: block;
+  /* font-size: 30px; */
+}
+
+@media (min-width: 950px) {
+  .desktopOnly {
+    display: none;
+  }
+}

@@ -1,0 +1,128 @@
+.desktopOnly {
+  display: none;
+}
+.mobileOnly {
+  display: block;
+}
+
+.ProductContainer {
+  display: flex;
+  flex-flow: column;
+  position: relative;
+  margin: 0;
+  display: column;
+  justify-content: center;
+
+  align-items: center;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 30px;
+}
+.ProductContainer:hover {
+  background: #f5f6fb;
+}
+.title {
+  font-size: 15px;
+  cursor: pointer;
+}
+.title:hover {
+  text-decoration: underline;
+  color: #6ce001;
+}
+.Picture {
+  padding: 10px;
+}
+
+@media (min-width: 850px) {
+  .desktopOnly {
+    display: block;
+  }
+  .mobileOnly {
+    display: none;
+  }
+
+  .tooltip .options {
+    visibility: hidden;
+    /* display: none; */
+    position: absolute;
+    right: 20px;
+    z-index: 200;
+    top: 30px;
+    color: rgb(58, 6, 117);
+    background: rgba(255, 255, 255, 0.7);
+    box-sizing: border-box;
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2px #999;
+    margin-bottom: 20px;
+
+    /* padding: 10px; */
+    /* margin-bottom: 20px; */
+  }
+
+  .tooltip:hover .options {
+    visibility: none;
+    transition: 0.3s;
+  }
+  .options p {
+    margin: 0;
+    /* border-top: 1px solid #eee; */
+    padding: 5px;
+  }
+  .options p:hover {
+    background: rgb(58, 6, 117);
+    color: white;
+    transition: 0.2s;
+    cursor: pointer;
+  }
+  .PriceAndSettingCont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background: green; */
+    flex: 1;
+  }
+  .PriceAndSettingCont h6 {
+    padding: 0;
+    margin: 0;
+  }
+  .PriceAndSettingCont svg {
+    opacity: 0.8;
+    cursor: pointer;
+    color: red;
+  }
+  /* .ProductHeading h6 {
+    flex: 1;
+    font-size: 15px;
+    background: green;
+    font-family: ubuntu;
+  } */
+  .ProductContainer {
+    position: relative;
+    margin: 0;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    /* min-height: 50px; */
+    /* background: rgb(252, 251, 251); */
+    /* box-shadow: 1px 1px 1px #eee; */
+    align-items: center;
+    padding: 0 10px 0 10px;
+    margin-bottom: 10px;
+  }
+  .ProductContainer h6 {
+    flex: 1;
+    padding: 6px;
+    /* padding: 3px; */
+  }
+  .Picture {
+    flex: 1;
+    /* width: 30px;
+    height: 30px; */
+    /* background: rgb(201, 197, 197); */
+    /* background: green; */
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    /* margin-left: 10px; */
+  }
+}

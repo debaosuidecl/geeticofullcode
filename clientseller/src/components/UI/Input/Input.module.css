@@ -1,0 +1,154 @@
+.Input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.Label {
+  display: block;
+  margin-top: 2px;
+}
+textarea.InputElement {
+  height: 200px;
+}
+
+.InputElement {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background-color: white;
+  font: inherit;
+  padding: 12px 10px;
+  display: inline-block;
+  margin-bottom: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+.InputElementForLabel > label {
+  font-weight: 400;
+  color: #1d2647;
+  /* color: rgb(58, 6, 117); */
+  padding-top: 4px;
+}
+.InputElement:focus {
+  outline: none;
+}
+
+.Invalid {
+  /* border: 1px solid darkred; */
+  background: pink;
+}
+
+.InputError {
+  transition: 3s;
+  margin-bottom: -2px;
+  display: block;
+  color: rgb(0, 23, 63);
+  font-size: 1em;
+}
+
+.InputError span {
+  text-transform: capitalize;
+  color: rgb(235, 50, 59);
+}
+
+#ConfirmPasswordError {
+  margin-bottom: 0;
+}
+.CheckBox {
+  padding: 20px;
+  color: green;
+}
+
+.CheckBoxContainer {
+  display: flex;
+}
+
+.CheckBoxContainer > .CheckBox {
+  margin-top: 2px;
+}
+.textStrengthLow {
+  padding: 3px;
+  background: rgb(184, 4, 4);
+  color: white;
+  border-radius: 2px;
+}
+.textStrengthMedium {
+  padding: 3px;
+  background: rgb(58, 6, 117);
+  color: white;
+  border-radius: 2px;
+}
+.textStrengthStrong {
+  padding: 3px;
+  background: rgb(7, 235, 102);
+  color: white;
+  border-radius: 2px;
+}
+
+.RoundedEdges {
+  border-radius: 15px;
+  padding: 10px;
+  border: none;
+}
+.NoBorder {
+  border: none;
+}
+
+.GreyColor {
+  color: #eee;
+}
+input::placeholder {
+  color: rgb(182, 181, 181);
+  font-weight: 300;
+}
+
+.PhoneNumberContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.PhoneNumberContainer select {
+  flex: 1;
+  padding: 7.4px 10px;
+  border: none;
+  border: 1px solid #ccc;
+}
+.PhoneNumberContainer input {
+  flex: 3;
+  padding: 8px 10px;
+  border: none;
+  border: 1px solid #ccc;
+}
+.Valid {
+  border-bottom: 1px solid green !important;
+  transition: 0.51s all ease;
+}
+.zoomInOut {
+  /* transform: scale(1.3);
+   */
+
+  animation: zoom 1.5s linear;
+}
+@keyframes zoom {
+  0% {
+    opacity: 0;
+    transform: scale(1) translateY(-100px);
+  }
+
+  100% {
+    transform: scale(1) translateY(0px);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@media (min-width: 780px) {
+  .InputElement {
+    border-bottom: 1px solid #ccc;
+  }
+}

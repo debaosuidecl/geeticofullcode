@@ -1,0 +1,272 @@
+.DashboardContainer .Title {
+  text-align: center;
+  font-size: 40px;
+  font-family: 'Kaushan Script', cursive;
+}
+.addCircle {
+  padding: 8.5px 10px 8.5px 10px;
+
+  /* border-radius: 50%;
+  background: rgb(3, 170, 170);
+  color: white;
+  margin-right: 20px; */
+}
+.addCircle svg {
+  font-size: 30px;
+  /* color: rgb(6, 163, 163); */
+  color: #6ce001;
+}
+
+.CardsContainer {
+  width: 90%;
+  margin: 60px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-items: center; */
+  justify-content: center;
+  /* text-align: center; */
+  /* background: green; */
+}
+.CardsCont {
+  width: 50%;
+  max-width: 350px;
+  min-width: 235px;
+  margin: 20px auto;
+  /* height: 400px */
+  /* margin: 10px auto; */
+}
+
+.DashboardContainer h2 {
+  /* text-align: center; */
+  font-size: 30px;
+  margin-top: 30px;
+  font-family: 'Times New Roman', Times, serif;
+  /* color: rgb(2, 0, 92); */
+
+  /* color: rgb(58, 6, 117); */
+}
+
+.DashboardContainer {
+  /* background: yellow; */
+  /* background: green; */
+  max-width: 1000px;
+  margin: auto;
+}
+
+.Body {
+  margin: 40px auto;
+  /* background: yellow; */
+  max-width: 1200px;
+}
+
+.Body p {
+  font-size: 17px;
+}
+
+.AddProductContainer {
+  width: 90%;
+  margin: auto;
+}
+
+.AddProductHeader {
+  /* height: 50px; */
+  /* color: white; */
+  /* padding: 1px; */
+  display: flex;
+  padding: 0;
+  margin: auto;
+  background: #1d2647;
+  /* background: rgb(58, 6, 117); */
+  overflow: hidden;
+  justify-content: space-between;
+  align-items: center;
+  /* text-align: center; */
+}
+
+.AddProductHeader h2 {
+  color: white;
+  padding: 14px;
+  font-size: 25px;
+  font-family: fantasy;
+  font-weight: 100;
+  /* float: left; */
+  margin: 0;
+}
+
+.AddProductHeader button {
+  /* float: right; */
+  margin-right: 20px;
+  height: 40px;
+  background: #6ce001;
+  /* background: rgb(6, 173, 173); */
+  outline: none;
+  border: none;
+  /* border: 0.5px solid teal; */
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.ProductBody {
+  /* display: flex; */
+  /* text-align: center; */
+
+  background: white;
+  padding: 25px;
+  /* flex-flow: column; */
+  min-height: 300px;
+  box-shadow: 1px 3px 1px #eee;
+  /* align-items: center; */
+  /* justify-content: space-between; */
+}
+
+.AddProductCTA {
+  width: 100%;
+}
+.AddProductCTA h3 {
+  font-family: 'Kaushan Script', cursive;
+  /* text-align: center; */
+}
+.AddProductCTA button {
+  /* font-family: "Kaushan Script", cursive;
+   */
+  background: teal;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 120px;
+  font-size: 16px;
+}
+
+.ProductImageContainer {
+  width: 50%;
+  /* background: green; */
+  text-align: center;
+  /* display: none; */
+}
+.ProductImageContainer img {
+  width: 100%;
+  /* min-width: 150px; */
+  max-width: 200px;
+}
+.AddProductCTA p {
+  font-size: 14px;
+}
+.desktopOnly {
+  display: none;
+}
+.mobileOnly {
+  display: block;
+}
+.ProductContainer {
+}
+.desktopOnlyFlex {
+  display: none;
+}
+
+.ProductSummaryCont {
+  overflow-y: scroll;
+  height: 300px;
+}
+/* width */
+.ProductSummaryCont::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+.ProductSummaryCont::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.ProductSummaryCont::-webkit-scrollbar-thumb {
+  background: rgba(11, 245, 116, 0.2);
+}
+
+/* Handle on hover */
+.ProductSummaryCont::-webkit-scrollbar-thumb:hover {
+  /* background: rgba(58, 6, 117, 1); */
+  background: #3cfd22;
+  transition: 0.5s;
+}
+
+@media (min-width: 650px) {
+  .mobileOnly {
+    display: block;
+  }
+  .CardsContainer {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    margin: 40px auto;
+  }
+  /* .CardsCont {
+    width: 60%;
+    min-width: none;
+  } */
+}
+
+@media (min-width: 850px) {
+  .mobileOnly {
+    display: none;
+  }
+  .ProductHeading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    color: #1d2647;
+    /* color: rgb(58, 6, 117); */
+    padding: 0 10px 0 10px;
+    /* font-size: 28px; */
+    /* font-family: "Kaushan Script", cursive; */
+  }
+  .ProductSummaryCont {
+    overflow-y: scroll;
+    height: 300px;
+  }
+  /* width */
+
+  .ProductHeading h6 {
+    flex: 1;
+    font-size: 15px;
+    /* background: green; */
+    font-family: ubuntu;
+  }
+
+  .desktopOnly {
+    display: block;
+  }
+  .desktopOnlyFlex {
+    display: flex;
+  }
+  .AddProductCTA p {
+    font-size: 19px;
+  }
+  .AddProductHeader h2 {
+    font-size: 35px;
+    /* text-align: left; */
+  }
+  .AddProductCTACont {
+    /* display: flex; */
+    text-align: left;
+    flex-flow: row;
+    justify-content: center;
+  }
+  .ProductImageContainer {
+    width: 50%;
+    /* background: green; */
+    text-align: center;
+    display: block;
+  }
+  .ProductImageContainer img {
+    width: 50%;
+    min-width: 150px;
+  }
+  .AddProductCTA {
+    width: 50%;
+  }
+  /* .AddProductCTA h3 {
+  } */
+}

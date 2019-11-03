@@ -1,0 +1,181 @@
+.AddProductContainer {
+  margin-bottom: -250px;
+}
+
+.inputTags {
+  width: 100%;
+  padding-left: 8px;
+}
+
+.AddProductContainer h2 {
+  text-align: center;
+  font-family: 'Kaushan Script', cursive;
+
+  color: #1d2647;
+}
+
+.NavCont {
+  margin-top: 40px;
+}
+.FormContainer {
+  width: 90%;
+  max-width: 850px;
+  margin: auto;
+}
+.SaveAndContinue {
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.FormContainer button {
+  width: 80%;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #6ce001;
+  color: #6ce001;
+  background: none;
+
+  margin-bottom: 20px;
+  transition: 0.5s;
+}
+
+.FormContainer button:hover {
+  background: #6ce001;
+  color: white;
+  transition: 0.5s;
+}
+.FormContainer button:disabled {
+  background: #eee;
+  transition: none;
+  border: 1px solid #eee;
+  cursor: not-allowed;
+  color: #999;
+}
+
+.ImageUploadContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  min-width: none;
+  max-width: none;
+  margin: 70px auto;
+  /* background: green; */
+}
+.InputCard {
+  display: flex;
+  align-items: center;
+}
+.imgPrevBox {
+  /* width: 400px; */
+  /* margin: auto; */
+  max-width: 400px;
+  min-width: 200px;
+  border-radius: 15px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  margin-right: 6px;
+  position: relative;
+  margin-left: 6px;
+  /* align-items: center; */
+  /* background: #000; */
+  justify-content: center;
+}
+.ChangeImage {
+  /* visibility: hidden; */
+  margin: auto;
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  width: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  z-index: 499;
+}
+
+.ChangeImageText {
+  position: absolute;
+  border: 1px solid rgb(58, 6, 117);
+  top: 40%;
+  padding: 2px 10px;
+  left: 50%;
+  color: white;
+  font-weight: 700;
+  transform: translate(-50%, -40%);
+}
+.ChangeImageTextTwo {
+  position: absolute;
+  border: 1px solid rgb(58, 6, 117);
+
+  padding: 2px 10px;
+  top: 60%;
+  left: 50%;
+  color: white;
+  transform: translate(-50%, -60%);
+}
+.imgPrevBox img:hover .ChangeImage {
+  visibility: visible;
+}
+
+.imgPrevBox img {
+  /* height: 200px; */
+  width: 60%;
+}
+.Success {
+  text-align: center;
+}
+.Success p {
+  color: green;
+  font-size: 20px;
+}
+@media (min-width: 950px) {
+  .SaveAndContinue {
+    text-align: center;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+  }
+  .FormContainer button {
+    width: 30%;
+  }
+  .ImageUploadContainer {
+    display: flex;
+    flex-flow: row;
+    max-width: 700px;
+    min-width: 600px;
+    /* margin: 30px; */
+  }
+  .ChangeImageText:hover,
+  .ChangeImageTextTwo:hover {
+    background: rgb(58, 6, 117);
+    transition: 0.5s;
+    cursor: pointer;
+  }
+  .ChangeImage:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transition: 0.3s;
+  }
+  .imgPrevBox {
+    width: 200px;
+    cursor: pointer;
+    overflow: hidden;
+    margin-right: 6px;
+    margin-left: 6px;
+    max-height: 200px;
+  }
+  .imgPrevBox img {
+    /* height: 200px; */
+    width: 150%;
+    /* width: 200px; */
+  }
+  .ChangeImage {
+    width: 100%;
+  }
+}

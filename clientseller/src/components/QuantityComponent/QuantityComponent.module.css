@@ -1,0 +1,30 @@
+.QuantityCont {
+  margin-top: 14px;
+}
+
+.productQuantity {
+  background: #eee;
+  color: #555;
+  margin-right: 2px;
+  padding: 7px;
+  border-radius: 4px;
+}
+
+.productQuantityInputCont {
+  display: inline;
+}
+
+.productQuantityInputCont input {
+  outline: none;
+  padding: 7px;
+  margin-right: 2px;
+  border-radius: 4px;
+  background: #eee;
+  color: #555;
+  border: none;
+  width: 90px;
+}
+
+.productQuantityInputCont div {
+  color: red;
+}

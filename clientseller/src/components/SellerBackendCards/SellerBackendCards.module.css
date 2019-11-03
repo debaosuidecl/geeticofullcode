@@ -1,0 +1,115 @@
+.SellerBackendCards {
+  background: white;
+  width: 95%;
+  /* max-height: 220px; */
+  /* height: 220px; */
+  height: 350px;
+  position: relative;
+  /* margin-right: 20px; */
+  box-sizing: border-box;
+  /* cursor: pointer; */
+  padding: 14px;
+  margin-bottom: 15px;
+  box-shadow: 0px 1px 1px rgb(190, 189, 189);
+  margin: auto;
+  transition: 0.4s ease-in-out;
+}
+.Header {
+  text-align: center;
+  /* color: rgb(58, 6, 117); */
+  color: #1d2647;
+}
+header.Header h4 {
+  font-size: 24px;
+  font-family: 'Kaushan Script', cursive;
+}
+.ImageContainer {
+  margin: auto;
+  text-align: center;
+}
+.ImageContainer img {
+  width: 70px;
+  height: 70px;
+}
+.SellerBackendCards:hover {
+  box-shadow: 1px 5px 10px rgb(190, 189, 189);
+  transition: 0.4s ease-in-out;
+}
+/* .Discount {
+  color: orange;
+}
+.Price {
+  font-size: 15px;
+} */
+
+.TextContainer {
+  text-align: center;
+  overflow: hidden;
+  /* position: relative; */
+}
+
+.TextContainer button {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 7px;
+  border: none;
+  color: white;
+  background: #6ce001;
+  /* background: teal; */
+  box-shadow: 2px 1px 6px #ccc;
+}
+
+.TextContainer .Description {
+  font-size: 16px;
+}
+/* 
+.TextContainer > .ClickForMore {
+  background: rgba(15, 14, 14, 1);
+  color: white;
+  padding: 2px 5px 2px 2px;
+  position: absolute;
+  bottom: -30px;
+  font-size: 12px;
+} */
+/* .SellerBackendCards:hover .ClickForMore {
+  transition: 0.5s all ease;
+  text-align: right;
+  right: 0;
+  bottom: 0;
+} */
+
+.TextContainer > .Title {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+@media (min-width: 950px) {
+  .SellerBackendCards {
+    background: white;
+    width: 95%;
+    /* max-height: 300px; */
+    height: 350px;
+    transition: 0.4s ease-in-out;
+  }
+  .ImageContainer {
+    margin: auto;
+    text-align: center;
+  }
+  .ImageContainer img {
+    width: 100px;
+    height: 100px;
+  }
+  .SellerBackendCards:hover {
+    box-shadow: 1px 5px 10px rgb(190, 189, 189);
+    transition: 0.4s ease-in-out;
+  }
+  .Discount {
+    color: orange;
+  }
+
+  .TextContainer {
+    text-align: left;
+  }
+}
