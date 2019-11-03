@@ -11,6 +11,7 @@ import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ProductSummary from '../../../components/ProductSummary/ProductSummary';
 import { fetchUserProducts } from '../../../store/actions/products';
+
 import { Helmet } from 'react-helmet';
 import AreYouSureToDelete from '../../../components/AreYouSureToDelete/AreYouSureToDelete';
 import SpinnerTwo from '../../../components/UI/Spinner2/Spinner2';
