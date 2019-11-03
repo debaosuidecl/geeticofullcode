@@ -1,0 +1,170 @@
+.OrderCard {
+  margin: 20px 20px;
+  /* min-height: 120px; */
+  /* height: 2000px; */
+  display: flex;
+  flex-flow: column;
+  max-height: none;
+  box-shadow: 1px 2px 5px #bbb;
+  padding: 15px;
+  border-radius: 10px;
+  /* cursor: pointer; */
+  /* transition: 1s; */
+}
+.spinnerCont {
+  position: absolute;
+}
+.OrderCard svg {
+  cursor: pointer;
+}
+.Status {
+  outline: none;
+  border: none;
+  background: #eee;
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.OrderTop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.OrderCard:hover {
+  background: rgb(252, 252, 252);
+}
+.Right {
+  flex: 1;
+  /* background: gold; */
+}
+.Left {
+  flex: 12;
+  /* background: green; */
+}
+.Left h2 {
+  padding: 0;
+  margin: 0;
+}
+.Left {
+  /* background: #eee; */
+  margin: 0;
+  padding: 0;
+  align-items: space-between;
+  justify-content: space-between;
+  display: flex;
+  flex-flow: column;
+}
+.subCont,
+.detCont {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 2px;
+  /* margin-top: 5px; */
+}
+.subCont .value,
+.detCont .value {
+  background: #eee;
+  color: #444;
+  padding: 6px;
+  border-radius: 10px;
+  width: 100%;
+  flex: 3;
+  max-width: 85px;
+}
+.subCont .title,
+.detCont .title {
+  font-weight: 100;
+  flex: 1;
+  margin-right: 3px;
+}
+.detCont {
+  flex-flow: column;
+}
+.Right {
+  display: flex;
+  /* background: #eee; */
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.collapsible {
+  /* margin-top: 5px; */
+  max-height: none;
+
+  width: 100%;
+  padding: 10px;
+  /* min-height: 0px; */
+  transition: 0.3s;
+  background: rgb(250, 250, 252);
+}
+.orderData {
+  /* margin: 10px 0px; */
+  padding: 5px;
+  max-height: none;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+}
+.quantity {
+  font-size: 12px !important;
+}
+.price {
+  font-size: 15px;
+}
+.productName {
+  font-weight: 900;
+  font-size: 17px;
+}
+.productName:hover {
+  color: rgb(38, 238, 71);
+}
+.shipped {
+  background: gold !important;
+}
+
+.delivered {
+  background: lime !important;
+  color: white !important;
+}
+.NamePriceCont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: column-reverse;
+  padding: 5px;
+}
+.NamePriceCont h2 {
+  color: #1d2647;
+  margin: 0;
+}
+@media (min-width: 500px) {
+  .detCont {
+    flex-flow: row;
+    justify-content: space-between;
+  }
+}
+@media (min-width: 1000px) {
+  .OrderCard {
+    margin: 20px 20px;
+  }
+  .Left {
+    /* background: #eee; */
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-flow: row;
+  }
+  .subCont {
+    margin-bottom: 0;
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+}

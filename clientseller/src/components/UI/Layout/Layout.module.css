@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css?family=Kaushan+Script");
+
+.Layout {
+  margin: 0 auto;
+  padding: 0;
+  background: rgb(236, 234, 234);
+  /* text-align: center; */
+}
+.ModalCont {
+  display: none;
+}
+.ModalHeader {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 30px;
+  font-family: "Kaushan Script", cursive;
+  color: orange;
+}
+
+.Header {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 25px;
+  font-family: "Kaushan Script", cursive;
+  color: rgb(243, 116, 31);
+}
+
+.ModalContent {
+  display: flex;
+  justify-content: space-evenly;
+  flex-flow: column;
+  padding: 40px;
+  align-items: center;
+}
+.ModalContent h5 {
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 14px;
+}
+.ModalContent h5 svg {
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.ModalContent h5 svg:hover {
+  color: rgb(255, 0, 21);
+  transition: 0.3s;
+}
+@media (min-width: 600px) {
+  .Header {
+    font-size: 50px;
+  }
+  .ModalHeader {
+    border-right: 1px solid orange;
+    padding-right: 30px 10px;
+  }
+  .ModalContent {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    padding: 40px;
+  }
+  .ModalContent h5 {
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    font-weight: 100;
+    font-size: 14px;
+  }
+  .ModalCont {
+    display: block;
+  }
+  .ModalContent h5 svg {
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+}

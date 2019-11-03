@@ -1,0 +1,31 @@
+.SerialCont {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.referenceNumber {
+  background: #eee;
+  color: #555;
+  margin-right: 2px;
+  padding: 7px;
+  border-radius: 4px;
+}
+
+.referenceNumberInputCont {
+  display: inline;
+}
+
+.referenceNumberInputCont input {
+  outline: none;
+  padding: 7px;
+  margin-right: 2px;
+  border-radius: 4px;
+  background: #eee;
+  color: #555;
+  border: none;
+  width: 90px;
+}
+
+.referenceNumberInputCont div {
+  color: red;
+}

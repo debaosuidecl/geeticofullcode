@@ -1,0 +1,13 @@
+.SearchTagsCont {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-around; */
+}
+
+.Tag {
+  background: #eee;
+  color: #555;
+  margin-right: 2px;
+  padding: 7px;
+  border-radius: 4px;
+}

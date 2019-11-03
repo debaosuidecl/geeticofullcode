@@ -1,0 +1,19 @@
+.descriptionInputCont textarea {
+  resize: none;
+  border: none;
+  background: rgb(250, 248, 248);
+  width: 80%;
+  /* height: 100%; */
+  min-height: 140px;
+  outline: none;
+}
+
+.Description p {
+  max-width: 300px;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.descriptionInputCont div {
+  color: red;
+}

@@ -7,14 +7,14 @@ import { authCheckState } from './store/actions/auth';
 import LoadingPage from './containers/LoadingPage/LoadingPage';
 import nonAuthRoute from './nonAuthRoute';
 
-
 class App extends Component {
   componentDidMount() {
     this.props.onTryAutoSignIn();
   }
   // static isDevelopment = false;
-  static domain = '/';
-  // static domain = process.env.NODE_ENV === 'development' ? 'http://localhost:5000/' : '/';
+  // static domain = '/';
+  static domain =
+    process.env.NODE_ENV === 'development' ? 'http://localhost:5000/' : '/';
   static allowedCategories = [
     'Beer, Wine & Spirit',
     'Food Cupboard',

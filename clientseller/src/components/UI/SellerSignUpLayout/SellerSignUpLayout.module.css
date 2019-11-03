@@ -1,0 +1,74 @@
+.SellerSignUpLayout {
+  /* background: rgb(247, 246, 246); */
+  height: 100%;
+  padding-top: 0.1px;
+}
+
+.Header {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 50px;
+  font-family: 'Kaushan Script', cursive;
+  color: rgb(58, 6, 117);
+}
+.SubHeader {
+  padding: 0;
+  margin: 20px auto;
+  text-align: center;
+  /* color: white; */
+  font-size: 30px;
+  font-family: 'Kaushan Script', cursive;
+}
+
+/* .bar {
+  height: 20px;
+  background: #ccc;
+  width: 60%;
+  margin: 10px auto;
+  border-radius: 20px;
+  position: relative;
+} */
+/* .Level {
+  height: 20px;
+  background: orange;
+  width: 0%;
+
+  border-radius: 20px;
+  position: absolute;
+}
+
+.circleOne,
+.circleTwo,
+.circleThree {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  position: absolute;
+  top: -12px;
+  background: rgb(189, 189, 182);
+
+}
+.circleOne {
+  left: 0;
+}
+.circleTwo {
+  left: 100%;
+  transform: translateX(-50%);
+}
+.circleThree {
+  left: 100%;
+  transform: translateX(-100%);
+}
+
+.circleOne p,
+.circleTwo p,
+.circleThree p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+} */

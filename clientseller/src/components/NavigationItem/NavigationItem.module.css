@@ -1,0 +1,128 @@
+.NavigationItem {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.Font svg {
+  font-size: 17px;
+}
+
+.NavigationItem a {
+  text-decoration: none;
+  color: orange;
+  cursor: pointer;
+  padding: 12px 12px;
+  display: block;
+  font-size: 11px;
+  font-family: 'Varela Round', sans-serif;
+  border-bottom: 0.21px solid #ccc;
+}
+.NavigationItem.Seller a {
+  color: white;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  padding: 15px;
+  font-size: 13px;
+  font-weight: 100;
+}
+.NavigationItem.Seller {
+  padding-left: 0;
+}
+.NavigationItem.Seller a {
+  /* padding-left: 0; */
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.NavigationItem a:hover {
+  box-shadow: 3px 3px 3px #ccc;
+  border-top: 0.1px solid #ccc;
+}
+
+/* .NavigationItem:hover {
+} */
+
+.NavigationItem.Seller.Active a {
+  /* background: white; */
+  /* color: rgb(58, 6, 117); */
+  transition: 0.8s;
+  color: #6ce001;
+  font-weight: 1000;
+
+  /* color: white; */
+}
+
+.NavigationItem.Seller.Active {
+  box-shadow: none;
+}
+/* .NavigationItem.Seller a {
+  color: white;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+} */
+
+.NavigationItem.Seller a:hover {
+  /* background: white; */
+
+  transition: 0.3s;
+  box-shadow: none;
+  border-top: none;
+}
+@media (min-width: 950px) {
+  .NavigationItem a {
+    color: white;
+    margin-right: 8px;
+    margin-left: 8px;
+    border: none;
+    box-shadow: none;
+  }
+
+  .NavigationItem.Seller a {
+    color: white;
+    margin: 0;
+    font-size: 12px;
+    border: none;
+    box-shadow: none;
+    font-weight: lighter;
+  }
+  .NavigationItem.Seller a svg {
+    margin-right: 10px;
+  }
+
+  .NavigationItem a:hover {
+    background: white;
+    color: orange;
+    transition: 0.3s;
+    box-shadow: none;
+  }
+  .NavigationItem.Seller a:hover {
+    color: #6ce001;
+    box-shadow: 0px 3px 5px #333 !important;
+
+    /* color: rgb(58, 6, 117); */
+  }
+  .NavigationItem.Seller.Active a {
+    background: white;
+    box-shadow: 0px 3px 5px #333;
+    /* color: #1d2647; */
+    color: #6ce001;
+    /* color: rgb(58, 6, 117); */
+    transition: 0.8s;
+    font-weight: lighter;
+  }
+}
+
+@keyframes NavAnimation {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@supports (-ms-ime-align: auto) {
+}

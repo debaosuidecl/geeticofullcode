@@ -1,0 +1,92 @@
+.ProductDetailSecondHalf {
+  margin-top: 2px;
+  min-height: 400px;
+  padding-top: 50px;
+  width: 100%;
+  background: white;
+  border: 1px solid rgba(3, 3, 105, 0.205);
+}
+.ProductDetailSecondHalf h2 {
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+}
+
+.ReviewLogoContainer {
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+}
+
+.NoReviewTextContainer {
+  margin: 20px auto;
+  max-width: 200px;
+  text-align: center;
+}
+
+.ProductDetailSecondHalf textarea {
+  /* text-align: center; */
+  width: 50%;
+  /* min-width: 400px; */
+  min-width: 200px;
+  margin: auto;
+  resize: none;
+  min-height: 200px;
+  padding: 14px;
+}
+.taCont {
+  text-align: center;
+}
+.singleReview {
+  /* background: #ddd; */
+  border-bottom: 1px solid #eee;
+
+  display: flex;
+  flex-flow: column;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 50px;
+}
+.NameRatingAndCommentCont {
+  /* background: #bbb; */
+  width: 100%;
+  min-height: 80px;
+  display: flex;
+  flex-flow: column;
+  /* align-items: space-between; */
+  /* justify-content: space-between; */
+  flex: 12;
+}
+
+.NameAndRatingCont {
+  /* background: #eee; */
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 100%;
+  /* height: 50px; */
+}
+.NameAndRatingCont p {
+  font-size: 20px;
+  margin: 0;
+  font-family: 'Signika', sans-serif;
+  color: #41549b;
+}
+.AvatarCont {
+  flex: 1;
+}
+.avatarImg {
+  width: 50px;
+  border-radius: 50%;
+}
+
+@media (min-width: 550px) {
+  .singleReview {
+    flex-flow: row;
+  }
+}

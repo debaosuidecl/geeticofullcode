@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script');
+
+.HeaderSeller {
+  display: flex;
+  justify-content: space-between;
+  /* height: 47px; */
+  width: 100%;
+  position: fixed;
+  /* background: #999; */
+  background: #121a38;
+  /* background: #6ce001; */
+  /* background: rgb(58, 6, 117); */
+  z-index: 2000;
+  align-items: center;
+  padding: 18px;
+  padding-top: 10px;
+  /* box-shadow: 0px 0.3px 2px #eee; */
+}
+.HeaderSeller a {
+  text-decoration: none;
+}
+.SellerBackendMobNavItemsCont {
+  position: absolute;
+  /* background: green; */
+  /* overflow: scroll; */
+  left: 50%;
+  top: 100%;
+  width: 100%;
+  transform: translateX(-50%) scale(0.05);
+  opacity: 0;
+  z-index: 100;
+}
+/* .HeaderSpan {
+  /* color: rgb(230, 27, 27); */
+/* color: rgb(6, 173, 173); 
+} */
+
+.Logout {
+  padding: 26px 10px;
+  transition: 0.5s;
+}
+
+span.Logout:hover {
+  background: white;
+  transition: 0.5s;
+  cursor: pointer;
+  color: #1d2647 !important;
+}
+.Header {
+  padding: 10px 0 10px 20px;
+  margin: 0;
+  text-align: center;
+  font-size: 32px;
+  font-family: 'Kaushan Script', cursive;
+  /* color: rgb(58, 6, 117); */
+  /* color: white; */
+
+  /* color: white; */
+}
+
+.ProfileDetails {
+  padding: 0 60px 0 0;
+  /* padding: 50%; */
+}
+.ProfileDetails span:nth-child(1) {
+  padding: 10px 15px;
+  margin: 0 10px 0 0;
+  border-radius: 50%;
+  background: #6ce001;
+  /* background: rgb(6, 173, 173); */
+  /* box-shadow: 1px 1px 1px #444; */
+
+  color: white;
+}
+.ProfileDetails span:nth-child(2) {
+  color: white;
+}
+
+.desktopOnly {
+  display: none;
+}
+.AnimEffect1 {
+  width: 20px;
+  padding: 20px;
+  background: #1d2647;
+  /* background: rgb(58, 6, 117); */
+  position: absolute;
+  height: 50px;
+  top: 650%;
+  border-radius: 50%;
+  /* display: none; */
+  /* display: none; */
+
+  left: 50%;
+  transform: translate(-50%, -650%) scale(0.51);
+  transition: 0.2s ease-out;
+  opacity: 0;
+}
+.ScaleBig {
+  transform: scale(39);
+  transition: 0.4s ease-in;
+  display: block;
+  opacity: 0.9;
+}
+
+.mobileOnly {
+  display: block;
+}
+.SellerBackendMobNavItemsCont.zoomNav {
+  /* animation: zoomNav 1s linear; */
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: 0.5s ease-in;
+}
+.higherIndex {
+  z-index: 2000;
+}
+
+.Header {
+  color: #6ce001;
+  /* color: rgb(58, 6, 117); */
+}
+
+.dropDown {
+  color: white;
+  min-width: 500px;
+  height: 100;
+  padding: 20px;
+  cursor: pointer;
+  z-index: 100;
+  position: relative;
+}
+.toolTipMore,
+.toolTipExtend {
+  display: none;
+}
+.signintext {
+  color: #1d2647;
+}
+.dropDown:hover .toolTipMore {
+  position: absolute !important;
+  height: 80px;
+  left: -150px;
+  top: 50px;
+  min-width: 190px;
+  padding: 20px;
+  background: white !important;
+  box-shadow: 0px 1px 1px #bbb;
+  display: inline-block;
+}
+.dropDown:hover .toolTipExtend {
+  /* display: inline-block; */
+  position: absolute !important;
+  height: 34px;
+  left: 0;
+  /* borderLeft: '2px solid green' */
+  top: 18px;
+  width: 10px;
+  background: white;
+  /* border-left: 41px solid green; */
+}
+.toolTipExtend::after {
+}
+
+@media (min-width: 950px) {
+  .mobileOnly {
+    display: none;
+  }
+  .HeaderSeller {
+    /* background: white; */
+  }
+  .Header {
+    color: #6ce001;
+    /* color: rgb(58, 6, 117); */
+  }
+  .desktopOnly {
+    display: block;
+  }
+
+  .CategorySearchCont {
+    flex: 2;
+    /* background: green; */
+    text-align: center;
+  }
+  .SearchInnerCont {
+    position: relative;
+    /* background: green; */
+    width: 80%;
+    margin: auto;
+  }
+  .CategorySearch {
+    padding: 10px;
+    width: 100%;
+    margin: auto;
+    border: none;
+    outline: none;
+    background: white;
+    border-radius: 15px;
+  }
+  .CategorySearch::placeholder {
+    font-size: 14px;
+    font-family: ubuntu;
+    font-weight: lighter;
+  }
+  .SearchIconCont {
+    position: absolute;
+    right: 0;
+    font-size: 20px;
+    color: #bbb;
+    top: 50%;
+    margin-right: 20px;
+    cursor: pointer;
+    transform: translateY(-50%);
+  }
+}
+@keyframes zoomNav {
+  0% {
+    opacity: 0.1;
+    /* transform: scale(); */
+  }
+  95% {
+    transform: scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-height: 360px) {
+  .SellerBackendMobNavItemsCont {
+    top: 50%;
+  }
+}

@@ -1,0 +1,16 @@
+.AreYouSureToDeleteCont {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.AreYouSureToDeleteCont input {
+}
+.AreYouSureToDeleteCont img {
+  height: 150px;
+  margin: 20px auto;
+}
+.ButtonCont {
+  display: flex;
+}
