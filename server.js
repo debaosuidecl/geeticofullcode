@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 //set port
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 // var server_host = process.env.YOUR_HOST || '142.93.39.91';
 
 
