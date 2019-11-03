@@ -1,4 +1,4 @@
-const express = require('express');
+esconst express = require('express');
 const connectDB = require('./config/db');
 require('dotenv').config();
 const app = express();
@@ -39,6 +39,6 @@ if (process.env.NODE_ENV === 'production') {
 const PORT = process.env.PORT || 5000;
 var server_host = process.env.YOUR_HOST || '142.93.39.91';
 
-app.listen(PORT, () =>
+app.listen(PORT, server_host, () =>
   console.log(`Server Started on port ${PORT}`)
 );
