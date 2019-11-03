@@ -43,13 +43,9 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 //set port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 1900;
 // var server_host = process.env.YOUR_HOST || '142.93.39.91';
-
-
-app.listen(PORT, () =>
-  console.log(`Server Started on port ${PORT}`)
-);
 
 app.listen(PORT, () => console.log(`Server Started on port ${PORT}`));
 
+app.listen(PORT, () => console.log(`Server Started on port ${PORT}`));
