@@ -22,7 +22,7 @@ class HeaderSeller extends Component {
   };
   logoutHandler = () => {
     this.props.onLogout();
-    this.props.history.push('/');
+    this.props.history.push('/sellerpage');
   };
   render() {
     return (
