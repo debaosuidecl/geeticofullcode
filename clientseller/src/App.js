@@ -16,7 +16,9 @@ class App extends Component {
   static baseName = '/seller/';
   // static domain = 'http://localhost:5000/';
   static domain =
-    process.env.NODE_ENV === 'development' ? 'http://localhost:5000/' : '/';
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:2900/'
+      : 'https://geetico.com/';
   static valueToHours = value => {
     switch (value) {
       case 1:

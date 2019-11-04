@@ -1,3 +1,13 @@
 GET http://localhost:5000/seller/beans HTTP/1.1
 
 # GET https://example.com/comments/1 HTTP/1.1
+
+###
+POST http://localhost:2900/api/auth
+content-type: application/json
+
+{
+    "fullName": "Akapa Temisan",
+    "email": "akapatemisan475@gmail.com",
+    "password": "Robinho007"
+}

@@ -5,7 +5,6 @@ const Order = require('../../models/Order');
 const Product = require('../../models/Product');
 const { check, validationResult } = require('express-validator');
 
-
 const extractProduct = async orderDetails => {
   let myProducts = await Promise.all(
     orderDetails.map(prod => {
@@ -70,11 +69,11 @@ router.get('/all/:page', authMiddleWare, async (req, res) => {
   const resPerPage = 10; // results per page
   const page = req.params.page || 1; // Page
 
-  if (req.user.id.toString() !== '5d8b3d7b29bd9b1bf0c3e546') {
-    return res.status(400).json({
-      msg: 'You are not authorized to view this please'
-    });
-  }
+  // if (req.user.id.toString() !== '5d8b3d7b29bd9b1bf0c3e546') {
+  // return res.status(400).json({
+  //   msg: 'You are not authorized to view this please'
+  // });
+  // }
   try {
     // let count = await Order.estimatedDocumentCount();
     let orders = await Order.find({})
@@ -117,11 +116,11 @@ router.get('/all/:status/:page', authMiddleWare, async (req, res) => {
   const resPerPage = 20; // results per page
   const page = req.params.page || 1; // Page
 
-  if (req.user.id.toString() !== '5d8b3d7b29bd9b1bf0c3e546') {
-    return res.status(400).json({
-      msg: 'You are not authorized to view this please'
-    });
-  }
+  // if (req.user.id.toString() !== '5d8b3d7b29bd9b1bf0c3e546') {
+  //   return res.status(400).json({
+  //     msg: 'You are not authorized to view this please'
+  //   });
+  // }
   try {
     let orders = await Order.find({
       status: req.params.status
@@ -179,11 +178,11 @@ router.post(
         errors: errors.array()
       });
     }
-    if (req.user.id.toString() !== '5d8b3d7b29bd9b1bf0c3e546') {
-      return res.status(400).json({
-        msg: 'You are not authorized to view this please'
-      });
-    }
+    // if (req.user.id.toString() !== '5d8b3d7b29bd9b1bf0c3e546') {
+    //   return res.status(400).json({
+    //     msg: 'You are not authorized to view this please'
+    //   });
+    // }
     const { status } = req.body;
     let order = await Order.findById(req.params.orderId);
 
