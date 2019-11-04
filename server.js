@@ -30,7 +30,7 @@ app.use('/api/userauth', require('./routes/api/frontendUserAuth'));
 app.use('/api/userorders', require('./routes/api/frontEndOrders'));
 
 if (process.env.NODE_ENV === 'production') {
-  app.use('/sellerpage', express.static('clientseller/build'));
+  // app.use('/sellerpage', express.static('clientseller/build'));
   app.get('/sellerpage/*', (req, res) => {
     res.sendFile(
       path.resolve(__dirname, 'clientseller', 'build', 'index.html')
