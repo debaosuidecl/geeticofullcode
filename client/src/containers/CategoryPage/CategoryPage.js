@@ -46,7 +46,8 @@ export class CategoryPage extends Component {
     this.setState({ catProps: nextProps.match.params.category });
   }
   componentDidMount() {
-    document.querySelector('[href="#TNV"]').click();
+    // document.querySelector('[href="#TNV"]').click();
+    window.scrollTo(0, 0);
 
     axios
       .get(

@@ -19,6 +19,7 @@ import bake from '../../shared/images/cooking & baking.jpg';
 import cupboard from '../../shared/images/food cupboard.jpg';
 import SaladSpread from '../../shared/images/salad spread.jpg';
 import Choco from '../../shared/images/Candy&Chocolate.jpg';
+import household from '../../shared/images/household.jpg';
 import Canned from '../../shared/images/Canned, Jarred & Packaged Foods.jpg';
 import 'semantic-ui-css/semantic.min.css';
 import SpinnerTwo from '../../components/UI/Spinner2/Spinner2';
@@ -35,21 +36,9 @@ class ProductPage extends React.Component {
     cooking: [],
     hasMore: true
   };
-  static allowedCategories = [
-    'Beer, Wine & Spirit',
-    'Food Cupboard',
-    'Beverages',
-    'Drinks',
-    'Cooking & Baking',
-    'Dried Beans, Grains & Rice',
-    'Breakfast Foods',
-    'Herbs Spices & Seasoning',
-    'Candy & Chocolate',
-    'Canned, Jarred & Packaged Foods',
-    'Jams, Jellies & Sweet Spreads',
-    'Condiments & Salad Dressings'
-  ];
+
   componentDidMount() {
+    window.scrollTo(0, 0);
     axios.get(`${App.domain}api/userproducts/1?search=cooking`).then(res => {
       // console.log(res.data);
 
@@ -181,6 +170,12 @@ class ProductPage extends React.Component {
                   }
                 >
                   <img src={Canned} alt='' />
+                </div>
+                <div
+                  className={classes.item15}
+                  onClick={() => this.goToCatHandler('Household Supplies')}
+                >
+                  <img src={household} alt='' />
                 </div>
                 <div
                   className={classes.item10}

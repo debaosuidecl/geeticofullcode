@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import Layout from '../../components/UI/Layout/Layout';
-import classes from './OrderPage.module.css';
-import Backdrop from '../../components/UI/Backdrop/Backdrop';
-import Spinner from '../../components/UI/Spinner/Spinner';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import axios from 'axios';
-import App from '../../App';
+import React, { Component } from "react";
+import Layout from "../../components/UI/Layout/Layout";
+import classes from "./OrderPage.module.css";
+import Backdrop from "../../components/UI/Backdrop/Backdrop";
+import Spinner from "../../components/UI/Spinner/Spinner";
+import InfiniteScroll from "react-infinite-scroll-component";
+import axios from "axios";
+import App from "../../App";
 // import SpinnerTwo from '../../components/UI/Spinner2/Spinner2';
-import queryString from 'query-string';
-import success from '../../shared/images/success.png';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import OrderCard from '../../components/OrderCard/OrderCard';
-import { Dropdown } from 'semantic-ui-react';
-import 'semantic-ui-css/semantic.min.css';
-import Modal from '../../components/UI/Modal/Modal';
+import queryString from "query-string";
+import success from "../../shared/images/success.png";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import OrderCard from "../../components/OrderCard/OrderCard";
+import { Dropdown } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
+import Modal from "../../components/UI/Modal/Modal";
 export class OrderPage extends Component {
   state = {
     page: 2,
@@ -22,10 +22,11 @@ export class OrderPage extends Component {
     hasMore: true,
     loading: true,
     isCollapsed: true,
-    pathToFetch: ''
+    pathToFetch: ""
   };
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     if (
       queryString.parse(this.props.location.search).orderId &&
       this.props.isAuthenticated
@@ -33,30 +34,30 @@ export class OrderPage extends Component {
       this.successOrderHandler();
     }
     // console.log(this.props);
-    if (this.props.match.path === '/orders/processing') {
-      this.setState({ pathToFetch: '/processing' });
-      this.initFetch('/processing');
-    } else if (this.props.match.path === '/orders/shipped') {
-      console.log('shipped matched bro');
-      this.setState({ pathToFetch: '/shipped' });
-      this.initFetch('/shipped');
-    } else if (this.props.match.path === '/orders/delivered') {
-      this.setState({ pathToFetch: '/delivered' });
+    if (this.props.match.path === "/orders/processing") {
+      this.setState({ pathToFetch: "/processing" });
+      this.initFetch("/processing");
+    } else if (this.props.match.path === "/orders/shipped") {
+      console.log("shipped matched bro");
+      this.setState({ pathToFetch: "/shipped" });
+      this.initFetch("/shipped");
+    } else if (this.props.match.path === "/orders/delivered") {
+      this.setState({ pathToFetch: "/delivered" });
 
-      this.initFetch('/delivered');
+      this.initFetch("/delivered");
     } else {
-      this.initFetch('/');
+      this.initFetch("/");
     }
   }
   successOrderHandler = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     if (!token) {
-      return console.log('no access');
+      return console.log("no access");
     }
     let config = {
       headers: {
-        'x-auth-token': token
+        "x-auth-token": token
       }
     };
     let url = `${App.domain}api/userorders/single/${
@@ -70,14 +71,14 @@ export class OrderPage extends Component {
     }
   };
   initFetch = async status => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     if (!token) {
-      return console.log('no access');
+      return console.log("no access");
     }
     let config = {
       headers: {
-        'x-auth-token': token
+        "x-auth-token": token
       }
     };
     let firstresp = await axios.get(
@@ -95,13 +96,13 @@ export class OrderPage extends Component {
     });
   };
   fetchMoreData = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-      return console.log('no access');
+      return console.log("no access");
     }
     let config = {
       headers: {
-        'x-auth-token': token
+        "x-auth-token": token
       }
     };
     let firstresp = await axios.get(
@@ -126,7 +127,7 @@ export class OrderPage extends Component {
   };
   render() {
     let loadingStage = (
-      <div className=''>
+      <div className="">
         <Backdrop forceWhite show={true} />
 
         <div className={classes.spinnerCont}>
@@ -137,7 +138,7 @@ export class OrderPage extends Component {
     let successModal = (
       <Modal show removeModal={() => this.setState({ successfulOrder: false })}>
         <div className={classes.OrderSuccess}>
-          <img src={success} alt='' />
+          <img src={success} alt="" />
           <p>Your order was successful!</p>
           <p>We will be in touch shortly</p>
         </div>
@@ -149,12 +150,12 @@ export class OrderPage extends Component {
         <Redirect to={`/?auth=true&redirect=orders`} />
       ) : null;
 
-    let ordersBeingDisplay = this.props.match.path.split('/')[
-      this.props.match.path.split('/').length - 1
+    let ordersBeingDisplay = this.props.match.path.split("/")[
+      this.props.match.path.split("/").length - 1
     ];
     return (
       <Layout hideFooter>
-        {' '}
+        {" "}
         {this.state.loading ? loadingStage : null}
         {authRedirect}
         {this.state.successfulOrder ? successModal : null}
@@ -163,48 +164,48 @@ export class OrderPage extends Component {
             <div className={classes.OrderHeader}>
               <h2>Your Orders</h2>
               <Dropdown
-                text='Filter'
-                icon='filter'
+                text="Filter"
+                icon="filter"
                 style={{
-                  color: '#777',
-                  border: '1px solid #bbb',
-                  padding: '4px',
-                  borderRadius: '3px'
+                  color: "#777",
+                  border: "1px solid #bbb",
+                  padding: "4px",
+                  borderRadius: "3px"
                 }}
               >
                 <Dropdown.Menu>
                   <Dropdown.Item
-                    text=' All'
+                    text=" All"
                     onClick={() => {
                       // this.props.onLogout();
-                      this.props.history.push('/orders');
+                      this.props.history.push("/orders");
                     }}
                     // description='track your orders'
                   />
                   <Dropdown.Item
                     // icon='folder'
-                    text=' Processing'
+                    text=" Processing"
                     onClick={() => {
                       // this.props.onLogout();
-                      this.props.history.push('/orders/processing');
+                      this.props.history.push("/orders/processing");
                     }}
                     // description='track your orders'
                   />
                   <Dropdown.Item
                     // icon='folder'
-                    text='Shipped'
+                    text="Shipped"
                     onClick={() => {
                       // this.props.onLogout();
-                      this.props.history.push('/orders/shipped');
+                      this.props.history.push("/orders/shipped");
                     }}
                     // description='track your orders'
                   />
                   <Dropdown.Item
                     // icon='folder'
-                    text='Delivered'
+                    text="Delivered"
                     onClick={() => {
                       // this.props.onLogout();
-                      this.props.history.push('/orders/delivered');
+                      this.props.history.push("/orders/delivered");
                     }}
                     // description='track your orders'
                   />
@@ -214,7 +215,7 @@ export class OrderPage extends Component {
               </Dropdown>
             </div>
             <div className={classes.displayCont}>
-              {ordersBeingDisplay === 'orders' ? (
+              {ordersBeingDisplay === "orders" ? (
                 <p className={classes.displayOrderText}>
                   Displaying all Orders
                 </p>
@@ -222,7 +223,7 @@ export class OrderPage extends Component {
                 <p className={classes.displayOrderText}>
                   showing {ordersBeingDisplay} Orders
                 </p>
-              )}{' '}
+              )}{" "}
             </div>
 
             <InfiniteScroll
@@ -230,13 +231,13 @@ export class OrderPage extends Component {
               next={this.fetchMoreData}
               hasMore={this.state.hasMore}
               loader={
-                <div style={{ textAlign: 'center' }}>
+                <div style={{ textAlign: "center" }}>
                   {/* //   <SpinnerTwo /> */}
                   ...
                 </div>
               }
               endMessage={
-                <p style={{ textAlign: 'center', fontWeight: 100 }}>
+                <p style={{ textAlign: "center", fontWeight: 100 }}>
                   <b>.</b>
                 </p>
               }

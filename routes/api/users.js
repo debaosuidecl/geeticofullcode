@@ -1,4 +1,6 @@
 const express = require('express');
+const orderid = require('order-id')('geetico2019');
+
 const router = express.Router();
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
@@ -8,6 +10,7 @@ const config = require('config');
 const User = require('../../models/FrontEndUser'); // bring in the user model
 const Product = require('../../models/Product'); // bring in the product model
 const authMiddleWare = require('../../middleware/auth');
+const getShippingCost = require('../../middleware/getShippingCost');
 const path = require('path');
 const Order = require('../../models/Order');
 const request = require('request');
@@ -169,7 +172,8 @@ router.post(
         orderNote,
         cartToJson,
         dateOfDelivery,
-        timeOfDelivery
+        timeOfDelivery,
+        directSelected
       } = req.body;
 
       // save the user details
@@ -210,7 +214,7 @@ router.post(
         .reduce((prevValue, curValue) => {
           return prevValue + curValue.price * curValue.quantity;
         }, 0);
-      amount += 1000;
+      amount += getShippingCost(amount, directSelected);
       // res.json();
       let form = {
         // amount: 1,
@@ -233,16 +237,32 @@ router.post(
         }
       };
 
-      initializePayment(form, (error, body) => {
-        if (error) {
-          //handle errors
-          res.status(400).json({ error });
-          console.log(error, 'from initilize payment');
-          return;
-        }
-        response = JSON.parse(body);
-        res.json({ url: response.data.authorization_url });
-      });
+      if (directSelected) {
+        const id = orderid.generate();
+        // 3016-734428-7759
+
+        orderid.getTime(id);
+        // 1479812667797
+        res.json({
+          bankDetails: {
+            bank: 'GTBank',
+            accountNumber: '999999999999',
+            accountName: 'Geetico',
+            orderId: id
+          }
+        });
+      } else {
+        initializePayment(form, (error, body) => {
+          if (error) {
+            //handle errors
+            res.status(400).json({ error });
+            console.log(error, 'from initilize payment');
+            return;
+          }
+          response = JSON.parse(body);
+          res.json({ url: response.data.authorization_url });
+        });
+      }
     } catch (error) {
       console.log(error);
       res.send(error);

@@ -17,14 +17,15 @@ const allowedCategories = [
   'Food Cupboard',
   'Beverages',
   'Drinks',
-  'Cooking & Baking',
+  'Cooking, Baking & Ingredients',
   'Dried Beans, Grains & Rice',
   'Breakfast Foods',
   'Herbs Spices & Seasoning',
-  'Candy & Chocolate',
+  'Biscuits, Candy & Chocolate',
   'Canned, Jarred & Packaged Foods',
   'Jams, Jellies & Sweet Spreads',
-  'Condiments & Salad Dressings'
+  'Condiments & Salad Dressings',
+  'Household Supplies'
 ];
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -67,8 +68,7 @@ router.post(
       .isEmpty(),
     check('productQuantity', 'Quantity is required')
       .not()
-      .isEmpty(),
-  
+      .isEmpty()
   ],
 
   async (req, res) => {

@@ -58,8 +58,6 @@
   transition: 0.8s;
 }
 .item1 {
-  grid-row-start: 1;
-  grid-row-end: 3;
   grid-area: item1;
 }
 .item2 {
@@ -72,28 +70,18 @@
   grid-area: item4;
 }
 .item5 {
-  grid-row-start: 2;
-  grid-row-end: 3;
   grid-area: item5;
 }
 .item6 {
-  grid-row-start: 2;
-  grid-row-end: 4;
   grid-area: item6;
 }
 .item7 {
   grid-area: item7;
 }
 .item8 {
-  grid-row-start: 3;
-  grid-column-start: 1;
-  grid-column-end: 3;
   grid-area: item8;
 }
 .item9 {
-  grid-row-start: 4;
-  grid-column-start: 3;
-  grid-column-end: 5;
   grid-area: item9;
 }
 
@@ -107,6 +95,9 @@
 
 .item12 {
   grid-area: item12;
+}
+.item15 {
+  grid-area: item15;
 }
 
 .item8 img,
@@ -136,7 +127,7 @@
     'item3 item4'
     'item6 item7'
     'item6 item10'
-    'item9 item9';
+    'item9 item15';
   grid-gap: 4px;
 }
 .ProductsCont {
@@ -183,6 +174,6 @@
       'item1 item2 item3 item4'
       'item1 item5 item6 item7'
       'item8 item8 item6 item10'
-      'item11 item12 item9 item9';
+      'item11 item12 item9 item15';
   }
 }

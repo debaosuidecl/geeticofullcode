@@ -17,7 +17,13 @@ class FancyRoute extends Component {
   }
 
   render() {
-    return <Route {...this.props} />;
+    return (
+      <Route
+        {...this.props}
+        // onUpdate={() => window.scrollTo(0, 0)}
+        // history={createBrowserHistory()}
+      />
+    );
   }
 }
 

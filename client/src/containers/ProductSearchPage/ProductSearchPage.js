@@ -48,7 +48,8 @@ export class CategoryPage extends Component {
     this.setState({ catProps: nextProps.match.params.category });
   }
   componentDidMount() {
-    document.querySelector('[href="#TNV"]').click();
+    window.scrollTo(0, 0);
+    // document.querySelector('[href="#TNV"]').click();
     if (queryString.parse(this.props.location.search).search) {
       axios
         .get(
@@ -127,7 +128,7 @@ export class CategoryPage extends Component {
     return (
       // <div>
       <Layout hideFooter>
-        <a href='#TNV'> </a>
+        {/* <a href='#TNV'> </a> */}
         <h2 className={classes.CategoryPage}>
           Showing results for{' '}
           {queryString.parse(this.props.location.search).search}

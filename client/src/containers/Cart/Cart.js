@@ -21,6 +21,7 @@ export class Cart extends Component {
     // currentValue: 1
   };
   componentWillMount() {
+    window.scrollTo(0, 0);
     this.props.onFetchCartItems();
   }
   checkAuthBeforeCheckout = () => {

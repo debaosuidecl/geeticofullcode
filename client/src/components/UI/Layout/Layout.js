@@ -46,7 +46,7 @@ class Layout extends React.Component {
     if (queryString.parse(this.props.location.search).auth) {
       this.props.onSetAuthModalToTrue();
     } else {
-      document.querySelector('[href="#TNV"]').click();
+      // document.querySelector('[href="#"]').click();
     }
   }
   componentWillUnmount() {
@@ -90,7 +90,7 @@ class Layout extends React.Component {
   render() {
     return (
       <div className={classes.Layout}>
-        <a href='#TNV'> </a>
+        {/* <a href='#'> </a> */}
         <div
           className=''
           style={{

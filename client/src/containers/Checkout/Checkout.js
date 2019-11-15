@@ -17,8 +17,8 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Checkout extends Component {
   state = {
-    directSelected: false,
-    payStackSelected: true,
+    directSelected: true,
+    payStackSelected: false,
     state: 'Lagos',
     city: '',
     suite: '',
@@ -33,6 +33,7 @@ class Checkout extends Component {
     time: ''
   };
   componentDidMount() {
+    window.scrollTo(0, 0);
     const token = localStorage.getItem('token');
 
     let config = {
@@ -118,12 +119,18 @@ class Checkout extends Component {
         orderNote,
         cartToJson,
         dateOfDelivery: startDate,
-        timeOfDelivery: time
+        timeOfDelivery: time,
+        directSelected: this.state.directSelected
       };
       axios
         .post(url, data, config)
         .then(result => {
-          this.setState({ loading: false, hitotsunagi: result.data });
+          if (result.data.url) {
+            this.setState({ loading: false, hitotsunagi: result.data });
+          } else {
+            console.log(result.data);
+            this.setState({ loading: false });
+          }
           // console.log(result.data);
         })
         .catch(err => {
@@ -136,7 +143,8 @@ class Checkout extends Component {
                 this.props.onAuthLogout();
               }
               if (err.response.data.errors) {
-                document.querySelector('[href="#TNV"]').click();
+                // document.querySelector('[href="#TNV"]').click();
+                window.scrollTo(0, 0);
                 this.setState({ errors: err.response.data.errors });
               }
             }
@@ -159,7 +167,7 @@ class Checkout extends Component {
     let authRedirect = this.props.isAuthenticated ? null : (
       <Redirect to={`/?auth=true&redirect=checkout`} />
     );
-    let shippingCost = 1000;
+
     let subTotal =
       this.props.cart &&
       this.props.cart !== 0 &&
@@ -176,6 +184,22 @@ class Checkout extends Component {
           </div>
         );
       });
+    let shippingCost;
+    if (this.state.directSelected) {
+      if (subTotal < 30000) {
+        shippingCost = 599;
+      } else {
+        shippingCost = 999;
+      }
+    } else {
+      if (subTotal < 30000) {
+        shippingCost = 999;
+      } else if (subTotal < 80000) {
+        shippingCost = 1999;
+      } else {
+        shippingCost = 2999;
+      }
+    }
     let hitotsunagi = (
       <Modal
         removeModal={() => this.removeHitotsuNagi()}
@@ -313,6 +337,16 @@ class Checkout extends Component {
                 <div className={classes.OrderTypeMajor}>
                   <div className={classes.OrderTypeCont}>
                     <h4
+                      onClick={() => this.changeOrderSelect('directSelected')}
+                      className={
+                        this.state.directSelected ? classes.selectedText : null
+                      }
+                    >
+                      Direct Payment{' '}
+                    </h4>
+                  </div>
+                  <div className={classes.OrderTypeCont}>
+                    <h4
                       onClick={() => this.changeOrderSelect('payStackSelected')}
                       className={
                         this.state.payStackSelected
@@ -331,7 +365,7 @@ class Checkout extends Component {
                   </div>
                   <div className={classes.OrderTypeDesc}>
                     <p style={{ opacity: this.state.directSelected ? 1 : 0 }}>
-                      Make your payment directly into our bank account. Please
+                      PAY AS LOW AS &#x20A6;599 FOR SHIPPING & HANDLING. Please
                       use your Order ID as the payment reference. Your order
                       won’t be shipped until the funds have cleared in our
                       account.

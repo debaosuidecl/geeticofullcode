@@ -8,7 +8,7 @@
     "server": "nodemon server --watch  server.js",
     "client": "npm start --prefix client",
     "seller": "npm start --prefix clientseller",
-    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run seller\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Osuide O.C",
@@ -23,6 +23,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.9",
     "multer": "^1.4.2",
+    "order-id": "^1.1.0",
+    "react-scroll-manager": "^1.0.2",
     "request": "^2.88.0",
     "uuid": "^3.3.3"
   },

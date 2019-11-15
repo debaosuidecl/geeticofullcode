@@ -14,20 +14,21 @@ class App extends Component {
   // static isDevelopment = false;
   // static domain = '/';
   static domain =
-    process.env.NODE_ENV === 'development' ? 'http://localhost:5000/' : '/';
+    process.env.NODE_ENV === 'development' ? 'http://localhost:2900/' : '/';
   static allowedCategories = [
     'Beer, Wine & Spirit',
     'Food Cupboard',
     'Beverages',
     'Drinks',
-    'Cooking & Baking',
+    'Cooking, Baking & Ingredients',
     'Dried Beans, Grains & Rice',
     'Breakfast Foods',
     'Herbs Spices & Seasoning',
-    'Candy & Chocolate',
+    'Biscuits, Candy & Chocolate',
     'Canned, Jarred & Packaged Foods',
     'Jams, Jellies & Sweet Spreads',
-    'Condiments & Salad Dressings'
+    'Condiments & Salad Dressings',
+    'Household Supplies'
   ];
   static lagos = [
     'Agege',

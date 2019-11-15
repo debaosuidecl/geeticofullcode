@@ -105,8 +105,8 @@ class AddProductContainer extends Component {
               displayValue: 'Drinks'
             },
             {
-              value: 'Cooking & Baking',
-              displayValue: 'Cooking & Baking'
+              value: 'Cooking, Baking & Ingredients',
+              displayValue: 'Cooking, Baking & Ingredients'
             },
             {
               value: 'Dried Beans, Grains & Rice',
@@ -117,12 +117,16 @@ class AddProductContainer extends Component {
               displayValue: 'Breakfast Foods'
             },
             {
+              value: 'Household Supplies',
+              displayValue: 'Household Supplies'
+            },
+            {
               value: 'Herbs Spices & Seasoning',
               displayValue: 'Herbs Spices & Seasoning'
             },
             {
-              value: 'Candy & Chocolate',
-              displayValue: 'Candy & Chocolate'
+              value: 'Biscuits, Candy & Chocolate',
+              displayValue: 'Biscuits, Candy & Chocolate'
             },
             {
               value: 'Canned, Jarred & Packaged Foods',

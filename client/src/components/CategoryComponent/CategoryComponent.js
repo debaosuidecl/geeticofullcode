@@ -2,20 +2,8 @@ import React from 'react';
 import classes from './CategoryComponent.module.css';
 import PropTypes from 'prop-types';
 import SimpleReactValidator from 'simple-react-validator';
-const allowedCategories = [
-  'Beer, Wine & Spirit',
-  'Food Cupboard',
-  'Beverages',
-  'Drinks',
-  'Cooking & Baking',
-  'Dried Beans, Grains & Rice',
-  'Breakfast Foods',
-  'Herbs Spices & Seasoning',
-  'Candy & Chocolate',
-  'Canned, Jarred & Packaged Foods',
-  'Jams, Jellies & Sweet Spreads',
-  'Condiments & Salad Dressings'
-];
+import App from '../../App';
+
 export default function CategoryComponent({
   category,
   showInput,
@@ -52,7 +40,7 @@ export default function CategoryComponent({
           <option value={category}>{category}</option>
           {/* // eslint-disable-next-line */}
           {// eslint-disable-next-line
-          allowedCategories.map((cat, i) => {
+          App.allowedCategories.map((cat, i) => {
             if (cat !== category) {
               return (
                 <option key={i} value={cat}>

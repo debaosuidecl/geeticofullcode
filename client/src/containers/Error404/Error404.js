@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import './Error404.css';
 class Error404 extends Component {
   componentDidMount() {
+    window.scrollTo(0, 0);
     let token = localStorage.getItem('token');
     // console.log(token, 'token');
     if (!token) this.props.history.push('/');

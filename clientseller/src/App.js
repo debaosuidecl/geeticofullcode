@@ -13,6 +13,21 @@ class App extends Component {
   componentDidMount() {
     this.props.onTryAutoSignIn();
   }
+  static allowedCategories = [
+    'Beer, Wine & Spirit',
+    'Food Cupboard',
+    'Beverages',
+    'Drinks',
+    'Cooking, Baking & Ingredients',
+    'Dried Beans, Grains & Rice',
+    'Breakfast Foods',
+    'Herbs Spices & Seasoning',
+    'Biscuits, Candy & Chocolate',
+    'Canned, Jarred & Packaged Foods',
+    'Jams, Jellies & Sweet Spreads',
+    'Condiments & Salad Dressings',
+    'Household Supplies'
+  ];
   static baseName = '/seller/';
   // static domain = 'http://localhost:5000/';
   static domain =
