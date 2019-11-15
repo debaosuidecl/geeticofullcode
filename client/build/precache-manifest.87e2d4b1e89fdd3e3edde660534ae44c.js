@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "ad97afd3337e8cda302d10ff5a4026b8",
-    "url": "/static/media/outline-icons.ad97afd3.ttf"
+    "revision": "a046592bac8f2fd96e994733faf3858c",
+    "url": "/static/media/brand-icons.a046592b.woff"
   },
   {
-    "revision": "22a6c8758cb6125602b8",
-    "url": "/static/css/main.a1575238.chunk.css"
+    "revision": "44c372420ddb36ad371a",
+    "url": "/static/css/main.f6503b5c.chunk.css"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -16,12 +16,20 @@ self.__precacheManifest = [
     "url": "/static/media/success.7876c294.png"
   },
   {
-    "revision": "5be3f230ab3a1244132c",
-    "url": "/static/js/2.40a0dbe5.chunk.js"
+    "revision": "18620f1ea0d1296f3860",
+    "url": "/static/js/2.32582aba.chunk.js"
   },
   {
     "revision": "9c74e172f87984c48ddf5c8108cabe67",
     "url": "/static/media/flags.9c74e172.png"
+  },
+  {
+    "revision": "faff92145777a3cbaf8e7367b4807987",
+    "url": "/static/media/icons.faff9214.woff"
+  },
+  {
+    "revision": "0ab54153eeeca0ce03978cc463b257f7",
+    "url": "/static/media/icons.0ab54153.woff2"
   },
   {
     "revision": "8e3c7f5520f5ae906c6cf6d7f3ddcd19",
@@ -32,16 +40,12 @@ self.__precacheManifest = [
     "url": "/static/media/outline-icons.701ae6ab.eot"
   },
   {
-    "revision": "faff92145777a3cbaf8e7367b4807987",
-    "url": "/static/media/icons.faff9214.woff"
+    "revision": "ef60a4f6c25ef7f39f2d25a748dbecfe",
+    "url": "/static/media/outline-icons.ef60a4f6.woff"
   },
   {
     "revision": "b87b9ba532ace76ae9f6edfe9f72ded2",
     "url": "/static/media/icons.b87b9ba5.ttf"
-  },
-  {
-    "revision": "0ab54153eeeca0ce03978cc463b257f7",
-    "url": "/static/media/icons.0ab54153.woff2"
   },
   {
     "revision": "cd6c777f1945164224dee082abaea03a",
@@ -52,36 +56,32 @@ self.__precacheManifest = [
     "url": "/static/media/brand-icons.e8c322de.woff2"
   },
   {
-    "revision": "ef60a4f6c25ef7f39f2d25a748dbecfe",
-    "url": "/static/media/outline-icons.ef60a4f6.woff"
-  },
-  {
     "revision": "13db00b7a34fee4d819ab7f9838cc428",
     "url": "/static/media/brand-icons.13db00b7.eot"
-  },
-  {
-    "revision": "962a1bf31c081691065fe333d9fa8105",
-    "url": "/static/media/icons.962a1bf3.svg"
-  },
-  {
-    "revision": "a046592bac8f2fd96e994733faf3858c",
-    "url": "/static/media/brand-icons.a046592b.woff"
   },
   {
     "revision": "82f60bd0b94a1ed68b1e6e309ce2e8c3",
     "url": "/static/media/outline-icons.82f60bd0.svg"
   },
   {
-    "revision": "22a6c8758cb6125602b8",
-    "url": "/static/js/main.7d673c2a.chunk.js"
+    "revision": "ad97afd3337e8cda302d10ff5a4026b8",
+    "url": "/static/media/outline-icons.ad97afd3.ttf"
   },
   {
-    "revision": "a1a749e89f578a49306ec2b055c073da",
-    "url": "/static/media/brand-icons.a1a749e8.svg"
+    "revision": "962a1bf31c081691065fe333d9fa8105",
+    "url": "/static/media/icons.962a1bf3.svg"
   },
   {
     "revision": "c5ebe0b32dc1b5cc449a76c4204d13bb",
     "url": "/static/media/brand-icons.c5ebe0b3.ttf"
+  },
+  {
+    "revision": "44c372420ddb36ad371a",
+    "url": "/static/js/main.382ddab8.chunk.js"
+  },
+  {
+    "revision": "a1a749e89f578a49306ec2b055c073da",
+    "url": "/static/media/brand-icons.a1a749e8.svg"
   },
   {
     "revision": "078aa3f09332c2484dbfd7239ef39e2d",
@@ -112,12 +112,12 @@ self.__precacheManifest = [
     "url": "/static/media/beans rice grains.0d77bdda.jpg"
   },
   {
-    "revision": "7c2f3de942769fc947abbcffb5161c9e",
-    "url": "/static/media/beer wines and spirit.7c2f3de9.jpg"
+    "revision": "e3a35cdbeddbee8056587bbec0c9dcb4",
+    "url": "/static/media/beer wines and spirit.e3a35cdb.jpg"
   },
   {
-    "revision": "e112300419fa301b36c4e491b22ddd4b",
-    "url": "/static/media/cooking & baking.e1123004.jpg"
+    "revision": "8d60c426ca3cdb56b1bff09e29fd7bb1",
+    "url": "/static/media/cooking & baking.8d60c426.jpg"
   },
   {
     "revision": "613dffe2a6abf441b93f4b647e5f442e",
@@ -128,23 +128,27 @@ self.__precacheManifest = [
     "url": "/static/media/salad spread.d9dc56b5.jpg"
   },
   {
-    "revision": "ab1b7bee83cc5c24112185a59e0fc287",
-    "url": "/static/media/Candy&Chocolate.ab1b7bee.jpg"
+    "revision": "0e8e68960c389f2bac2e3a565bc37526",
+    "url": "/static/media/Candy&Chocolate.0e8e6896.jpg"
   },
   {
-    "revision": "09e56222f97f11c5f7961ff21cde332c",
-    "url": "/static/media/Canned, Jarred & Packaged Foods.09e56222.jpg"
+    "revision": "39ee17ad87accf7ad44d4faf8b3ce0f9",
+    "url": "/static/media/household.39ee17ad.jpg"
+  },
+  {
+    "revision": "0c7c45dd9d38e1df41d172814088c92d",
+    "url": "/static/media/Canned, Jarred & Packaged Foods.0c7c45dd.jpg"
   },
   {
     "revision": "539ceb34bd89280018252ad82133af68",
     "url": "/static/media/pay_paystack.539ceb34.png"
   },
   {
-    "revision": "5be3f230ab3a1244132c",
+    "revision": "18620f1ea0d1296f3860",
     "url": "/static/css/2.37ba228a.chunk.css"
   },
   {
-    "revision": "06222f2ac203e2f0a38059b24aa187f3",
+    "revision": "599a49c26c595a51c33cc37b821418fb",
     "url": "/index.html"
   }
 ];
