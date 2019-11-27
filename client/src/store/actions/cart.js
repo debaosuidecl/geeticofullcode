@@ -86,15 +86,27 @@ export const fetchAllCartItems = () => {
               .get(url)
 
               .then(res => {
+                console.log(res.data);
                 // console.log(res);
-                resolve({
-                  ...res.data,
-                  quantity:
-                    cartToJson[url.split('/')[url.split('/').length - 1]]
-                });
+                if (res.data.deleteId) {
+                  console.log('na null oo');
+                  dispatch(
+                    initiateDeleteItemFromCart({ productId: res.data.deleteId })
+                  );
+                }
+                // if (res.data.productName) {
+                else if (res.data.productName) {
+                  resolve({
+                    ...res.data,
+                    quantity:
+                      cartToJson[url.split('/')[url.split('/').length - 1]]
+                  });
+                }
+                // }
               })
               .catch(err => {
                 // console.log(err.response);
+                console.log('probably did not see the cart');
                 dispatch(setCartValue('Error occured'));
 
                 reject(err.response);
@@ -103,6 +115,8 @@ export const fetchAllCartItems = () => {
       )
     )
       .then(data => {
+        console.log('please');
+        console.log(data, 'from cart');
         dispatch(setCartValue(data));
       })
       .catch(error => {

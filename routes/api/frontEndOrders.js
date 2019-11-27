@@ -10,6 +10,7 @@ const extractProduct = async orderDetails => {
     orderDetails.map(prod => {
       return new Promise(async (resolve, reject) => {
         let fullProduct = await Product.findById(prod.product);
+        console.log(fullProduct, 'from orders');
         if (fullProduct) {
           resolve({ fullProduct, quantity: prod.quantity });
         }

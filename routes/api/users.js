@@ -11,13 +11,39 @@ const User = require('../../models/FrontEndUser'); // bring in the user model
 const Product = require('../../models/Product'); // bring in the product model
 const authMiddleWare = require('../../middleware/auth');
 const getShippingCost = require('../../middleware/getShippingCost');
-const path = require('path');
+// const path = require("path");
 const Order = require('../../models/Order');
 const request = require('request');
-
+const fs = require('fs');
+const path = require('path');
+// const config = require('../config/config');
+const nodemailer = require('nodemailer');
 const { initializePayment, verifyPayment } = require('../../config/paystack')(
   request
 );
+
+// const transport = {
+//   host: 'smtp.geetico.com',
+//   port: 26,
+//   secure: false,
+//   auth: {
+//     user: config.USER,
+//     pass: config.PASSWORD
+//   },
+//   tls: {
+//     rejectUnauthorized: false
+//   }
+// };
+// const transporter = nodemailer.createTransport(transport);
+
+// transporter.verify((error, success) => {
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log('Server is ready to take messages', success);
+//   }
+// });
+
 // @route    POST api/users
 // @desc     Register User
 // @access   public
@@ -94,6 +120,21 @@ router.post(
   }
 );
 
+const extractProduct = async orderDetails => {
+  let myProducts = await Promise.all(
+    orderDetails.map(prod => {
+      return new Promise(async (resolve, reject) => {
+        let fullProduct = await Product.findById(prod.product);
+        console.log(fullProduct, 'from orders');
+        if (fullProduct) {
+          resolve({ fullProduct, quantity: prod.quantity });
+        }
+      });
+    })
+  );
+  return myProducts;
+};
+
 // @route    POST api/users/userOrderUpdate
 // @desc     Update User address before Order
 // @access   private
@@ -147,8 +188,6 @@ router.post(
       5,
       6
     ])
-
-    // .isNumeric(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -240,15 +279,43 @@ router.post(
       if (directSelected) {
         const id = orderid.generate();
         // 3016-734428-7759
-
-        orderid.getTime(id);
-        // 1479812667797
+        let data = {
+          amount,
+          // email: customer.email,
+          directPaymentMethod: true,
+          user: req.user.id,
+          fullName: user.fullName,
+          // referenceNumber: reference,
+          transactionId: id,
+          city: city,
+          suite: suite,
+          street: street,
+          phone: phone,
+          company: company,
+          orderNote: orderNote,
+          dateOfDelivery: new Date(dateOfDelivery),
+          timeOfDelivery: timeOfDelivery,
+          status: 'awaiting verification',
+          orderDetails: Object.keys(cartToJson).map(prodId => {
+            return {
+              product: prodId,
+              quantity: cartToJson[prodId]
+            };
+          })
+        };
+        data = {
+          ...data,
+          orderDetails: await extractProduct(data.orderDetails)
+        };
+        // save the user details
+        let newOrder = new Order(data);
+        await newOrder.save();
         res.json({
           bankDetails: {
             bank: 'GTBank',
             accountNumber: '999999999999',
             accountName: 'Geetico',
-            orderId: id
+            newOrder
           }
         });
       } else {
@@ -314,6 +381,10 @@ router.get('/paystack/callback', authMiddleWare, async (req, res) => {
         };
       })
     };
+    data = {
+      ...data,
+      orderDetails: await extractProduct(data.orderDetails)
+    };
 
     let newOrder = new Order(data);
     try {
@@ -331,6 +402,22 @@ router.get('/paystack/callback', authMiddleWare, async (req, res) => {
       // }
     }
   });
+});
+
+router.get('/directPaymentOrder', authMiddleWare, async (req, res) => {
+  try {
+    // let user = await User.findById(req.user.id);
+    let directPaymentOrder = await Order.findOne({
+      transactionId: req.query.transactionId,
+      directPaymentMethod: true
+    });
+    if (!directPaymentOrder) {
+      return res.status(400).json({ noDirectPayment: true });
+    }
+    return res.json(directPaymentOrder);
+  } catch (error) {
+    res.status(500).send('Server Error');
+  }
 });
 
 module.exports = router;

@@ -1,44 +1,46 @@
-import React, { Component } from 'react';
-import Layout from '../../components/UI/Layout/Layout';
-import Modal from '../../components/UI/Modal/Modal';
-import classes from './Checkout.module.css';
-import { connect } from 'react-redux';
-import CustomerDetailComponent from '../../components/CustomerDetailComponent/CustomerDetailComponent';
-import { fetchAllCartItems } from '../../store/actions/cart';
-import { Redirect, Link } from 'react-router-dom';
-import { authLogOut, authSuccess } from '../../store/actions/auth';
-import paystackImage from '../../shared/images/pay_paystack.png';
-import paystackLogo from '../../shared/images/paystackLogo.jpg';
-import Button from '../../components/UI/Button/Button';
-import axios from 'axios';
-import App from '../../App';
-import Backdrop from '../../components/UI/Backdrop/Backdrop';
-import Spinner from '../../components/UI/Spinner/Spinner';
+import React, { Component } from "react";
+import Layout from "../../components/UI/Layout/Layout";
+import Modal from "../../components/UI/Modal/Modal";
+import classes from "./Checkout.module.css";
+import { connect } from "react-redux";
+import CustomerDetailComponent from "../../components/CustomerDetailComponent/CustomerDetailComponent";
+import { fetchAllCartItems } from "../../store/actions/cart";
+import { Redirect, Link } from "react-router-dom";
+import { authLogOut, authSuccess } from "../../store/actions/auth";
+import paystackImage from "../../shared/images/pay_paystack.png";
+import paystackLogo from "../../shared/images/paystackLogo.jpg";
+import Button from "../../components/UI/Button/Button";
+import axios from "axios";
+import App from "../../App";
+import Backdrop from "../../components/UI/Backdrop/Backdrop";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 class Checkout extends Component {
   state = {
     directSelected: true,
     payStackSelected: false,
-    state: 'Lagos',
-    city: '',
-    suite: '',
-    street: '',
-    phone: '',
-    company: '',
-    orderNote: '',
+    directPaymentConfirmation: false,
+    showDirectPaymentModal: "",
+    state: "Lagos",
+    city: "",
+    suite: "",
+    street: "",
+    phone: "",
+    company: "",
+    orderNote: "",
     loading: false,
     errors: [],
-    hitotsunagi: '',
-    startDate: '',
-    time: ''
+    hitotsunagi: "",
+    startDate: "",
+    time: ""
   };
   componentDidMount() {
     window.scrollTo(0, 0);
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     let config = {
       headers: {
-        'x-auth-token': token
+        "x-auth-token": token
       }
     };
     let url = `${App.domain}api/userauth/`;
@@ -48,11 +50,11 @@ class Checkout extends Component {
         const { city, suite, street, phone, company } = response.data;
 
         this.setState({
-          city: city ? city : '',
-          suite: suite ? suite : '',
-          street: street ? street : '',
-          phone: phone ? phone : '',
-          company: company ? company : ''
+          city: city ? city : "",
+          suite: suite ? suite : "",
+          street: street ? street : "",
+          phone: phone ? phone : "",
+          company: company ? company : ""
         });
 
         // console.log(response.data);
@@ -60,14 +62,14 @@ class Checkout extends Component {
 
       .catch(error => {
         if (error.response && error.response.data.msg) {
-          this.props.history.push('/');
+          this.props.history.push("/");
         }
       });
     this.props.onFetchCartItems();
   }
   changeOrderSelect = control => {
     switch (control) {
-      case 'directSelected':
+      case "directSelected":
         return this.setState({ directSelected: true, payStackSelected: false });
       default:
         return this.setState({ directSelected: false, payStackSelected: true });
@@ -90,23 +92,23 @@ class Checkout extends Component {
       startDate,
       time
     } = this.state;
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
       this.setState({ loading: false });
       this.props.onAuthLogout();
     } else {
       let config = {
         headers: {
-          'x-auth-token': token
+          "x-auth-token": token
         }
       };
 
       let url = `${App.domain}api/users/userOrderUpdate`;
 
-      let cart = localStorage.getItem('cart-sama');
+      let cart = localStorage.getItem("cart-sama");
       if (cart === null) {
         this.setState({ loading: false });
-        this.props.history.push('/');
+        this.props.history.push("/");
       }
       let cartToJson = JSON.parse(cart);
       let data = {
@@ -129,17 +131,20 @@ class Checkout extends Component {
             this.setState({ loading: false, hitotsunagi: result.data });
           } else {
             console.log(result.data);
-            this.setState({ loading: false });
+            this.setState({
+              loading: false,
+              directPaymentConfirmation: `/directPayment/${result.data.newOrder.transactionId}`
+            });
           }
           // console.log(result.data);
         })
         .catch(err => {
-          this.setState({ loading: false });
+          this.setState({ loading: false, showDirectPaymentModal: false });
 
           // console.log(err.response);
           if (err.response) {
             if (err.response.data) {
-              if (err.response.data.msg === 'Token is not valid') {
+              if (err.response.data.msg === "Token is not valid") {
                 this.props.onAuthLogout();
               }
               if (err.response.data.errors) {
@@ -163,6 +168,16 @@ class Checkout extends Component {
       };
     });
   };
+
+  showDirectPaymentModalHandler = () => {
+    // console.log("go with direct");
+    this.setState(p => {
+      return {
+        showDirectPaymentModal: !p.showDirectPaymentModal
+      };
+    });
+  };
+
   render() {
     let authRedirect = this.props.isAuthenticated ? null : (
       <Redirect to={`/?auth=true&redirect=checkout`} />
@@ -207,14 +222,14 @@ class Checkout extends Component {
       >
         {this.state.hitotsunagi ? (
           <div className={classes.continueWithPaystack}>
-            <img src={paystackLogo} width='120px' alt='' />
+            <img src={paystackLogo} width="120px" alt="" />
             <div className={classes.continueCont}>
               <Button
                 clicked={() => {
-                  document.querySelector('#hitotsunagi').click();
+                  document.querySelector("#hitotsunagi").click();
                   this.setState({ loading: false });
                 }}
-                btnType='Geetico'
+                btnType="Geetico"
               >
                 Continue with Paystack
               </Button>
@@ -223,8 +238,25 @@ class Checkout extends Component {
         ) : null}
       </Modal>
     );
+
+    let directPaymentModal = (
+      <Modal
+        removeModal={() => this.showDirectPaymentModalHandler()}
+        show={this.state.showDirectPaymentModal}
+      >
+        {this.state.showDirectPaymentModal ? (
+          <div className={classes.continueWithPaystack}>
+            <div className={classes.continueCont}>
+              <Button clicked={this.onPlaceOrder} btnType="Geetico">
+                Continue with Direct Payment Method
+              </Button>
+            </div>
+          </div>
+        ) : null}
+      </Modal>
+    );
     let loadingStage = (
-      <div className=''>
+      <div className="">
         <Backdrop forceWhite show={true} />
 
         <div className={classes.spinnerCont}>
@@ -238,17 +270,18 @@ class Checkout extends Component {
         {this.props.cart === 0 ? loadingStage : null}
         {this.state.loading ? loadingStage : null}
         <a
-          href={this.state.hitotsunagi ? this.state.hitotsunagi.url : '#'}
-          id='hitotsunagi'
+          href={this.state.hitotsunagi ? this.state.hitotsunagi.url : "#"}
+          id="hitotsunagi"
         >
-          {' '}
+          {" "}
         </a>
-        <a href='#TNV'> </a>
+        <a href="#TNV"> </a>
         {authRedirect}
         {hitotsunagi}
+        {directPaymentModal}
         <div className={classes.Navigator}>
-          <Link to='/'>Home </Link> ><Link to='/cart'> Cart </Link> >
-          <Link to='/checkout'> Checkout </Link>
+          <Link to="/">Home </Link> ><Link to="/cart"> Cart </Link> >
+          <Link to="/checkout"> Checkout </Link>
           <div className={classes.Checkout}>
             {/* <h1>Checkout</h1> */}
             <div className={classes.Left}>
@@ -290,12 +323,12 @@ class Checkout extends Component {
                           {c.productName} X {c.quantity}
                         </p>
                         <p className={classes.value}>
-                          &#x20A6;{' '}
+                          &#x20A6;{" "}
                           {parseFloat(
-                            (c.price * c.quantity).toString().replace(/,/g, '')
+                            (c.price * c.quantity).toString().replace(/,/g, "")
                           )
                             .toFixed(0)
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                         </p>
                       </div>
                     );
@@ -304,30 +337,30 @@ class Checkout extends Component {
                 <div className={classes.RightHeading}>
                   <p className={classes.titleNoBold}>Sub total</p>
                   <p className={classes.value}>
-                    &#x20A6;{' '}
-                    {parseFloat(subTotal.toString().replace(/,/g, ''))
+                    &#x20A6;{" "}
+                    {parseFloat(subTotal.toString().replace(/,/g, ""))
                       .toFixed(0)
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </p>
                 </div>
                 <div className={classes.RightHeading}>
                   <p className={classes.titleNoBold}>Shipping Cost</p>
                   <p className={classes.value}>
-                    &#x20A6;{' '}
-                    {parseFloat(shippingCost.toString().replace(/,/g, ''))
+                    &#x20A6;{" "}
+                    {parseFloat(shippingCost.toString().replace(/,/g, ""))
                       .toFixed(0)
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </p>
                 </div>
                 <div className={classes.RightHeading}>
                   <p className={classes.titleLarge}>Total</p>
                   <p className={classes.valueLarge}>
-                    &#x20A6;{' '}
+                    &#x20A6;{" "}
                     {parseFloat(
-                      (shippingCost + subTotal).toString().replace(/,/g, '')
+                      (shippingCost + subTotal).toString().replace(/,/g, "")
                     )
                       .toFixed(0)
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </p>
                 </div>
               </div>
@@ -337,30 +370,30 @@ class Checkout extends Component {
                 <div className={classes.OrderTypeMajor}>
                   <div className={classes.OrderTypeCont}>
                     <h4
-                      onClick={() => this.changeOrderSelect('directSelected')}
+                      onClick={() => this.changeOrderSelect("directSelected")}
                       className={
                         this.state.directSelected ? classes.selectedText : null
                       }
                     >
-                      Direct Payment{' '}
+                      Direct Payment{" "}
                     </h4>
                   </div>
                   <div className={classes.OrderTypeCont}>
                     <h4
-                      onClick={() => this.changeOrderSelect('payStackSelected')}
+                      onClick={() => this.changeOrderSelect("payStackSelected")}
                       className={
                         this.state.payStackSelected
                           ? classes.selectedText
                           : null
                       }
                     >
-                      Pay with Paystack{' '}
+                      Pay with Paystack{" "}
                     </h4>
                     <img
                       src={paystackImage}
                       // style={{ marginLeft: 50 }}
-                      width='120px'
-                      alt='paystack'
+                      width="120px"
+                      alt="paystack"
                     />
                   </div>
                   <div className={classes.OrderTypeDesc}>
@@ -382,11 +415,18 @@ class Checkout extends Component {
           </div>
         </div>
         <div className={classes.PlaceOrderCont}>
-          <Button btnType='Geetico' clicked={this.onPlaceOrder}>
-            Proceed To Payment - (&#x20A6;{' '}
-            {parseFloat((shippingCost + subTotal).toString().replace(/,/g, ''))
+          <Button
+            btnType="Geetico"
+            clicked={
+              this.state.directSelected
+                ? this.showDirectPaymentModalHandler
+                : this.onPlaceOrder
+            }
+          >
+            Proceed To Payment - (&#x20A6;{" "}
+            {parseFloat((shippingCost + subTotal).toString().replace(/,/g, ""))
               .toFixed(0)
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             )
           </Button>
         </div>
@@ -411,7 +451,4 @@ const mapStateToProps = state => {
     isAuthenticated: state.auth.token !== null
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Checkout);
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

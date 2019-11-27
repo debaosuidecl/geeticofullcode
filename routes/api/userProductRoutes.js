@@ -7,21 +7,36 @@ const { check, validationResult } = require('express-validator');
 
 // const { check, validationResult } = require('express-validator');
 
+// const allowedCategories = [
+//   'Beer, Wine & Spirit',
+//   'Food Cupboard',
+//   'Beverages',
+//   'Drinks',
+//   'Cooking & Baking',
+//   'Dried Beans, Grains & Rice',
+//   'Breakfast Foods',
+//   'Herbs Spices & Seasoning',
+//   'Candy & Chocolate',
+//   'Canned, Jarred & Packaged Foods',
+//   'Jams, Jellies & Sweet Spreads',
+//   'Condiments & Salad Dressings'
+// ];
+
 const allowedCategories = [
   'Beer, Wine & Spirit',
   'Food Cupboard',
   'Beverages',
   'Drinks',
-  'Cooking & Baking',
+  'Cooking, Baking & Ingredients',
   'Dried Beans, Grains & Rice',
   'Breakfast Foods',
   'Herbs Spices & Seasoning',
-  'Candy & Chocolate',
+  'Biscuits, Candy & Chocolate',
   'Canned, Jarred & Packaged Foods',
   'Jams, Jellies & Sweet Spreads',
-  'Condiments & Salad Dressings'
+  'Condiments & Salad Dressings',
+  'Household Supplies'
 ];
-
 //@route    GET api/userproducts
 //@desc     GET user productData
 //@access   public
@@ -79,6 +94,13 @@ router.get('/details/:productId', async (req, res) => {
         _id: req.params.productId
       });
       // console.log(product);
+
+      // console.log(product);
+      if (product === null) {
+        return res.json({
+          deleteId: req.params.productId
+        });
+      }
       return res.json(product);
     } catch (error) {
       return res.status(400).json([]);
@@ -131,10 +153,9 @@ router.get('/category/:search/:page', async (req, res) => {
 
 router.get('/me', authMiddleWare, async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id }).populate(
-      'user',
-      ['name', 'avatar']
-    );
+    const profile = await Profile.findOne({
+      user: req.user.id
+    }).populate('user', ['name', 'avatar']);
 
     if (!profile) {
       return res.status(400).json({ msg: 'There is no profile for this user' });
