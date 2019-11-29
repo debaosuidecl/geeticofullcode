@@ -228,7 +228,7 @@ class ProductPage extends React.Component {
                             })
                           }
                           cart={this.props.cart}
-                          productURL={`${App.domain}${item.productURL[0]}`}
+                          productURL={`${App.domain}public/${item.productURL[0]}`}
                           desc={item.desc}
                           id={item._id}
                           productName={item.productName}

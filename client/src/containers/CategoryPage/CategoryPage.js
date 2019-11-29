@@ -164,7 +164,7 @@ export class CategoryPage extends Component {
                     cart={this.props.cart}
                     key={p._id}
                     id={p._id}
-                    productURL={`${App.domain}public/${p.productURL[0]}`}
+                    productURL={`http://geetico.com/public/${p.productURL[0]}`}
                     productName={p.productName}
                     price={p.price}
                     addCart={() =>
@@ -197,8 +197,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(CategoryPage)
+  connect(mapStateToProps, mapDispatchToProps)(CategoryPage)
 );

@@ -23,7 +23,7 @@ h2.CategoryPage {
   justify-items: center;
   /* align-items: center; */
 
-  grid-template-columns: minmax(auto, 270px) minmax(auto, 270px);
+  grid-template-columns: minmax(auto, auto) minmax(auto, auto);
 
   grid-gap: 2px;
 
