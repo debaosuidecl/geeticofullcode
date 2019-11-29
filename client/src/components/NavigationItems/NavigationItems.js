@@ -12,7 +12,7 @@ class NavigationItems extends Component {
       'Food Cupboard',
       'Beverages',
       'Drinks',
-      'Cooking & Baking',
+      ' Cooking, Baking & Ingredients',
       'Breakfast Foods'
       // 'Food Cupboard'
     ]

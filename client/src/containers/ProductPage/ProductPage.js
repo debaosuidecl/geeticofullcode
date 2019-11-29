@@ -31,7 +31,7 @@ class ProductPage extends React.Component {
   state = {
     page: 2,
     products: [],
-    breakfast: [],
+    Canned: [],
     hottestDeals: [],
     cooking: [],
     hasMore: true
@@ -39,36 +39,39 @@ class ProductPage extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    axios.get(`${App.domain}api/userproducts/1?search=cooking`).then(res => {
-      // console.log(res.data);
-
-      this.setState({
-        cooking: res.data
-      });
-    });
-    axios.get(`${App.domain}api/userproducts/1?search=breakfast`).then(res => {
-      // console.log(res.data);
-
-      this.setState({
-        breakfast: res.data
-      });
-    });
-
     axios
-      .get(`${App.domain}api/userproducts/1`)
+      .get(`${App.domain}api/userproducts/1?search=cooking&excludeCat=true`)
       .then(res => {
         // console.log(res.data);
-        this.setState(prevState => {
-          return {
-            // page: prevState.page + 1,
-            hottestDeals: prevState.products.concat(res.data)
-            // hasMore: res.data.length > 0
-          };
-        });
-      })
-      .catch(err => {
-        // console.log(err.response);
+
+        axios
+          .get(`${App.domain}api/userproducts/1?search=canned&excludeCat=true`)
+          .then(res222 => {
+            // console.log(res.data);
+            console.log(res.data, 'res');
+            console.log(res222.data, 'res2');
+            this.setState({
+              cooking: res.data,
+              Canned: res222.data
+            });
+          });
       });
+
+    // axios
+    //   .get(`${App.domain}api/userproducts/1`)
+    //   .then(res => {
+    //     // console.log(res.data);
+    //     this.setState(prevState => {
+    //       return {
+    //         // page: prevState.page + 1,
+    //         hottestDeals: prevState.products.concat(res.data)
+    //         // hasMore: res.data.length > 0
+    //       };
+    //     });
+    //   })
+    //   .catch(err => {
+    //     // console.log(err.response);
+    //   });
   }
 
   fetchMoreData = () => {
@@ -199,19 +202,19 @@ class ProductPage extends React.Component {
             </div>
           </div>
 
-          {['breakfast', 'cooking'].map(search => {
+          {['Canned', 'cooking'].map(search => {
             return this.state[search].length > 0 ? (
               <React.Fragment>
                 <div className={classes.HeaderProdCont}>
                   <h2 className={classes.ProductHeader}>
                     {search.toUpperCase()}
                   </h2>
-                  <p onClick={() => this.searchMoreOption(search)}>View More</p>
+                  <p onClick={() => this.searchMoreOption(search)}>More</p>
                 </div>
                 <div className={classes['scrolling-wrapper']}>
                   {this.state[search].length > 0 &&
                     this.state[search].map((item, i) => (
-                      <span className=''>
+                      <span className='' key={i}>
                         <CarouselCard
                           goToDetail={() =>
                             this.props.history.push(`/details/${item._id}`)
@@ -225,9 +228,7 @@ class ProductPage extends React.Component {
                             })
                           }
                           cart={this.props.cart}
-                          productURL={`${App.domain}public/${
-                            item.productURL[0]
-                          }`}
+                          productURL={`${App.domain}${item.productURL[0]}`}
                           desc={item.desc}
                           id={item._id}
                           productName={item.productName}
@@ -256,8 +257,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(ProductPage)
+  connect(mapStateToProps, mapDispatchToProps)(ProductPage)
 );

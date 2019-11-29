@@ -34,28 +34,28 @@ router.get('/:page', authMiddleWare, async (req, res) => {
       .sort('-date')
       .skip(resPerPage * page - resPerPage)
       .limit(resPerPage);
-
-    try {
-      await Promise.all(
-        orders.map(o => {
-          return new Promise(async (resolve, reject) => {
-            let editedOrder = {
-              ...o._doc,
-              orderDetails: await extractProduct(o._doc.orderDetails)
-            };
-            // console.log(editedOrder, 'edit me');
-            if (editedOrder) {
-              resolve(editedOrder);
-            }
-          });
-        })
-      ).then(result => {
-        res.json(result);
-      });
-    } catch (error) {
-      console.log(error, 'fetch issue');
-      res.status(400).json({ error, msg: 'error in fetch' });
-    }
+    return res.json(orders);
+    // try {
+    //   await Promise.all(
+    //     orders.map(o => {
+    //       return new Promise(async (resolve, reject) => {
+    //         let editedOrder = {
+    //           ...o._doc,
+    //           orderDetails: await extractProduct(o._doc.orderDetails)
+    //         };
+    //         // console.log(editedOrder, 'edit me');
+    //         if (editedOrder) {
+    //           resolve(editedOrder);
+    //         }
+    //       });
+    //     })
+    //   ).then(result => {
+    //     res.json(result);
+    //   });
+    // } catch (error) {
+    //   console.log(error, 'fetch issue');
+    //   res.status(400).json({ error, msg: 'error in fetch' });
+    // }
   } catch (error) {
     console.log(error);
     res.status(400).json({ error, msg: 'error in fetch' });

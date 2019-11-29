@@ -16,33 +16,34 @@ const Order = require('../../models/Order');
 const request = require('request');
 const fs = require('fs');
 const path = require('path');
-// const config = require('../config/config');
+const authConfig = require('../../config/config');
 const nodemailer = require('nodemailer');
 const { initializePayment, verifyPayment } = require('../../config/paystack')(
   request
 );
 
-// const transport = {
-//   host: 'smtp.geetico.com',
-//   port: 26,
-//   secure: false,
-//   auth: {
-//     user: config.USER,
-//     pass: config.PASSWORD
-//   },
-//   tls: {
-//     rejectUnauthorized: false
-//   }
-// };
-// const transporter = nodemailer.createTransport(transport);
+const transport = {
+  host: 'smtp.geetico.com',
+  port: 587,
+  secure: false,
+  auth: {
+    user: authConfig.USER,
+    pass: authConfig.PASSWORD
+  },
+  tls: {
+    rejectUnauthorized: false
+  },
+  debug: true
+};
+const transporter = nodemailer.createTransport(transport);
 
-// transporter.verify((error, success) => {
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log('Server is ready to take messages', success);
-//   }
-// });
+transporter.verify((error, success) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Server is ready to take messages', success);
+  }
+});
 
 // @route    POST api/users
 // @desc     Register User
@@ -127,7 +128,7 @@ const extractProduct = async orderDetails => {
         let fullProduct = await Product.findById(prod.product);
         console.log(fullProduct, 'from orders');
         if (fullProduct) {
-          resolve({ fullProduct, quantity: prod.quantity });
+          resolve({ ...fullProduct._doc, quantity: prod.quantity });
         }
       });
     })
@@ -285,7 +286,7 @@ router.post(
           directPaymentMethod: true,
           user: req.user.id,
           fullName: user.fullName,
-          // referenceNumber: reference,
+          referenceNumber: id,
           transactionId: id,
           city: city,
           suite: suite,
@@ -310,13 +311,42 @@ router.post(
         // save the user details
         let newOrder = new Order(data);
         await newOrder.save();
-        res.json({
-          bankDetails: {
-            bank: 'GTBank',
-            accountNumber: '999999999999',
-            accountName: 'Geetico',
-            newOrder
+
+        // let {name, email, message} = req.body;
+        let orderdetails = data.orderDetails.map(
+          prod => `<p>${prod.productName} X ${prod.quantity} </p>`
+        );
+        let content = `
+                        <p>Your order that is awaiting verification</p>
+                        <p>Below are the details</p>
+                        
+                        <div>${orderdetails}</div>
+                        
+
+                        `;
+        let mail = {
+          from: 'contact@geetico.com.ng',
+          to: user.email,
+          subject: `A new message from ${user.fullName}`,
+          html: content
+        };
+
+        transporter.sendMail(mail, (err, data) => {
+          if (err) {
+            console.log(err);
+            res.send('Failed to send your message');
+          } else {
+            // res.send('Your message has been sent');
+            res.json({
+              bankDetails: {
+                bank: 'GTBank',
+                accountNumber: '999999999999',
+                accountName: 'Geetico',
+                newOrder
+              }
+            });
           }
+          console.log(data, 'data');
         });
       } else {
         initializePayment(form, (error, body) => {
@@ -385,12 +415,13 @@ router.get('/paystack/callback', authMiddleWare, async (req, res) => {
       ...data,
       orderDetails: await extractProduct(data.orderDetails)
     };
-
+    console.log(data, 'after the effect');
     let newOrder = new Order(data);
     try {
       const order = await newOrder.save();
       return res.json({ success: true, order });
     } catch (error) {
+      console.log(error);
       // console.log(error.name);
       if (error.name == 'MongoError')
         return res.status(400).json({

@@ -17,12 +17,15 @@ h2.CategoryPage {
 
 .ProductsCont {
   display: grid;
+  /* background: green; */
+  /* margin: auto; */
 
-  justify-content: center;
+  justify-items: center;
+  /* align-items: center; */
 
   grid-template-columns: minmax(auto, 270px) minmax(auto, 270px);
 
-  grid-gap: 8px;
+  grid-gap: 2px;
 
   /* grid-template-areas:
     'item1 item2 item3 item4'
@@ -30,18 +33,39 @@ h2.CategoryPage {
     'item8 item8 item6 item10'
     'item11 item12 item9 item9'; */
 }
+
+@media (min-width: 500px) {
+  .ProductsCont {
+    justify-content: center !important;
+    /* padding-left: 38px; */
+    grid-template-columns: minmax(auto, 270px) minmax(auto, 270px) minmax(
+        auto,
+        270px
+      );
+  }
+}
+
 @media (min-width: 750px) {
   .ProductsCont {
+    justify-content: center !important;
+    /* padding-left: 38px; */
     grid-template-columns:
       minmax(auto, 270px) minmax(auto, 270px) minmax(auto, 270px)
       minmax(auto, 270px);
   }
 }
-
-@media (min-width: 930px) {
+@media (min-width: 1100px) {
   .ProductsCont {
     grid-template-columns:
       minmax(auto, 270px) minmax(auto, 270px) minmax(auto, 270px)
-      minmax(auto, 270px);
+      minmax(auto, 270px) minmax(auto, 270px);
+  }
+}
+
+@media (min-width: 1350px) {
+  .ProductsCont {
+    grid-template-columns:
+      minmax(auto, 270px) minmax(auto, 270px) minmax(auto, 270px)
+      minmax(auto, 270px) minmax(auto, 270px) minmax(auto, 270px);
   }
 }

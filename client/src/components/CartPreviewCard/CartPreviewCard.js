@@ -12,9 +12,7 @@ import App from '../../App';
 function CartPreviewCard({ c, onEditQuant, onRemove, showCart }) {
   // console.log(showCart);
   console.log(c, 'from cart card');
-  if (!c._id) {
-    console.log('e no dey');
-  }
+
   const { productName, price, productURL, _id, quantity } = c;
 
   // const [myprice] = useState(price);

@@ -62,11 +62,11 @@ router.get('/:page', async (req, res) => {
         .skip(resPerPage * page - resPerPage)
         .limit(resPerPage);
 
-      let possibleDuplicates = [
-        ...foundByName,
-        ...foundProducts,
-        ...foundByCat
-      ].map(j => JSON.stringify(j));
+      let possibleDuplicates = req.query.excludeCat
+        ? [...foundByName, ...foundProducts].map(j => JSON.stringify(j))
+        : [...foundByName, ...foundProducts, ...foundByCat].map(j =>
+            JSON.stringify(j)
+          );
       const uniqueSet = new Set(possibleDuplicates);
       const uniqueArray = [...uniqueSet].map(s => JSON.parse(s));
 

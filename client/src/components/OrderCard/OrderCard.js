@@ -91,13 +91,11 @@ function OrderCard({ order, history }) {
                   onClick={() => history.push(`/details/${p.fullProduct._id}`)}
                   className={classes.productName}
                 >
-                  {p.fullProduct.productName}
+                  {p.productName}
                 </span>{' '}
                 X <span className={classes.quantity}> {p.quantity}</span>
               </span>
-              <span className={classes.price}>
-                &#x20A6; {p.fullProduct.price}
-              </span>
+              <span className={classes.price}>&#x20A6; {p.price}</span>
             </div>
           );
         })}

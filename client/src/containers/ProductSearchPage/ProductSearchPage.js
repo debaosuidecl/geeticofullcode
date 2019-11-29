@@ -172,12 +172,18 @@ export class CategoryPage extends Component {
                 !this.state.products.msg &&
                 this.state.products.map(p => (
                   <CarouselCard
+                    cart={this.props.cart}
                     key={p._id}
+                    id={p._id}
                     productURL={`${App.domain}public/${p.productURL[0]}`}
                     productName={p.productName}
                     price={p.price}
                     addCart={() =>
-                      this.props.onAddToCart({ productId: p._id, quantity: 1 })
+                      this.props.onAddToCart({
+                        productId: p._id,
+                        fullProduct: p,
+                        quantity: 1
+                      })
                     }
                     goToDetail={() =>
                       this.props.history.push(`/details/${p._id}`)
@@ -191,15 +197,16 @@ export class CategoryPage extends Component {
     );
   }
 }
-
+const mapStateToProps = state => {
+  return {
+    cart: state.cart.cartItems
+  };
+};
 const mapDispatchToProps = dispatch => {
   return {
     onAddToCart: prodData => dispatch(initiateAddToCart(prodData))
   };
 };
 export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps
-  )(CategoryPage)
+  connect(mapStateToProps, mapDispatchToProps)(CategoryPage)
 );
