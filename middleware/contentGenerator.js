@@ -750,7 +750,9 @@ module.exports = (data, orderdetails, shippingCost) => {
                                                                                       </td>
                                                                                   </tr>
                                                                                   <tr>
-                                                                                      <td class="esd-block-button es-p15t es-p10b" align="center"><span class="es-button-border" style="border-radius: 5px; border-style: solid; border-top-width: 0px; border-bottom-width: 0px; background: rgb(54, 78, 161); border-color: rgb(44, 181, 67);"><a href="https://geetico.com" class="es-button" target="_blank" style="font-size: 16px; border-top-width: 10px; border-bottom-width: 10px; border-radius: 5px; background: rgb(54, 78, 161); border-color: rgb(54, 78, 161);">Verify your order</a></span></td>
+                                                                                      <td class="esd-block-button es-p15t es-p10b" align="center"><span class="es-button-border" style="border-radius: 5px; border-style: solid; border-top-width: 0px; border-bottom-width: 0px; background: rgb(54, 78, 161); border-color: rgb(44, 181, 67);"><a href="https://geetico.com//directPayment/${
+                                                                                        data.transactionId
+                                                                                      }" class="es-button" target="_blank" style="font-size: 16px; border-top-width: 10px; border-bottom-width: 10px; border-radius: 5px; background: rgb(54, 78, 161); border-color: rgb(54, 78, 161);">Verify your order</a></span></td>
                                                                                   </tr>
                                                                               </tbody>
                                                                           </table>
