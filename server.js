@@ -30,9 +30,12 @@ app.use('/api/userauth', require('./routes/api/frontendUserAuth'));
 app.use('/api/userorders', require('./routes/api/frontEndOrders'));
 
 if (process.env.NODE_ENV === 'production') {
-  app.use('/', express.static(path.join(__dirname, 'clientseller/build')));
-  app.get('*', (req, res) => {
-    res.sendFile(
+  app.use(
+    '/sellerpage/',
+    express.static(path.join(__dirname, 'clientseller', 'build'))
+  );
+  app.get('/sellerpage/*', (req, res) => {
+    return res.sendFile(
       path.join(__dirname, './clientseller', './build', 'index.html')
     );
   });
