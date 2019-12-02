@@ -36,14 +36,14 @@ if (process.env.NODE_ENV === 'production') {
   );
   app.get('/sellerpage/*', (req, res) => {
     res.sendFile(
-      path.join(__dirname, './clientseller', './build', 'index.html')
+      path.resolve(__dirname, 'clientseller', 'build', 'index.html')
     );
   });
 
-  app.use(express.static('client/build'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
+  // app.use(express.static('client/build'));
+  // app.get('*', (req, res) => {
+  //   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  // });
 }
 //set port
 const PORT = process.env.PORT || 2900;
