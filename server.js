@@ -3,7 +3,7 @@ const connectDB = require('./config/db');
 require('dotenv').config();
 const app = express();
 const path = require('path');
-
+const fs = require('fs');
 // console.log(process.env);
 // connect database
 
@@ -32,7 +32,9 @@ app.use('/api/userorders', require('./routes/api/frontEndOrders'));
 if (process.env.NODE_ENV === 'production') {
   app.use('/sellerpage', express.static(__dirname + 'clientseller/build'));
   app.get('/sellerpage/*', (req, res) => {
-    let HTML = path.resolve(__dirname, 'clientseller', 'build', 'index.html');
+    let HTML = fs.readFileSync(
+      path.join(__dirname, 'clientseller', 'build', 'index.html')
+    );
     res.send(`${HTML}`);
   });
 
