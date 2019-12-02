@@ -11,6 +11,7 @@ const User = require('../../models/FrontEndUser'); // bring in the user model
 const Product = require('../../models/Product'); // bring in the product model
 const authMiddleWare = require('../../middleware/auth');
 const getShippingCost = require('../../middleware/getShippingCost');
+const contentGenerator = require('../../middleware/contentGenerator');
 // const path = require("path");
 const Order = require('../../models/Order');
 const request = require('request');
@@ -281,7 +282,7 @@ router.post(
         const id = orderid.generate();
         // 3016-734428-7759
         let data = {
-          amount,
+          amount: amount * 100,
           // email: customer.email,
           directPaymentMethod: true,
           user: req.user.id,
@@ -313,21 +314,18 @@ router.post(
         await newOrder.save();
 
         // let {name, email, message} = req.body;
-        let orderdetails = data.orderDetails.map(
-          prod => `<p>${prod.productName} X ${prod.quantity} </p>`
+        // let orderdetails = data.orderDetails.map(
+        //   prod => `<p>${prod.productName} X ${prod.quantity} </p>`
+        // );
+        let content = contentGenerator(
+          data,
+          data.orderDetails,
+          getShippingCost(amount, directSelected)
         );
-        let content = `
-                        <p>Your order that is awaiting verification</p>
-                        <p>Below are the details</p>
-                        
-                        <div>${orderdetails}</div>
-                        
-
-                        `;
         let mail = {
-          from: 'contact@geetico.com.ng',
+          from: 'Geetico.com <contact@geetico.com>',
           to: user.email,
-          subject: `A new message from ${user.fullName}`,
+          subject: `Verify your order at geetico.com`,
           html: content
         };
 
@@ -340,8 +338,8 @@ router.post(
             res.json({
               bankDetails: {
                 bank: 'GTBank',
-                accountNumber: '999999999999',
-                accountName: 'Geetico',
+                accountNumber: '0122958763',
+                accountName: 'Geetico HQ',
                 newOrder
               }
             });
@@ -445,7 +443,14 @@ router.get('/directPaymentOrder', authMiddleWare, async (req, res) => {
     if (!directPaymentOrder) {
       return res.status(400).json({ noDirectPayment: true });
     }
-    return res.json(directPaymentOrder);
+    return res.json({
+      ...directPaymentOrder,
+      bankDetails: {
+        bank: 'GTBank',
+        accountNumber: '0122958763',
+        accountName: 'Geetico HQ'
+      }
+    });
   } catch (error) {
     res.status(500).send('Server Error');
   }

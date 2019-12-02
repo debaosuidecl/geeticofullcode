@@ -1,0 +1,37 @@
+.DirectPaymentDetails {
+  margin-top: 90px;
+}
+
+.CardVerificationDetails {
+  background: white;
+  border-top: 7px solid #41549b;
+  min-height: 350px;
+  width: 80%;
+  margin: 20px auto;
+  /* box-shadow: 1px 10px 10px rgb(226, 225, 225); */
+  padding: 10px;
+  /* transform: rotateX(0deg) skew(15deg, 15deg); */
+
+  transition: 0.5s;
+}
+.strong {
+  font-weight: 300;
+}
+.header {
+  color: #41549b;
+  text-align: center;
+  font-weight: 100;
+}
+.orderDetailHeader {
+  font-size: 14px;
+  font-weight: 100;
+  text-align: center;
+}
+.BankDetailsCont {
+  text-align: center;
+  font-size: 18px;
+  color: #444;
+}
+.BankDetailsCont p {
+  font-weight: 100;
+}

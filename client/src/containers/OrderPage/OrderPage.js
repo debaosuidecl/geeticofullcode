@@ -85,7 +85,7 @@ export class OrderPage extends Component {
       `${App.domain}api/userorders${status}/1`,
       config
     );
-    // console.log(firstresp.data);
+    console.log(firstresp.data);
     this.setState(prevState => {
       return {
         loading: false,
