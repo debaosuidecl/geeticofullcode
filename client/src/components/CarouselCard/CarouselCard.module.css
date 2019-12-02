@@ -1,11 +1,12 @@
 .CarouselCardContainer {
   background: white;
+
   width: 95%;
   /* width: 100%; */
   /* flex: 1; */
   border-top: 3px solid #41549b;
 
-  max-width: 200px;
+  max-width: 165px;
   /* margin: 0px 10px; */
   /* min-width: 200px; */
   /* max-height: 220px;
@@ -129,6 +130,7 @@
   .CarouselCardContainer {
     background: white;
     width: 95%;
+    max-width: 200px;
     /* max-height: 300px;
     height: 280px; */
     transition: 0.4s ease-in-out;
