@@ -4,7 +4,7 @@ import Error404 from './containers/Error404/Error404';
 const routes = [
   {
     title: 'SignUp',
-    path: '/sellerpage',
+    path: '/',
     exact: true,
     component: SignUp
   },
