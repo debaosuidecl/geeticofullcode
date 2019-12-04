@@ -33,7 +33,7 @@ class App extends Component {
   static domain =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:2900/'
-      : 'http://seller.geetico.com/';
+      : 'https://seller.geetico.com/';
   static valueToHours = value => {
     switch (value) {
       case 1:
