@@ -33,7 +33,7 @@ class App extends Component {
   static domain =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:2900/'
-      : 'https://geetico.com/';
+      : 'http://seller.geetico.com/';
   static valueToHours = value => {
     switch (value) {
       case 1:
@@ -97,10 +97,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(App)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
 // export default App;
