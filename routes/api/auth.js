@@ -6,7 +6,7 @@ const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const bcrypt = require('bcryptjs');
-
+const gravatar = require('gravatar');
 //@route    GET api/auth
 //@desc     test Route
 //@access   public
@@ -94,77 +94,77 @@ router.post(
 // @route    POST api/users
 // @desc     Register User
 // @access   public
-router.post(
-  '/',
-  [
-    check('fullName', 'Your full name is required')
-      .not()
-      .isEmpty(),
+// router.post(
+//   '/seller',
+//   [
+//     check('fullName', 'Your full name is required')
+//       .not()
+//       .isEmpty(),
 
-    check('email', 'Use a valid Email').isEmail(),
-    check(
-      'password',
-      'Please Enter a password with 6 or more characters'
-    ).isLength({ min: 8 })
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      // if there are errors
-      return res.status(400).json({
-        errors: errors.array()
-      });
-    }
+//     check('email', 'Use a valid Email').isEmail(),
+//     check(
+//       'password',
+//       'Please Enter a password with 6 or more characters'
+//     ).isLength({ min: 8 })
+//   ],
+//   async (req, res) => {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//       // if there are errors
+//       return res.status(400).json({
+//         errors: errors.array()
+//       });
+//     }
 
-    const { fullName, email, password } = req.body;
+//     const { fullName, email, password } = req.body;
 
-    try {
-      // we want to see if the user exist
+//     try {
+//       // we want to see if the user exist
 
-      // get User's gravatar
+//       // get User's gravatar
 
-      // encrypt the password using bcrypt
+//       // encrypt the password using bcrypt
 
-      // return a jsonwebtoken so that the user can be logged in immediately
+//       // return a jsonwebtoken so that the user can be logged in immediately
 
-      let user = await User.findOne({ email });
-      if (user) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'User Already Exists' }] }); //bad request
-      }
-      const avatar = gravatar.url(email, {
-        s: '200', // default size
-        r: 'pg', // rating - cant have any naked people :)
-        d: 'mm' // gives a default image
-      });
-      user = new User({
-        fullName,
-        email,
-        avatar,
-        password
-      });
-      const salt = await bcrypt.genSalt(10); // create the salt
-      user.password = await bcrypt.hash(password, salt); // to encrypt the user password
+//       let user = await User.findOne({ email });
+//       if (user) {
+//         return res
+//           .status(400)
+//           .json({ errors: [{ msg: 'User Already Exists' }] }); //bad request
+//       }
+//       const avatar = gravatar.url(email, {
+//         s: '200', // default size
+//         r: 'pg', // rating - cant have any naked people :)
+//         d: 'mm' // gives a default image
+//       });
+//       user = new User({
+//         fullName,
+//         email,
+//         avatar,
+//         password
+//       });
+//       const salt = await bcrypt.genSalt(10); // create the salt
+//       user.password = await bcrypt.hash(password, salt); // to encrypt the user password
 
-      await user.save();
+//       await user.save();
 
-      const payload = {
-        user: {
-          id: user.id
-        }
-      };
+//       const payload = {
+//         user: {
+//           id: user.id
+//         }
+//       };
 
-      jwt.sign(payload, config.get('jwtSecret'), null, (error, token) => {
-        if (error) throw error;
+//       jwt.sign(payload, config.get('jwtSecret'), null, (error, token) => {
+//         if (error) throw error;
 
-        res.json({ token, avatar: user.avatar, fullName: user.fullName });
-      });
-    } catch (e) {
-      console.error(e);
-      res.status(500).send('Server Error');
-    }
-  }
-);
+//         res.json({ token, avatar: user.avatar, fullName: user.fullName });
+//       });
+//     } catch (e) {
+//       console.error(e);
+//       res.status(500).send('Server Error');
+//     }
+//   }
+// );
 
 module.exports = router;
