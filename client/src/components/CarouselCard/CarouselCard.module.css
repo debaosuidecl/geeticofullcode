@@ -44,9 +44,19 @@
   height: 35%; */
   /* transform: translate(-50%, -50%); */
 }
+.ImageContainer {
+  /* background: green; */
+  position: relative;
+  height: 100px;
+}
 .ImageContainer img {
   /* width: 70px; */
   height: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+
+  /* width: 100px; */
 }
 .CarouselCardContainer:hover {
   box-shadow: 1px 5px 10px rgb(190, 189, 189);
@@ -122,6 +132,7 @@
   font-size: 15px;
   height: 40px;
   /* background: #eee; */
+  width: 110px;
   border-bottom: 1px solid #eee;
   font-weight: bold;
 }

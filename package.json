@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "server": "nodemon server --watch  routes/api/users.js",
+    "server": "nodemon server --watch  routes/api/uploadProduct.js",
     "client": "npm start --prefix client",
     "seller": "npm start --prefix clientseller",
     "dev": "concurrently \"npm run server\" \"npm run client\"",

@@ -124,18 +124,6 @@ export class CategoryPage extends Component {
         </h2>
         {this.state.products.length > 0 ? (
           <InfiniteScroll
-            refreshFunction={this.refresh}
-            pullDownToRefresh
-            pullDownToRefreshContent={
-              <h3 style={{ textAlign: 'center' }}>
-                &#8595; Pull down to refresh
-              </h3>
-            }
-            releaseToRefreshContent={
-              <h3 style={{ textAlign: 'center' }}>
-                &#8593; Release to refresh
-              </h3>
-            }
             dataLength={this.state.products.length}
             next={this.fetchMoreData}
             hasMore={this.state.hasMore}

@@ -3,11 +3,17 @@ import SellerBackendLayout from '../../../components/UI/sellerBackendLayout/sell
 // import ProductContainer from "../../../components/ProductSummary/ProductSummary";
 import classes from './Product.module.css';
 import Modal from '../../../components/UI/Modal/Modal';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import { connect } from 'react-redux';
-import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPlusCircle,
+  faTrash,
+  faSearch,
+  faFilter
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ProductSummary from '../../../components/ProductSummary/ProductSummary';
 import { fetchUserProducts } from '../../../store/actions/products';
@@ -22,15 +28,62 @@ export class Products extends Component {
   state = {
     show: false,
     productToDelete: null,
-    loading: false
+    loading: false,
+    products: [],
+    searchTerm: '',
+    searchTermDisplay: '',
+    page: 2,
+    loadingProduct: false,
+    hasMore: true,
+    searchMode: false
     // showModal
   };
   componentDidMount() {
     this.props.checkAuth();
+
+    this.onFetchUserProducts(true);
+  }
+  onFetchUserProducts = first => {
+    if (first) {
+      this.setState({ loadingProduct: true });
+    }
+
     let token = localStorage.getItem('token');
     if (!token) return this.props.history.push('/');
-    this.props.onFetchUserProducts();
-  }
+    const config = {
+      headers: {
+        'x-auth-token': token
+      }
+    };
+    let url = this.state.searchMode
+      ? `${App.domain}api/userproducts/${this.state.page}?search=${this.state.searchTerm}&`
+      : `${App.domain}api/upload/getAll/${
+          first === true ? 1 : this.state.page
+        }`;
+
+    axios
+      .get(url, config)
+      .then(response => {
+        // this.setState({ products: response.data });
+        this.setState({ loadingProduct: false });
+        // console.log(response.data)
+        this.setState(prevState => {
+          return {
+            // loading: false,
+            loadingProduct: false,
+            products: prevState.products.concat(response.data),
+            hasMore:
+              response.data.length < 25 || response.data.length == 0
+                ? false
+                : true,
+            page: first === false ? prevState.page + 1 : prevState.page
+          };
+        });
+      })
+      .catch(error => {
+        this.setState({ loadingProduct: false });
+      });
+  };
   toggleModal = () => {
     this.setState(pState => {
       return {
@@ -40,7 +93,7 @@ export class Products extends Component {
   };
   toDetailPage = summ => {};
   deleteStartHandler = productId => {
-    let productToDelete = this.props.products.filter(
+    let productToDelete = this.state.products.filter(
       prod => prod._id === productId
     )[0];
     this.setState({
@@ -75,7 +128,7 @@ export class Products extends Component {
           loading: false
         });
 
-        this.props.onFetchUserProducts();
+        this.onFetchUserProducts();
       })
       .catch(error => {
         this.setState({
@@ -87,50 +140,121 @@ export class Products extends Component {
         );
       });
   };
+
+  searchChangeHandler = e => {
+    this.setState({ searchTerm: e.target.value });
+  };
+  searchNewHandler = showAll => {
+    this.setState({ loadingProduct: true });
+    let url = `${App.domain}api/userproducts/1?search=${this.state.searchTerm}`;
+
+    if (showAll === true) {
+      url = `${App.domain}api/userproducts/1`;
+      this.setState({ searchTermDisplay: '' });
+    }
+    axios
+      .get(url)
+      .then(response => {
+        // this.setState({ loadingProduct: false });
+        this.setState(prevState => {
+          return {
+            products: [...response.data],
+            loadingProduct: false,
+            hasMore:
+              response.data.length < 25 || response.data.length == 0
+                ? false
+                : true,
+            page: 2,
+            searchMode: this.state.searchTerm.length > 0 ? true : false,
+            searchTermDisplay: this.state.searchTerm
+          };
+        });
+      })
+      .catch(e => {
+        console.log(e.response);
+      });
+  };
   render() {
     let productSummary = 'No Products Uploaded Yet';
+    productSummary =
+      this.state.products.length > 0 &&
+      this.state.products.map((summ, i) => (
+        <ProductSummary
+          key={i}
+          toDetailPage={() => {
+            this.props.history.push(
+              `/sellerpage/products/productdetail/${summ._id}`
+            );
+          }}
+          deleteStartHandler={this.deleteStartHandler}
+          // key={summ._id}
+          title={summ.productName}
+          quantity={summ.productQuantity}
+          productId={summ._id}
+          price={summ.price}
+          icon={faTrash}
+          src={'https://seller.geetico.com/' + 'public/' + summ.productURL[[0]]}
+        />
+      ));
+    let wrapper = !this.state.loadingProduct ? (
+      <InfiniteScroll
+        dataLength={this.state.products.length}
+        next={() => this.onFetchUserProducts(false)}
+        hasMore={this.state.hasMore}
+        loader={
+          <div style={{ textAlign: 'center', marginBottom: 100 }}>
+            <SpinnerTwo />
+          </div>
+        }
+        endMessage={
+          <p
+            style={{
+              textAlign: 'center',
+              color: '#333'
+            }}
+          >
+            End of Results
+          </p>
+        }
+      >
+        <div className={classes.ProductSummaryCont}>{productSummary}</div>
+      </InfiniteScroll>
+    ) : (
+      <Spinner />
+    );
+
     // if (this.props.products.length !== 0) {
-    productSummary = this.props.products.map(summ => (
-      <ProductSummary
-        toDetailPage={() => {
-          this.props.history.push(
-            `/sellerpage/products/productdetail/${summ._id}`
-          );
-        }}
-        deleteStartHandler={this.deleteStartHandler}
-        key={summ._id}
-        title={summ.productName}
-        quantity={summ.productQuantity}
-        productId={summ._id}
-        price={summ.price}
-        icon={faTrash}
-        src={App.domain + 'public/' + summ.productURL[[0]]}
-      />
-    ));
+
     // }
     return (
       <SellerBackendLayout>
         <Helmet>
           <meta charSet='utf-8' />
           <title>Product Display Page</title>
-          {/* <link rel='canonical' href='http://mysite.com/example' /> */}
         </Helmet>
-
         <Modal show={this.state.show} removeModal={this.toggleModal}>
-          {/* Delete Product {JSON.stringify(this.state.productToDelete)} */}
           {this.state.productToDelete ? (
             <AreYouSureToDelete
               name='this Product'
-              imageUrl={`${App.domain}public/${
-                this.state.productToDelete.productURL[0]
-              }`}
+              imageUrl={`${App.domain}public/${this.state.productToDelete.productURL[0]}`}
               finalDelete={this.deleteImageHandlerAfterConfirmation}
               toggleModal={this.toggleModal}
             />
           ) : null}
         </Modal>
+
         <div className={classes.DashboardContainer}>
-          <h2 className={classes.Title}>Products</h2>
+          <div
+            className={classes.SearchBarFloatingButton}
+            onClick={() => {
+              window.scrollTo(0, 0);
+              document.querySelector('[name="product_search"]').focus();
+              // document.querySelector('[name="product_search"]').();
+            }}
+          >
+            <FontAwesomeIcon icon={faSearch} size='2x' color='white' />
+          </div>
+          {/* <h2 className={classes.Title}>Products</h2> */}
           {this.state.loading ? <SpinnerTwo /> : null}
           <div className={classes.AddProductHeader}>
             <h2>My Products</h2>
@@ -152,27 +276,58 @@ export class Products extends Component {
               <FontAwesomeIcon icon={faPlusCircle} size='1x' />
             </span>
           </div>
-          {/* <div className={classes.Body}> */}
-          <div className={classes.ProductBody}>
-            <div
-              className={[classes.ProductHeading, classes.desktopOnlyFlex].join(
-                ' '
-              )}
+          <div className=''>
+            <form
+              className={classes.SearchInputCont}
+              onSubmit={e => {
+                e.preventDefault();
+                this.searchNewHandler();
+              }}
             >
-              <h6>Product </h6>
-              <h6>Name</h6>
-              <h6>Quantity</h6>
-              <h6>Price</h6>
-            </div>
-            <div
-              className={classes.ProductSummaryCont}
-              // style={{ overflowY: "scroll", height: "200px" }}
-            >
-              {this.props.loadingProduct ? <Spinner /> : productSummary}
-            </div>
+              <input
+                onChange={this.searchChangeHandler}
+                value={this.state.searchTerm}
+                // onFocus={() => console.log(this.setState())}
+                name='product_search'
+                type='text'
+                placeholder='Search for a product, category or tag'
+              />
+              {this.state.searchMode ? (
+                <p
+                  className={classes.showAll}
+                  onClick={() => {
+                    this.setState({
+                      searchTerm: '',
+                      searchTermDisplay: '',
+                      searchMode: false
+                    });
 
-            {/* </div> */}
+                    this.searchNewHandler(true);
+                    // this.onFetchUserProducts(true);
+                  }}
+                >
+                  Show All
+                </p>
+              ) : null}
+              <FontAwesomeIcon
+                icon={faFilter}
+                style={{
+                  color: this.state.searchMode ? '#6ce001' : '#555'
+                }}
+                onClick={this.searchNewHandler}
+              />
+            </form>
           </div>
+          {this.state.searchMode && this.state.searchTermDisplay ? (
+            <div className=''>
+              Showing results for {this.state.searchTermDisplay.toUpperCase()}
+            </div>
+          ) : null}
+          {this.state.products.length <= 0 && !this.state.loadingProduct ? (
+            <p className={classes.NoSearchResult}>Search returned No results</p>
+          ) : (
+            wrapper
+          )}
         </div>
       </SellerBackendLayout>
     );
@@ -191,8 +346,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Products)
+  connect(mapStateToProps, mapDispatchToProps)(Products)
 );

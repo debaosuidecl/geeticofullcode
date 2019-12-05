@@ -344,6 +344,39 @@ router.get('/', authMiddleWare, async (req, res) => {
   }
 });
 
+//@route    GET api/upload/getAll
+//@desc     GET user productData
+//@access   private
+router.get('/getAll/:page', authMiddleWare, async (req, res) => {
+  console.log(req.user.id);
+
+  try {
+    // Declaring variable
+    const resPerPage = 25; // results per page
+    const page = req.params.page || 1; // Page
+
+    if (req.query.search) {
+      // Declaring query based/search variables
+      //  const searchQuery = req.query.search,
+      regex = new RegExp(escapeRegex(req.query.search), 'gi');
+      // Find Demanded Products - Skipping page values, limit results       per page
+      const foundProducts = await Product.find({})
+        .skip(resPerPage * page - resPerPage)
+        .limit(resPerPage);
+
+      return res.json(foundProducts);
+    } else {
+      // return res.status(400).json({ msg: 'no query was issued' });
+      const foundProducts = await Product.find()
+        .skip(resPerPage * page - resPerPage)
+        .limit(resPerPage);
+      return res.json(foundProducts);
+    }
+  } catch (error) {
+    return res.status(500).json({ msg: 'A Server Error Occured' });
+  }
+});
+
 //@route    GET api/upload/details/:productId
 //@desc     GET single product
 //@access   private
@@ -366,10 +399,9 @@ router.get('/details/:productId', authMiddleWare, async (req, res) => {
 
 router.get('/me', authMiddleWare, async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id }).populate(
-      'user',
-      ['name', 'avatar']
-    );
+    const profile = await Profile.findOne({
+      user: req.user.id
+    }).populate('user', ['name', 'avatar']);
 
     if (!profile) {
       return res.status(400).json({ msg: 'There is no profile for this user' });

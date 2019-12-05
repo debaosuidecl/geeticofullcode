@@ -1,64 +1,64 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from '../../components/UI/Button/Button';
+import React, { useState, useEffect } from 'react';
 import classes from './ProductSummary.module.css';
-const ProductSummary = ({
-  title,
-  productId,
-  quantity,
-  price,
-  icon,
-  src,
-  toDetailPage,
-  deleteStartHandler
-}) => {
+// import { Button } from 'semantic-ui-react';
+import Spin from '../../shared/images/loading_spinner.gif';
+import Button from '../UI/Button/Button';
+
+const CarouselCard = props => {
+  const {
+    title,
+    productId,
+    quantity,
+    price,
+    icon,
+    src,
+    toDetailPage,
+    deleteStartHandler
+  } = props;
+  // const [currentValue, setCurrentValue] = useState(returnQuantity(props));
+  const [loading, setLoading] = useState(true);
+
   return (
-    <div className={classes.ProductContainer}>
-      <div className={classes.Picture}>
-        <img onClick={toDetailPage} src={src} height='100' alt={src + title} />
+    <div
+      style={{
+        minWidth: props.isCarousel ? 200 : 'none',
+        marginRight: props.isCarousel ? 20 : 'none'
+      }}
+      className={[classes.CarouselCardContainer, classes.card].join(' ')}
+    >
+      <div className={classes.ImageContainer}>
+        <img
+          className={classes.prod}
+          onClick={toDetailPage}
+          src={src}
+          alt=''
+          onLoad={() => setLoading(false)}
+        />
+        {loading ? <img src={Spin} alt='' className={classes.spin} /> : null}
       </div>
-      <div
-        className={[classes.ProdDetailContainerMobile, classes.mobileOnly].join(
-          ' '
-        )}
-      >
-        <div>
-          Product Name:{' '}
-          <span onClick={toDetailPage} className={classes.title}>
-            {title}
-          </span>
-        </div>
-        <div>Quantity: {quantity}</div>
-        <div>
-          Price per/pc: &#x20A6;
+
+      <hr />
+      <div className={classes.TextContainer}>
+        <h4 className={classes.Title} onClick={toDetailPage}>
+          {title}
+        </h4>
+        <h4 className={classes.Price}>
+          &#8358;{' '}
           {parseFloat(price.toString().replace(/,/g, ''))
             .toFixed(0)
             .toString()
             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-        </div>
+        </h4>
+      </div>
+
+      <div className=''>
         <Button btnType='Danger' clicked={() => deleteStartHandler(productId)}>
           {' '}
           Delete product{' '}
         </Button>
       </div>
-      <h6
-        onClick={toDetailPage}
-        className={[classes.title, classes.desktopOnly].join(' ')}
-      >
-        {title}
-      </h6>
-      <h6 className={classes.desktopOnly}>{quantity}</h6>
-      <div
-        className={[classes.PriceAndSettingCont, classes.desktopOnly].join(' ')}
-      >
-        <h6>&#8358;{price}</h6>
-        <div onClick={() => deleteStartHandler(productId)}>
-          <FontAwesomeIcon icon={icon} size='1x' />
-          {/* <Button btnType='Gosmall'>View Product</Button> */}
-        </div>
-      </div>
     </div>
   );
 };
 
-export default ProductSummary;
+export default CarouselCard;

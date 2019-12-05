@@ -25,6 +25,10 @@ body {
   height: 300px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 ::-webkit-scrollbar-thumb {
   background: rgb(64, 238, 64);
   /* background: #1d2647; */

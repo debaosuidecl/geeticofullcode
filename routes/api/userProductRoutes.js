@@ -44,7 +44,7 @@ router.get('/:page', async (req, res) => {
   // console.log(req.user.id);
   try {
     // Declaring variable
-    const resPerPage = 15; // results per page
+    const resPerPage = 25; // results per page
     const page = req.params.page || 1; // Page
 
     if (req.query.search) {
@@ -64,6 +64,8 @@ router.get('/:page', async (req, res) => {
 
       let possibleDuplicates = req.query.excludeCat
         ? [...foundByName, ...foundProducts].map(j => JSON.stringify(j))
+        : req.query.nameOnly
+        ? [...foundByName].map(j => JSON.stringify(j))
         : [...foundByName, ...foundProducts, ...foundByCat].map(j =>
             JSON.stringify(j)
           );

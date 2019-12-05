@@ -46,7 +46,7 @@ export const fetchUserProducts = () => {
     };
     axios
       .get(
-        `${App.domain}api/upload
+        `${App.domain}api/upload/getAll
     `,
         config
       )
