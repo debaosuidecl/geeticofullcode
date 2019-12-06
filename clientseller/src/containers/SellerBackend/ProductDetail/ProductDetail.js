@@ -120,6 +120,10 @@ export class Products extends Component {
   updateHandler = () => {
     // console.log('updatedFields', this.state.productDetail);
     this.setState({ isUpdating: true });
+    console.log(this.validator.fields.productName, 'prod');
+    console.log(this.validator.fields.price, ' price');
+    console.log(this.validator.fields.description, 'desc');
+    console.log(this.validator.fields.productQuantity, 'prod');
     if (
       !this.validator.fields.productName ||
       !this.validator.fields.price ||
@@ -127,7 +131,7 @@ export class Products extends Component {
       !this.validator.fields.productQuantity
       // !this.validator.fields.referenceNumber
     ) {
-      // console.log('not valid');
+      console.log('not valid');
       return;
     }
     let token = localStorage.getItem('token');
@@ -144,7 +148,7 @@ export class Products extends Component {
         config
       )
       .then(response => {
-        // console.log(response.data);
+        console.log(response.data);
         this.setState({
           showInput: false,
           isUpdating: false
@@ -152,7 +156,7 @@ export class Products extends Component {
       })
       .catch(errors => {
         alert('Error Editing Product, Please try again later');
-        // console.log(errors.response);
+        console.log(errors.response);
         this.setState({
           isUpdating: false
         });
@@ -406,8 +410,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Products)
+  connect(mapStateToProps, mapDispatchToProps)(Products)
 );

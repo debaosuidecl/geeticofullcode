@@ -27,7 +27,7 @@ export default function ProductNameComponent({
             validator.message(
               'productName',
               e.target.value,
-              'required|min:4|max:30'
+              'required|min:4|max:40'
               // 'text-danger'
             );
             onEditChange(e);
@@ -38,7 +38,7 @@ export default function ProductNameComponent({
           name='productName'
           className={classes.productNameInput}
         />
-        {validator.message('productName', productName, 'required|min:4|max:30')}
+        {validator.message('productName', productName, 'required|min:4|max:40')}
 
         {/* <button></button> */}
       </div>

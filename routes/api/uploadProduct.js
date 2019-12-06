@@ -81,6 +81,7 @@ router.post(
     }
 
     try {
+      console.log(req.body);
       const user = await User.findById(req.user.id);
 
       // console.log(user);
