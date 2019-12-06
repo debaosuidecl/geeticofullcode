@@ -81,10 +81,20 @@ router.post(
     }
 
     try {
+      const user = await User.findById(req.user.id);
+
+      // console.log(user);
+      // I'm gonna change this up very soon
+      if (!user.isSeller)
+        return res.status(400).json({
+          msg: 'not authorized'
+        });
       const product = await Product.findOne({
-        _id: req.params.productId,
-        user: req.user.id
+        _id: req.params.productId
+        // user: req.user.id
       });
+
+      console.log(product, 'line 89');
 
       const {
         productName,
