@@ -1,13 +1,13 @@
 {
   "main.css": "/static/css/main.920761e9.chunk.css",
-  "main.js": "/static/js/main.6f95cc1c.chunk.js",
-  "main.js.map": "/static/js/main.6f95cc1c.chunk.js.map",
+  "main.js": "/static/js/main.b23c3af7.chunk.js",
+  "main.js.map": "/static/js/main.b23c3af7.chunk.js.map",
   "static/css/1.3a5c83c3.chunk.css": "/static/css/1.3a5c83c3.chunk.css",
   "static/js/1.4821cb7b.chunk.js": "/static/js/1.4821cb7b.chunk.js",
   "static/js/1.4821cb7b.chunk.js.map": "/static/js/1.4821cb7b.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.229c360f.js",
   "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/media/semantic.min.css": "/static/media/brand-icons.c5ebe0b3.ttf",
+  "static/media/semantic.min.css": "/static/media/brand-icons.a1a749e8.svg",
   "static/media/geet2.jpg": "/static/media/geet2.99c7a767.jpg",
   "static/media/ordermanagement.png": "/static/media/ordermanagement.95348a37.png",
   "static/media/loading_spinner.gif": "/static/media/loading_spinner.078aa3f0.gif",
@@ -17,6 +17,6 @@
   "static/css/1.3a5c83c3.chunk.css.map": "/static/css/1.3a5c83c3.chunk.css.map",
   "static/css/main.920761e9.chunk.css.map": "/static/css/main.920761e9.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.3c224fc12ca2d7416e6ae40f53d7b8f4.js": "/precache-manifest.3c224fc12ca2d7416e6ae40f53d7b8f4.js",
+  "precache-manifest.901d81273c6f587daed4789dd2a63eeb.js": "/precache-manifest.901d81273c6f587daed4789dd2a63eeb.js",
   "service-worker.js": "/service-worker.js"
 }
