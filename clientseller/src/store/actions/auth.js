@@ -108,10 +108,10 @@ export const authCheckOnContainer = () => {
       axios
         .get(url, config)
         .then(response => {
-          const { email, _id, fullName } = response.data;
+          const { email, _id, fullName, avatar } = response.data;
 
           setTimeout(() => {
-            dispatch(authSuccess(token, _id, fullName, email));
+            dispatch(authSuccess(token, _id, fullName, email, avatar));
           }, 500);
         })
 
@@ -145,10 +145,10 @@ export const authCheckState = () => {
         .get(url, config)
         .then(response => {
           console.log('success');
-          console.log(response);
-          const { email, _id, fullName } = response.data;
+          console.log(response, ' from new');
+          const { email, _id, fullName, avatar } = response.data;
           setTimeout(() => {
-            dispatch(authSuccess(token, _id, fullName, email));
+            dispatch(authSuccess(token, _id, fullName, email, avatar));
           }, 500);
         })
 

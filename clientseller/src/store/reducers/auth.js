@@ -55,7 +55,8 @@ const authSuccess = (state, action) => {
     token: action.idToken,
     _id: action._id,
     fullName: action.fullName,
-    email: action.email
+    email: action.email,
+    avatar: action.avatar
   });
 };
 const authFail = (state, action) => {

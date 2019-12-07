@@ -4,8 +4,7 @@ import classes from './Home.module.css';
 import ProductIcon from '../../../shared/images/productIcon2.png';
 import ProductCardIcon from '../../../shared/images/productIcon1.png';
 import OrderManagementIcon from '../../../shared/images/ordermanagement.png';
-// import InventoryIcon from '../../../shared/images/inventoryIcon.png';
-// import ProductItem from "../../../components/SellerBackendCards/SellerBackendCards";
+import Helmet from 'react-helmet';
 import { authCheckOnContainer } from '../../../store/actions/auth';
 import SellerBackendCards from '../../../components/SellerBackendCards/SellerBackendCards';
 import { connect } from 'react-redux';
@@ -108,6 +107,9 @@ export class Home extends Component {
     );
     return (
       <SellerBackendLayout>
+        <Helmet>
+          <title>Geetico seller Portal</title>
+        </Helmet>
         {this.props.authCheck ? <LoadingPage /> : null}
         {this.props.isAuthenticated ? content : null}
       </SellerBackendLayout>
@@ -131,9 +133,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Home)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

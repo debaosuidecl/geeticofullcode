@@ -54,12 +54,12 @@ class sellerBackendLayout extends Component {
       <div className={classes.sellerBackendLayout}>
         {/* <div className={classes.sellerBackendBody}> */}
         <HeaderSeller navItems={this.state} />
-        <div className={classes.NavContainer}>
+        {/* <div className={classes.NavContainer}>
           <SellerBackendNavigationItems
-            navItems={this.state}
+            navItems={this.props.state}
             clicked={this.onClickedHandler}
           />
-        </div>
+        </div> */}
         <div className={classes.Children}>{this.props.children}</div>
       </div>
     );

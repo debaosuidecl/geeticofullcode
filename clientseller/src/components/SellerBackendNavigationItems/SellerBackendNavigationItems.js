@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavigationItem from '../NavigationItem/NavigationItem';
 import classes from './SellerBackendNavigationItems.module.css';
+import Logo from '../../shared/images/minimalist-01.png';
 
 class SellerBackendNavigationItems extends Component {
   render() {
@@ -25,7 +26,12 @@ class SellerBackendNavigationItems extends Component {
         <ul
           className={[classes.NavigationItems, classes.desktopOnly].join(' ')}
         >
-          <h2 className={classes.Logo}>Geetico</h2>
+          {/* <div className={classes.Logo}>
+            <div className={classes.LogoCont}>
+              <img src={Logo} width='50px' alt='' />
+              <p>Geetico</p>
+            </div>
+          </div> */}
           {renderCategoryArray}
         </ul>
       </React.Fragment>

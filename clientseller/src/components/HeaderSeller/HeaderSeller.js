@@ -7,11 +7,13 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import SellerBackendMobNavItems from '../../components/SellerBackendMobNavItems/SellerBackendMobNavItems';
 import { authLogOut } from '../../store/actions/auth';
-
+import Logo from '../../shared/images/minimalist-01.png';
+import SellerBackendNavigationItems from '../SellerBackendNavigationItems/SellerBackendNavigationItems';
 class HeaderSeller extends Component {
   state = {
     isToggled: false
   };
+  onClickedHandler = navItem => {};
 
   toggledHandler = () => {
     this.setState(pS => {
@@ -52,26 +54,37 @@ class HeaderSeller extends Component {
 
         {this.props.signupHeader ? (
           <React.Fragment>
-            <Link to='/sellerpage/dashboard'>
-              <div className={classes.Header}>Geetico.ng</div>
+            <Link to='/sellerpage'>
+              <div className={classes.Header}>
+                <img width='10px' src={Logo} />
+              </div>
             </Link>
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Link to='/sellerpage/dashboard'>
-              <div className={classes.Header}>Geetico.ng</div>
+            <Link to='/sellerpage'>
+              <div className={classes.Header}>
+                <img width='50px' src={Logo} />
+              </div>
             </Link>
-            <div
-              className={[classes.CategorySearchCont, classes.desktopOnly].join(
-                ' '
-              )}
-            ></div>
+            <div className={classes.desktopOnly}>
+              <SellerBackendNavigationItems
+                navItems={this.props.navItems}
+                clicked={this.onClickedHandler}
+              />
+            </div>
             <div
               className={[classes.ProfileDetails, classes.desktopOnly].join(
                 ' '
               )}
             >
-              <span>{this.props.fullName.split(' ')[0][0]}</span>
+              {/* <span> */}
+              <img
+                className={classes.avatar}
+                src={this.props.avatar}
+                alt='avatar'
+              />
+              {/* </span> */}
               <span className={classes.Logout} onClick={this.logoutHandler}>
                 Logout
               </span>
@@ -94,8 +107,8 @@ class HeaderSeller extends Component {
               className={[classes.TogglerCont, classes.higherIndex].join(' ')}
             >
               <Toggler
-                color='white'
-                background='white'
+                color='#6ce001'
+                background='#6ce001'
                 clicked={this.toggledHandler}
                 isToggled={this.state.isToggled}
               />
@@ -111,7 +124,8 @@ const mapStateToProps = state => {
     isAuthenticated: state.auth.token !== null,
     authCheck: state.auth.loading,
     fullName: state.auth.fullName,
-    email: state.auth.email
+    email: state.auth.email,
+    avatar: state.auth.avatar
   };
 };
 const mapDispatchToProps = dispatch => {
@@ -121,8 +135,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(HeaderSeller)
+  connect(mapStateToProps, mapDispatchToProps)(HeaderSeller)
 );
