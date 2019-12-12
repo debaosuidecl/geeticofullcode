@@ -134,12 +134,19 @@ export class Products extends Component {
       )
       .then(res => {
         console.log(res.data);
+
+        let products = [...this.state.products];
+        let newProducts = products.filter(
+          prod => prod._id !== this.state.productToDelete._id
+        )[0];
+
         this.setState({
           show: false,
-          loading: false
+          loading: false,
+          products: newProducts
         });
 
-        this.onFetchUserProducts();
+        // this.onFetchUserProducts();
       })
       .catch(error => {
         this.setState({
