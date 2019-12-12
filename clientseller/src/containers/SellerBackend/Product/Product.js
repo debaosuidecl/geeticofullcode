@@ -138,7 +138,7 @@ export class Products extends Component {
         let products = [...this.state.products];
         let newProducts = products.filter(
           prod => prod._id !== this.state.productToDelete._id
-        )[0];
+        );
 
         this.setState({
           show: false,
