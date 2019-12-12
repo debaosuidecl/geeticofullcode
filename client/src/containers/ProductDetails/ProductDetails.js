@@ -142,7 +142,12 @@ export class Products extends Component {
         {/* <link rel='canonical' href='http://mysite.com/example' /> */}
 
         <div className={classes.ProductDetailContainer}>
-          <Link to='/'>Back to home</Link>
+          <Link to='/'>Home </Link>
+          <div className=''>
+            <Link to={`/category/${this.state.productDetail.category}`}>
+              {this.state.productDetail.category}
+            </Link>
+          </div>
           {this.state.loading ? (
             <Spinner />
           ) : Array.isArray(this.state.productDetail) &&
@@ -215,8 +220,5 @@ const mapStateStateToProps = state => {
   };
 };
 export default withRouter(
-  connect(
-    mapStateStateToProps,
-    mapDispatchToProps
-  )(Products)
+  connect(mapStateStateToProps, mapDispatchToProps)(Products)
 );

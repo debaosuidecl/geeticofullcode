@@ -11,6 +11,7 @@ import axios from 'axios';
 
 import { connect } from 'react-redux';
 import { authLogOut } from '../../store/actions/auth';
+import Logo from '../../shared/images/minimalist-01.png';
 import App from '../../App';
 import Backdrop from '../UI/Backdrop/Backdrop';
 import { fetchAllCartItems, showCartPreview } from '../../store/actions/cart';
@@ -63,7 +64,8 @@ class NavigationItems extends Component {
 
     return (
       <ul className={classes.NavigationItems}>
-        <Link to='/'>
+        <Link to='/' style={{ display: 'flex' }}>
+          <img src={Logo} width={40} alt='' style={{ marginRight: 10 }} />
           <h1 className={classes.Header}>Geetico.com</h1>
         </Link>
 
@@ -196,8 +198,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(NavigationItems)
+  connect(mapStateToProps, mapDispatchToProps)(NavigationItems)
 );

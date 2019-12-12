@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "a1a749e89f578a49306ec2b055c073da",
-    "url": "/static/media/brand-icons.a1a749e8.svg"
+    "revision": "962a1bf31c081691065fe333d9fa8105",
+    "url": "/static/media/icons.962a1bf3.svg"
   },
   {
-    "revision": "434f5d0b13e04301ba46",
-    "url": "/static/css/main.1615d5c9.chunk.css"
+    "revision": "9a52398ee4ea0af6f01b",
+    "url": "/static/css/main.d4c3593d.chunk.css"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -16,8 +16,8 @@ self.__precacheManifest = [
     "url": "/static/media/success.7876c294.png"
   },
   {
-    "revision": "71163e9591856dfe1e35",
-    "url": "/static/js/2.f9a1f565.chunk.js"
+    "revision": "2e221fdfad4a16715958",
+    "url": "/static/js/2.a4c13b72.chunk.js"
   },
   {
     "revision": "9c74e172f87984c48ddf5c8108cabe67",
@@ -40,20 +40,16 @@ self.__precacheManifest = [
     "url": "/static/media/icons.b87b9ba5.ttf"
   },
   {
-    "revision": "ef60a4f6c25ef7f39f2d25a748dbecfe",
-    "url": "/static/media/outline-icons.ef60a4f6.woff"
+    "revision": "701ae6abd4719e9c2ada3535a497b341",
+    "url": "/static/media/outline-icons.701ae6ab.eot"
   },
   {
     "revision": "cd6c777f1945164224dee082abaea03a",
     "url": "/static/media/outline-icons.cd6c777f.woff2"
   },
   {
-    "revision": "ad97afd3337e8cda302d10ff5a4026b8",
-    "url": "/static/media/outline-icons.ad97afd3.ttf"
-  },
-  {
-    "revision": "701ae6abd4719e9c2ada3535a497b341",
-    "url": "/static/media/outline-icons.701ae6ab.eot"
+    "revision": "ef60a4f6c25ef7f39f2d25a748dbecfe",
+    "url": "/static/media/outline-icons.ef60a4f6.woff"
   },
   {
     "revision": "13db00b7a34fee4d819ab7f9838cc428",
@@ -62,6 +58,10 @@ self.__precacheManifest = [
   {
     "revision": "82f60bd0b94a1ed68b1e6e309ce2e8c3",
     "url": "/static/media/outline-icons.82f60bd0.svg"
+  },
+  {
+    "revision": "ad97afd3337e8cda302d10ff5a4026b8",
+    "url": "/static/media/outline-icons.ad97afd3.ttf"
   },
   {
     "revision": "e8c322de9658cbeb8a774b6624167c2c",
@@ -76,12 +76,16 @@ self.__precacheManifest = [
     "url": "/static/media/brand-icons.a046592b.woff"
   },
   {
-    "revision": "434f5d0b13e04301ba46",
-    "url": "/static/js/main.8b13f2c7.chunk.js"
+    "revision": "9a52398ee4ea0af6f01b",
+    "url": "/static/js/main.b65e97dc.chunk.js"
   },
   {
-    "revision": "962a1bf31c081691065fe333d9fa8105",
-    "url": "/static/media/icons.962a1bf3.svg"
+    "revision": "a1a749e89f578a49306ec2b055c073da",
+    "url": "/static/media/brand-icons.a1a749e8.svg"
+  },
+  {
+    "revision": "ac5e4a14e2b6822b17cc2a85dcc5b5f4",
+    "url": "/static/media/minimalist-01.ac5e4a14.png"
   },
   {
     "revision": "078aa3f09332c2484dbfd7239ef39e2d",
@@ -144,11 +148,11 @@ self.__precacheManifest = [
     "url": "/static/media/pay_paystack.539ceb34.png"
   },
   {
-    "revision": "71163e9591856dfe1e35",
+    "revision": "2e221fdfad4a16715958",
     "url": "/static/css/2.37ba228a.chunk.css"
   },
   {
-    "revision": "df5bf4ef57ce25d6e0a2c024bf3850da",
+    "revision": "c5adc5ddc3b096b266f95ddd0579e5da",
     "url": "/index.html"
   }
 ];

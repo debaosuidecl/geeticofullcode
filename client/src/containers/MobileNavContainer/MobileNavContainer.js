@@ -19,6 +19,7 @@ import { showCartPreview, fetchAllCartItems } from '../../store/actions/cart';
 import { authLogOut } from '../../store/actions/auth';
 import { connect } from 'react-redux';
 import CartPreview from '../../components/CartPreview/CartPreview';
+import Logo from '../../shared/images/minimalist-01.png';
 
 const navContainerArray = [classes.NavContainer, classes.MobileOnly];
 
@@ -73,12 +74,14 @@ class NavContainer extends React.Component {
               isToggled={this.props.isToggled}
               clicked={this.props.clicked}
             />
-            <h1
+            {/* <h1
               className={classes.Header}
               onClick={() => this.props.history.push('/')}
             >
               Geetico.com
-            </h1>
+
+            </h1> */}
+            <img src={Logo} width={30} alt='' />
           </div>
           <div className={classes.CheckoutIconContainer}>
             {this.props.isAuthenticated ? (
@@ -189,8 +192,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(NavContainer)
+  connect(mapStateToProps, mapDispatchToProps)(NavContainer)
 );
