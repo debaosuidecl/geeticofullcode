@@ -920,8 +920,12 @@ module.exports = (data, orderdetails, shippingCost) => {
                                                                                                   <td style="text-align: center;" width="60">${
                                                                                                     detail.quantity
                                                                                                   }</td>
-                                                                                                  <td style="text-align: center;" width="100">N${detail.quantity *
-                                                                                                    detail.price}</td>
+                                                                                                  <td style="text-align: center;" width="100">N${parseFloat(
+                                                                                                    detail.quantity *
+                                                                                                      detail.price
+                                                                                                  ).toFixed(
+                                                                                                    2
+                                                                                                  )}</td>
                                                                                               </tr>
                                                                                           </tbody>
                                                                                       </table>
@@ -1056,12 +1060,21 @@ module.exports = (data, orderdetails, shippingCost) => {
                                                                                                       <td style="text-align: right; font-size: 18px; line-height: 150%;">Subtotal (${
                                                                                                         orderdetails.length
                                                                                                       } items):</td>
-                                                                                                      <td style="text-align: right; font-size: 18px; line-height: 150%;">N${data.amount -
-                                                                                                        shippingCost}</td>
+                                                                                                      <td style="text-align: right; font-size: 18px; line-height: 150%;">N${parseFloat(
+                                                                                                        data.amount /
+                                                                                                          100 -
+                                                                                                          shippingCost
+                                                                                                      ).toFixed(
+                                                                                                        2
+                                                                                                      )}</td>
                                                                                                   </tr>
                                                                                                   <tr>
                                                                                                       <td style="text-align: right; font-size: 18px; line-height: 150%;">Flat-rate Shipping:</td>
-                                                                                                      <td style="text-align: right; font-size: 18px; line-height: 150%; color: #364ea1;"><strong>N${shippingCost}</strong></td>
+                                                                                                      <td style="text-align: right; font-size: 18px; line-height: 150%; color: #364ea1;"><strong>N${parseFloat(
+                                                                                                        shippingCost
+                                                                                                      ).toFixed(
+                                                                                                        2
+                                                                                                      )}</strong></td>
                                                                                                   </tr>
                                                                                                   <tr>
                                                                                                       <td style="text-align: right; font-size: 18px; line-height: 150%;">Discount:</td>
@@ -1069,9 +1082,12 @@ module.exports = (data, orderdetails, shippingCost) => {
                                                                                                   </tr>
                                                                                                   <tr>
                                                                                                       <td style="text-align: right; font-size: 18px; line-height: 150%;"><strong>Order Total:</strong></td>
-                                                                                                      <td style="text-align: right; font-size: 18px; line-height: 150%; color: #364ea1;"><strong>N${
-                                                                                                        data.amount
-                                                                                                      }</strong></td>
+                                                                                                      <td style="text-align: right; font-size: 18px; line-height: 150%; color: #364ea1;"><strong>N${parseFloat(
+                                                                                                        data.amount /
+                                                                                                          100
+                                                                                                      ).toFixed(
+                                                                                                        2
+                                                                                                      )}</strong></td>
                                                                                                   </tr>
                                                                                               </tbody>
                                                                                           </table>
