@@ -7,7 +7,7 @@
   "static/js/1.3c0fffa0.chunk.js.map": "/static/js/1.3c0fffa0.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.229c360f.js",
   "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/media/semantic.min.css": "/static/media/brand-icons.13db00b7.eot",
+  "static/media/semantic.min.css": "/static/media/brand-icons.a1a749e8.svg",
   "static/media/minimalist-01.png": "/static/media/minimalist-01.ac5e4a14.png",
   "static/media/productIcon1.png": "/static/media/productIcon1.d79dca8f.png",
   "static/media/ordermanagement.png": "/static/media/ordermanagement.95348a37.png",
@@ -18,6 +18,6 @@
   "static/css/main.e1915991.chunk.css.map": "/static/css/main.e1915991.chunk.css.map",
   "static/css/1.c4539069.chunk.css.map": "/static/css/1.c4539069.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.d7237f2b2943d60063666a062f8db6ff.js": "/precache-manifest.d7237f2b2943d60063666a062f8db6ff.js",
+  "precache-manifest.e4e338576fd00810878ead01a84e33d1.js": "/precache-manifest.e4e338576fd00810878ead01a84e33d1.js",
   "service-worker.js": "/service-worker.js"
 }
