@@ -4,7 +4,8 @@ import {
   APPEND_TO_PRODUCT,
   PRODUCT_FETCH_START,
   PRODUCT_FETCH_SUCCESS,
-  PRODUCT_ADD_FAIL
+  PRODUCT_ADD_FAIL,
+  SET_SUCCESS_NULL
 } from './actionTypes';
 import axios from 'axios';
 import { authLogOut } from './auth';
@@ -31,6 +32,12 @@ export const productFetchSuccess = productArray => {
   return {
     type: PRODUCT_FETCH_SUCCESS,
     productArray
+  };
+};
+
+export const setSuccessNull = () => {
+  return {
+    type: SET_SUCCESS_NULL
   };
 };
 

@@ -16,7 +16,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ProductSummary from '../../../components/ProductSummary/ProductSummary';
-import { fetchUserProducts } from '../../../store/actions/products';
+import {
+  fetchUserProducts,
+  setSuccessNull
+} from '../../../store/actions/products';
 
 import { Helmet } from 'react-helmet';
 import AreYouSureToDelete from '../../../components/AreYouSureToDelete/AreYouSureToDelete';
@@ -40,9 +43,15 @@ export class Products extends Component {
   };
   componentDidMount() {
     this.props.checkAuth();
-
+    setTimeout(this.setSuccessNullOnComponent, 3400);
     this.onFetchUserProducts(true);
   }
+  componentWillUnmount() {
+    clearTimeout(this.setSuccessNullOnComponent);
+  }
+  setSuccessNullOnComponent = () => {
+    this.props.onSetSuccessNull();
+  };
   onFetchUserProducts = first => {
     if (first) {
       this.setState({ loadingProduct: true });
@@ -56,7 +65,7 @@ export class Products extends Component {
       }
     };
     let url = this.state.searchMode
-      ? `${App.domain}api/userproducts/${this.state.page}?search=${this.state.searchTerm}&`
+      ? `${App.domain}api/upload/usersp/${this.state.page}?search=${this.state.searchTerm}&`
       : `${App.domain}api/upload/getAll/${
           first === true ? 1 : this.state.page
         }`;
@@ -64,6 +73,7 @@ export class Products extends Component {
     axios
       .get(url, config)
       .then(response => {
+        console.log(response.data);
         // this.setState({ products: response.data });
         this.setState({ loadingProduct: false });
         // console.log(response.data)
@@ -84,6 +94,7 @@ export class Products extends Component {
         this.setState({ loadingProduct: false });
       });
   };
+
   toggleModal = () => {
     this.setState(pState => {
       return {
@@ -145,16 +156,24 @@ export class Products extends Component {
     this.setState({ searchTerm: e.target.value });
   };
   searchNewHandler = showAll => {
+    let token = localStorage.getItem('token');
+    if (!token) return this.props.history.push('/');
+    let config = {
+      headers: {
+        'x-auth-token': token
+      }
+    };
     this.setState({ loadingProduct: true });
-    let url = `${App.domain}api/userproducts/1?search=${this.state.searchTerm}`;
+    let url = `${App.domain}api/upload/usersp/1?search=${this.state.searchTerm}`;
 
     if (showAll === true) {
-      url = `${App.domain}api/userproducts/1`;
+      url = `${App.domain}api/upload/usersp/1`;
       this.setState({ searchTermDisplay: '' });
     }
     axios
-      .get(url)
+      .get(url, config)
       .then(response => {
+        console.log(response.data);
         // this.setState({ loadingProduct: false });
         this.setState(prevState => {
           return {
@@ -342,7 +361,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchUserProducts: () => dispatch(fetchUserProducts()),
-    checkAuth: () => dispatch(authCheckOnContainer())
+    checkAuth: () => dispatch(authCheckOnContainer()),
+    onSetSuccessNull: () => dispatch(setSuccessNull())
   };
 };
 export default withRouter(

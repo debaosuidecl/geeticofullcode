@@ -19,9 +19,9 @@ class sellerBackendLayout extends Component {
     scrolled: false,
     navItems: {
       Dashboard: {
-        active: this.props.history.location.pathname === '/sellerpage',
+        active: this.props.history.location.pathname === '/',
         icon: faHome,
-        link: '/sellerpage'
+        link: '/'
       },
       Product: {
         active: this.props.history.location.pathname.includes('products'),

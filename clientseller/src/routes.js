@@ -17,7 +17,7 @@ import ProductDetail from './containers/SellerBackend/ProductDetail/ProductDetai
 const routes = [
   {
     title: 'SellerBackendHome',
-    path: '/sellerpage',
+    path: '/',
     exact: true,
 
     component: SellerBackendHome

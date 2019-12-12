@@ -23,6 +23,7 @@ import household from '../../shared/images/household.jpg';
 import Canned from '../../shared/images/Canned, Jarred & Packaged Foods.jpg';
 import 'semantic-ui-css/semantic.min.css';
 import SpinnerTwo from '../../components/UI/Spinner2/Spinner2';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import { connect } from 'react-redux';
 import { initiateAddToCart } from '../../store/actions/cart';
 import App from '../../App';
@@ -188,59 +189,69 @@ class ProductPage extends React.Component {
                 </div>
                 <div
                   className={classes.item11}
-                  onClick={() => this.goToCatHandler('Cooking & Baking')}
+                  onClick={() =>
+                    this.goToCatHandler('Cooking, Baking & Ingredients')
+                  }
                 >
                   <img src={bake} alt='' />
                 </div>
                 <div
                   className={classes.item12}
-                  onClick={() => this.goToCatHandler('Candy & Chocolate')}
+                  onClick={() =>
+                    this.goToCatHandler('Biscuits, Candy & Chocolate')
+                  }
                 >
                   <img src={Choco} alt='' />
                 </div>
               </div>
             </div>
           </div>
+          <div className={classes.HeightSet}>
+            {['Canned', 'cooking'].map(search => {
+              return this.state[search].length > 0 ? (
+                <React.Fragment>
+                  <div className={classes.HeaderProdCont}>
+                    <h2 className={classes.ProductHeader}>
+                      {search.toUpperCase()}
+                    </h2>
+                    <p onClick={() => this.searchMoreOption(search)}>More</p>
+                  </div>
+                  <div className={classes['scrolling-wrapper']}>
+                    {this.state[search].length > 0 &&
+                      this.state[search].map((item, i) => (
+                        <span className='' key={i}>
+                          <CarouselCard
+                            goToDetail={() =>
+                              this.props.history.push(`/details/${item._id}`)
+                            }
+                            isCarousel
+                            addCart={() =>
+                              this.props.onAddToCart({
+                                productId: item._id,
+                                quantity: 1,
+                                fullProduct: item
+                              })
+                            }
+                            cart={this.props.cart}
+                            productURL={`${App.domain}public/${item.productURL[0]}`}
+                            desc={item.desc}
+                            id={item._id}
+                            productName={item.productName}
+                            price={item.price}
+                            key={`key-${i}`}
+                          />
+                        </span>
+                      ))}
+                  </div>
+                </React.Fragment>
+              ) : null;
+            })}
 
-          {['Canned', 'cooking'].map(search => {
-            return this.state[search].length > 0 ? (
-              <React.Fragment>
-                <div className={classes.HeaderProdCont}>
-                  <h2 className={classes.ProductHeader}>
-                    {search.toUpperCase()}
-                  </h2>
-                  <p onClick={() => this.searchMoreOption(search)}>More</p>
-                </div>
-                <div className={classes['scrolling-wrapper']}>
-                  {this.state[search].length > 0 &&
-                    this.state[search].map((item, i) => (
-                      <span className='' key={i}>
-                        <CarouselCard
-                          goToDetail={() =>
-                            this.props.history.push(`/details/${item._id}`)
-                          }
-                          isCarousel
-                          addCart={() =>
-                            this.props.onAddToCart({
-                              productId: item._id,
-                              quantity: 1,
-                              fullProduct: item
-                            })
-                          }
-                          cart={this.props.cart}
-                          productURL={`${App.domain}public/${item.productURL[0]}`}
-                          desc={item.desc}
-                          id={item._id}
-                          productName={item.productName}
-                          price={item.price}
-                          key={`key-${i}`}
-                        />
-                      </span>
-                    ))}
-                </div>
-              </React.Fragment>
-            ) : null;
-          })}
+            {this.state['Canned'].length <= 0 ||
+            this.state['cooking'].length <= 0 ? (
+              <Spinner />
+            ) : null}
+          </div>
         </Layout>
       </div>
     );

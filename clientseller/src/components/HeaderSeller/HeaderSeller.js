@@ -62,7 +62,7 @@ class HeaderSeller extends Component {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Link to='/sellerpage'>
+            <Link to='/'>
               <div className={classes.Header}>
                 <img width='50px' src={Logo} />
               </div>

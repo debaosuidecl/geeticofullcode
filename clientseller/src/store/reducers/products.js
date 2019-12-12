@@ -3,7 +3,8 @@ import {
   INIT_ADD_PRODUCT,
   PRODUCT_FETCH_SUCCESS,
   PRODUCT_FETCH_START,
-  PRODUCT_ADD_FAIL
+  PRODUCT_ADD_FAIL,
+  SET_SUCCESS_NULL
 } from '../actions/actionTypes';
 
 let initialState = {
@@ -69,7 +70,14 @@ const reducer = (state = initialState, action) => {
         failure: false,
         loadingAddProduct: false
       };
-
+    case SET_SUCCESS_NULL:
+      return {
+        ...state,
+        prompt: false,
+        success: false,
+        failure: false,
+        loadingAddProduct: false
+      };
     default: {
       return state;
     }

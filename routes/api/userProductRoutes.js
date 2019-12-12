@@ -53,12 +53,15 @@ router.get('/:page', async (req, res) => {
       regex = new RegExp(escapeRegex(req.query.search), 'gi');
       // Find Demanded Products - Skipping page values, limit results       per page
       const foundProducts = await Product.find({ tags: regex })
+        .sort({ date: -1 })
         .skip(resPerPage * page - resPerPage)
         .limit(resPerPage);
       const foundByCat = await Product.find({ category: regex })
+        .sort({ date: -1 })
         .skip(resPerPage * page - resPerPage)
         .limit(resPerPage);
       const foundByName = await Product.find({ productName: regex })
+        .sort({ date: -1 })
         .skip(resPerPage * page - resPerPage)
         .limit(resPerPage);
 
@@ -76,6 +79,7 @@ router.get('/:page', async (req, res) => {
     } else {
       // return res.status(400).json({ msg: 'no query was issued' });
       const foundProducts = await Product.find()
+        .sort({ date: -1 })
         .skip(resPerPage * page - resPerPage)
         .limit(resPerPage);
       return res.json(foundProducts);
@@ -119,7 +123,7 @@ router.get('/details/:productId', async (req, res) => {
 router.get('/category/:search/:page', async (req, res) => {
   try {
     // Declaring variable
-    const resPerPage = 8; // results per page
+    const resPerPage = 25; // results per page
     const page = req.params.page || 1; // Page
     console.log(req.params.search);
     if (req.params.search) {
@@ -141,6 +145,7 @@ router.get('/category/:search/:page', async (req, res) => {
       );
 
       const foundByCat = await Product.find({ category: regex })
+        .sort({ date: -1 })
         .skip(resPerPage * page - resPerPage)
         .limit(resPerPage);
 

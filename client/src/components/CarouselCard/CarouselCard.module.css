@@ -132,7 +132,9 @@
   font-size: 15px;
   height: 40px;
   /* background: #eee; */
-  width: 110px;
+  /* width: 110px; */
+  min-width: 110px;
+
   border-bottom: 1px solid #eee;
   font-weight: bold;
 }

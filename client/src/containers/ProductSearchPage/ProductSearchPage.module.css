@@ -17,21 +17,9 @@ h2.CategoryPage {
 
 .ProductsCont {
   display: grid;
-  /* background: green; */
-  /* margin: auto; */
-
   justify-items: center;
-  /* align-items: center; */
-
   grid-template-columns: minmax(auto, auto) minmax(auto, auto);
-
   grid-gap: 2px;
-
-  /* grid-template-areas:
-    'item1 item2 item3 item4'
-    'item1 item5 item6 item7'
-    'item8 item8 item6 item10'
-    'item11 item12 item9 item9'; */
 }
 
 @media (min-width: 500px) {

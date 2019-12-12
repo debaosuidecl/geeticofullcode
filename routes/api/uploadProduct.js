@@ -5,6 +5,8 @@ const Product = require('../../models/Product');
 const User = require('../../models/User');
 const { check, validationResult } = require('express-validator');
 const request = require('request');
+const escapeRegex = require('../../middleware/escapeRegex');
+
 const config = require('config');
 const multer = require('multer');
 const uuid = require('uuid');
@@ -371,19 +373,86 @@ router.get('/getAll/:page', authMiddleWare, async (req, res) => {
       //  const searchQuery = req.query.search,
       regex = new RegExp(escapeRegex(req.query.search), 'gi');
       // Find Demanded Products - Skipping page values, limit results       per page
-      const foundProducts = await Product.find({})
+      const foundProducts = await Product.find({
+        user: req.user.id
+      })
         .skip(resPerPage * page - resPerPage)
+        .sort({ date: -1 })
         .limit(resPerPage);
 
       return res.json(foundProducts);
     } else {
       // return res.status(400).json({ msg: 'no query was issued' });
-      const foundProducts = await Product.find()
+      const foundProducts = await Product.find({ user: req.user.id })
+        .skip(resPerPage * page - resPerPage)
+        .sort({ date: -1 })
+        .limit(resPerPage);
+      return res.json(foundProducts);
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: 'A Server Error Occured' });
+  }
+});
+//@route    GET api/upload/getAll
+//@desc     GET user specific product
+//@access   private
+router.get('/usersp/:page', authMiddleWare, async (req, res) => {
+  // console.log(req.user.id);
+  try {
+    // Declaring variable
+    const resPerPage = 25; // results per page
+    const page = req.params.page || 1; // Page
+
+    if (req.query.search) {
+      // Declaring query based/search variables
+      //  const searchQuery = req.query.search,
+      regex = new RegExp(escapeRegex(req.query.search), 'gi');
+      // Find Demanded Products - Skipping page values, limit results       per page
+      const foundProducts = await Product.find({
+        tags: regex,
+        user: req.user.id
+      })
+
+        .sort({ date: -1 })
+        .skip(resPerPage * page - resPerPage)
+        .limit(resPerPage);
+      const foundByCat = await Product.find({
+        category: regex,
+        user: req.user.id
+      })
+        .sort({ date: -1 })
+        .skip(resPerPage * page - resPerPage)
+        .limit(resPerPage);
+      const foundByName = await Product.find({
+        productName: regex,
+        user: req.user.id
+      })
+        .sort({ date: -1 })
+        .skip(resPerPage * page - resPerPage)
+        .limit(resPerPage);
+
+      let possibleDuplicates = req.query.excludeCat
+        ? [...foundByName, ...foundProducts].map(j => JSON.stringify(j))
+        : req.query.nameOnly
+        ? [...foundByName].map(j => JSON.stringify(j))
+        : [...foundByName, ...foundProducts, ...foundByCat].map(j =>
+            JSON.stringify(j)
+          );
+      const uniqueSet = new Set(possibleDuplicates);
+      const uniqueArray = [...uniqueSet].map(s => JSON.parse(s));
+
+      return res.json(uniqueArray);
+    } else {
+      // return res.status(400).json({ msg: 'no query was issued' });
+      const foundProducts = await Product.find({ user: req.user.id })
+        .sort({ date: -1 })
         .skip(resPerPage * page - resPerPage)
         .limit(resPerPage);
       return res.json(foundProducts);
     }
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ msg: 'A Server Error Occured' });
   }
 });

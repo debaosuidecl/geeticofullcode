@@ -188,9 +188,7 @@ class SignUp extends Component {
 
     return (
       <SellerSignUpLayout subHeader=''>
-        {this.props.isAuthenticated ? (
-          <Redirect to='/sellerpage/dashboard' />
-        ) : null}
+        {/* {this.props.isAuthenticated ? <Redirect to='/' /> : null} */}
         <div className={classes.AuthTypesContainer}>
           <div className={[classes.Appear].join(' ')}>
             {IndividualSellerForm}
@@ -219,7 +217,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

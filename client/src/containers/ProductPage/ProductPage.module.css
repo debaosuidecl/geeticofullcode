@@ -13,6 +13,9 @@
   color: #6ce001;
   font-weight: 100;
 }
+.HeightSet {
+  min-height: 400px;
+}
 .HeaderProdCont {
   display: flex;
   width: 80%;
