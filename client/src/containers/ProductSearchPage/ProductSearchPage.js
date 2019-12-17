@@ -159,12 +159,11 @@ export class CategoryPage extends Component {
               <p
                 style={{
                   textAlign: 'center',
-                  fontWeight: 800,
-                  width: '50%',
-                  borderBottom: '1px solid #999',
-                  margin: 'auto'
+                  color: '#333'
                 }}
-              ></p>
+              >
+                End of Results
+              </p>
             }
           >
             <div className={classes.ProductsCont}>

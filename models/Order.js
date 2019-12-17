@@ -134,6 +134,9 @@ const OrderSchema = new mongoose.Schema({
   },
   company: {
     type: String
+  },
+  verificationImage: {
+    type: String
   }
 });
 function productURLLimit(val) {

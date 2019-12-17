@@ -8,7 +8,7 @@ import SearchBar from '../UI/SearchBar/SearchBar';
 import { Dropdown } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import axios from 'axios';
-
+import DesktopDropDown from '../DesktopDropDown/DesktopDropDown';
 import { connect } from 'react-redux';
 import { authLogOut } from '../../store/actions/auth';
 import Logo from '../../shared/images/minimalist-01.png';
@@ -16,13 +16,26 @@ import App from '../../App';
 import Backdrop from '../UI/Backdrop/Backdrop';
 import { fetchAllCartItems, showCartPreview } from '../../store/actions/cart';
 import CartPreview from '../CartPreview/CartPreview';
+import Toggler from '../UI/Toggler/Toggler';
 class NavigationItems extends Component {
   state = {
     search: '',
     suggestions: [],
-    showDropDown: false
+    showDropDown: false,
+    showNavDesktop: false
   };
-
+  componentWillMount() {
+    document.addEventListener('mousedown', this.closeNavDesktop);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.closeNavDesktop);
+  }
+  closeNavDesktop = e => {
+    if (this.node.contains(e.target)) {
+      return;
+    }
+    this.setState({ showDropDown: false, showNavDesktop: false });
+  };
   componentDidMount() {
     this.props.onFetchCartItems();
   }
@@ -55,6 +68,13 @@ class NavigationItems extends Component {
   onFocusHandler = () => {
     this.setState({ showDropDown: true });
   };
+  showNavDesktopHandler = () => {
+    this.setState(prevState => {
+      return {
+        showNavDesktop: !prevState.showNavDesktop
+      };
+    });
+  };
   render() {
     const element = (
       <span className={classes.CartIconContainer}>
@@ -63,50 +83,83 @@ class NavigationItems extends Component {
     );
 
     return (
-      <ul className={classes.NavigationItems}>
+      <ul className={classes.NavigationItems} ref={node => (this.node = node)}>
+        <div className=''>
+          <DesktopDropDown
+            show={this.state.showNavDesktop}
+            //
+          />
+          <Toggler
+            color='#333'
+            forceShow
+            clicked={this.showNavDesktopHandler}
+          />
+        </div>
         <Link to='/' style={{ display: 'flex' }}>
           <img src={Logo} width={40} alt='' style={{ marginRight: 10 }} />
-          <h1 className={classes.Header}>Geetico.com</h1>
+          <h1 className={classes.Header}>Geetico</h1>
         </Link>
-
-        <div className={classes.InputContainer}>
-          <SearchBar
-            search={this.state.search}
-            clicked={() => {
-              if (this.state.search.length > 2)
-                window.location.href = `/search?search=${this.state.search}`;
-            }}
-            textChangeHandler={this.textChangeHandler}
-            searchIcon={faSearch}
-            keyDownHandler={this.keyDownHandler}
-          />
-          <div className={classes.editDrop} style={{ opacity: 0.3 }}>
-            <Backdrop
-              show={this.state.showDropDown}
-              clicked={this.onBlurHandler}
+        <div className={classes.CartAndAvatar}>
+          <div
+            className={classes.InputContainer}
+            ref={node => (this.node = node)}
+          >
+            <SearchBar
+              search={this.state.search}
+              clicked={() => {
+                if (this.state.search.length > 2)
+                  window.location.href = `/search?search=${this.state.search}`;
+              }}
+              textChangeHandler={this.textChangeHandler}
+              searchIcon={faSearch}
+              keyDownHandler={this.keyDownHandler}
             />
+            {/* <div className={classes.editDrop} style={{ opacity: 0.3 }}>
+              <Backdrop
+                show={this.state.showDropDown}
+                clicked={this.onBlurHandler}
+              />
+            </div> */}
+            {this.state.showDropDown && this.state.suggestions.length > 0 ? (
+              <div className={classes.suggestions}>
+                {this.state.suggestions.length > 0 &&
+                  this.state.suggestions.map(sug => {
+                    return (
+                      <a key={sug._id} href={`/details/${sug._id}`}>
+                        <div className={classes.singleSuggestion}>
+                          <img
+                            src={`http://geetico.com/public/${sug.productURL[0]}`}
+                            className={classes.productImage}
+                            alt=''
+                          />
+                          <p>{sug.productName}</p>
+                        </div>
+                      </a>
+                    );
+                  })}
+              </div>
+            ) : null}
           </div>
-          {this.state.showDropDown && this.state.suggestions.length > 0 ? (
-            <div className={classes.suggestions}>
-              {this.state.suggestions.length > 0 &&
-                this.state.suggestions.map(sug => {
-                  return (
-                    <a key={sug._id} href={`/details/${sug._id}`}>
-                      <div className={classes.singleSuggestion}>
-                        <img
-                          src={`${App.domain}public/${sug.productURL[0]}`}
-                          className={classes.productImage}
-                          alt=''
-                        />
-                        <p>{sug.productName}</p>
-                      </div>
-                    </a>
-                  );
-                })}
+          {this.props.hideCheckoutDrop ? null : (
+            <div className={classes.CheckOutDrop}>
+              <button
+                onClick={() => this.props.onToggleCartPreview()}
+                className={classes.CheckoutButton}
+              >
+                {' '}
+                {element}Cart{' '}
+                <span className={classes.CartNumber}>
+                  {this.props.itemCount}
+                </span>
+              </button>
+              <CartPreview
+                toggleCartPreview={this.props.onToggleCartPreview}
+                showCart={this.props.showCart}
+                cart={this.props.cart}
+              />
             </div>
-          ) : null}
+          )}
         </div>
-
         <div onClick={this.props.clickForModal}>
           {this.props.isAuthenticated ? null : (
             <NavigationItem
@@ -118,39 +171,23 @@ class NavigationItems extends Component {
             </NavigationItem>
           )}
         </div>
-        {this.props.hideCheckoutDrop ? null : (
-          <div className={classes.CheckOutDrop}>
-            <button
-              onClick={() => this.props.onToggleCartPreview()}
-              className={classes.CheckoutButton}
-            >
-              {' '}
-              {element}My Cart{' '}
-              <span className={classes.CartNumber}>{this.props.itemCount}</span>
-            </button>
-            <CartPreview
-              toggleCartPreview={this.props.onToggleCartPreview}
-              showCart={this.props.showCart}
-              cart={this.props.cart}
+        <div className={classes.CartAndAvatar}>
+          {this.props.isAuthenticated ? (
+            <img
+              alt='avatar'
+              width='40px'
+              src={this.props.avatar}
+              className={classes.avatar}
             />
-          </div>
-        )}
-
-        {this.props.isAuthenticated ? (
-          <img
-            alt='avatar'
-            width='40px'
-            src={this.props.avatar}
-            className={classes.avatar}
-          />
-        ) : null}
-        {this.props.isAuthenticated ? (
-          <span className={classes.fullName}>
-            {' '}
-            Hi {this.props.fullName.split(' ')[0]}!
-          </span>
-        ) : null}
-        {this.props.isAuthenticated ? (
+          ) : null}
+          {this.props.isAuthenticated ? (
+            <span className={classes.fullName}>
+              {' '}
+              Hi {this.props.fullName.split(' ')[0]}!
+            </span>
+          ) : null}
+        </div>
+        {/* {this.props.isAuthenticated ? (
           <Dropdown text='' color='white'>
             <Dropdown.Menu>
               <Dropdown.Item
@@ -174,7 +211,7 @@ class NavigationItems extends Component {
               />
             </Dropdown.Menu>
           </Dropdown>
-        ) : null}
+        ) : null} */}
       </ul>
     );
   }

@@ -158,7 +158,4 @@ const mapStateToProps = state => {
     isEditing: state.cart.isEditing
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CarouselCard);
+export default connect(mapStateToProps, mapDispatchToProps)(CarouselCard);

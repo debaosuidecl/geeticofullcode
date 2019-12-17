@@ -8,20 +8,27 @@ const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const User = require('../../models/FrontEndUser'); // bring in the user model
+const Seller = require('../../models/User'); // bring in the seller model
 const Product = require('../../models/Product'); // bring in the product model
+const Order = require('../../models/Order'); // bring in the order model
+const Notification = require('../../models/Notification'); // bring in the notification model
 const authMiddleWare = require('../../middleware/auth');
 const getShippingCost = require('../../middleware/getShippingCost');
 const contentGenerator = require('../../middleware/contentGenerator');
+const sellerVerificationEmailContent = require('../../middleware/sellerVerificationEmailContent');
+// const contentGenerator = require('../../middleware/contentGenerator');
 // const path = require("path");
-const Order = require('../../models/Order');
+// const Order = require('../../models/Order');
 const request = require('request');
 const fs = require('fs');
 const path = require('path');
+const uuid = require('uuid');
 const authConfig = require('../../config/config');
 const nodemailer = require('nodemailer');
 const { initializePayment, verifyPayment } = require('../../config/paystack')(
   request
 );
+const multer = require('multer');
 
 const transport = {
   host: 'smtp.geetico.com',
@@ -45,6 +52,16 @@ transporter.verify((error, success) => {
     console.log('Server is ready to take messages', success);
   }
 });
+
+var storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'test-public');
+  },
+  filename: function(req, file, cb) {
+    cb(null, Date.now() + '-' + uuid() + file.originalname);
+  }
+});
+var upload = multer({ storage: storage }).array('myImages');
 
 // @route    POST api/users
 // @desc     Register User
@@ -313,6 +330,11 @@ router.post(
         let newOrder = new Order(data);
         await newOrder.save();
 
+        // console.log(newArray);
+
+        // let notification =- new Notification({
+        //   seller:
+        // })
         // let {name, email, message} = req.body;
         // let orderdetails = data.orderDetails.map(
         //   prod => `<p>${prod.productName} X ${prod.quantity} </p>`
@@ -438,7 +460,8 @@ router.get('/directPaymentOrder', authMiddleWare, async (req, res) => {
     // let user = await User.findById(req.user.id);
     let directPaymentOrder = await Order.findOne({
       transactionId: req.query.transactionId,
-      directPaymentMethod: true
+      directPaymentMethod: true,
+      status: 'awaiting verification'
     });
     if (!directPaymentOrder) {
       return res.status(400).json({ noDirectPayment: true });
@@ -455,5 +478,93 @@ router.get('/directPaymentOrder', authMiddleWare, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+//@route    POST api/users/verification-image
+//@desc     upload a verificationImage
+//@access   private
+
+router.post(
+  '/verification-image/:transactionId',
+  authMiddleWare,
+  upload,
+  async (req, res) => {
+    console.log(req.files);
+    try {
+      let user = await User.findById(req.user.id);
+      let order = await Order.findOne({
+        transactionId: req.params.transactionId,
+        status: 'awaiting verification',
+        directPaymentMethod: true
+      });
+      console.log(order);
+      if (!order) {
+        return res.status(400).send('No order awaiting verification found');
+      }
+      order.status = 'verification in progress';
+      order.verificationImage = req.files[0].filename;
+      // console.log(order.transactionId, 'the tranac');
+      await order.save();
+
+      let mailingList = [];
+
+      let idList = order.orderDetails.map(p => p.user.toString());
+      // let users = await User.find().populate('-email');
+      // console.log(idList);
+      const set = new Set(idList);
+      const newArray = [...set];
+      for (i = 0; i < newArray.length; i++) {
+        let seller = await Seller.findById(newArray[i]);
+        mailingList.push({
+          sellerEmail: seller.email,
+          sellerName: seller.fullName,
+          sellerID: seller._id,
+          buyerName: user.fullName
+        });
+      }
+      console.log(mailingList);
+
+      for (i = 0; i < mailingList.length; i++) {
+        let newNotification = new Notification({
+          user: req.user.id,
+          seller: mailingList[i].sellerID,
+          notification: `You just received a payment verification document from ${mailingList[i].buyerName}`
+        });
+        await newNotification.save();
+      }
+
+      mailingList.forEach(function(to, i, array) {
+        let content = sellerVerificationEmailContent(
+          to.sellerName,
+          to.buyerName
+        );
+
+        let mail = {
+          from: 'Geetico.com <contact@geetico.com>',
+
+          subject: `verification picture submitted at geetico.com`,
+          html: content
+        };
+
+        transporter.sendMail(mail, (err, data) => {
+          if (err) {
+            console.log(err);
+            res.send('Failed to send your message');
+          } else {
+            // res.send('Your message has been sent');
+          }
+        });
+        if (i === mailingList.length - 1) {
+          res.json({ msg: 'done', orderId: order.transactionId });
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error,
+        msg: 'there was an error in adding the product'
+      });
+    }
+  }
+);
 
 module.exports = router;

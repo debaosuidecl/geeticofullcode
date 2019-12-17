@@ -24,12 +24,17 @@
   width: 80%;
   overflow-y: scroll;
   background: #fff;
-  box-shadow: 1px 2px 10px #bbb;
+  border: 1px solid #eee;
+  /* box-shadow: 1px 2px 10px #bbb; */
   z-index: 5000;
   top: 35px;
   left: 0px;
   height: 140px;
   z-index: 9999;
+  padding: 10px;
+}
+.suggestions::-webkit-scrollbar-track {
+  background: white;
 }
 .CheckoutButton {
   margin-right: 15px;
@@ -48,24 +53,32 @@
 }
 
 @media (min-width: 950px) {
-  .NavigationItems {
+  .CartAndAvatar {
     display: flex;
     justify-content: center;
+    align-items: center;
+  }
+  .NavigationItems {
+    display: flex;
+    justify-content: space-around;
     flex-flow: row;
     align-items: center;
-
+    box-shadow: 1px 0px 9px #bbb;
+    /* border-bottom: 0.51px solid #bbb; */
     /* background: rgb(253, 113, 31); */
-    background: #1d2647;
+    /* background: #1d2647; */
+    background: white;
     /* background: #4a9207; */
 
     width: 100%;
   }
   .editDrop {
     position: relative;
-    z-index: 9999;
+    z-index: 1000;
   }
   .fullName {
-    color: white;
+    /* color: white; */
+    color: #1d2647;
   }
   .avatar {
     border-radius: 50%;
@@ -75,10 +88,12 @@
     padding: 0;
     margin: 0;
     margin-right: 10px;
+
     text-align: center;
     font-size: 30px;
-    font-family: 'Kaushan Script', cursive;
-    color: white;
+    /* font-family: 'Kaushan Script', cursive; */
+    font-family: century;
+    color: #1d2647;
   }
   .Help {
     color: white;
@@ -95,7 +110,8 @@
     transition: 0.5s;
   }
   .InputContainer {
-    width: 300px;
+    /* width: 300px; */
+    /* background: green; */
     display: flex;
     position: relative;
     justify-items: flex-start;

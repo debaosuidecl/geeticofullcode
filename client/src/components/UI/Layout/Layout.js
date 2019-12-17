@@ -140,7 +140,7 @@ class Layout extends React.Component {
             clickForModal={this.props.onShowAuthModalToggle}
             itemCount={this.props.itemCount}
           />
-          <NavContainer />
+          {/* <NavContainer /> */}
         </div>
 
         <div className='' style={{ paddingTop: 50, minHeight: 700 }}>
@@ -169,9 +169,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Layout)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));

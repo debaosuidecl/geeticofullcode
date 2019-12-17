@@ -88,7 +88,7 @@ function OrderCard({ order, history }) {
             <div key={i} className={classes.orderData}>
               <span>
                 <span
-                  onClick={() => history.push(`/details/${p.fullProduct._id}`)}
+                  // onClick={() => history.push(`/details/${p.fullProduct._id}`)}
                   className={classes.productName}
                 >
                   {p.productName}

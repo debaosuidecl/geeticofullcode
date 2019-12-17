@@ -32,7 +32,7 @@ class ProductPage extends React.Component {
   state = {
     page: 2,
     products: [],
-    Canned: [],
+    'Household Supplies': [],
     hottestDeals: [],
     cooking: [],
     hasMore: true
@@ -46,14 +46,14 @@ class ProductPage extends React.Component {
         // console.log(res.data);
 
         axios
-          .get(`${App.domain}api/userproducts/1?search=canned&excludeCat=true`)
+          .get(`${App.domain}api/userproducts/1?search=household`)
           .then(res222 => {
             // console.log(res.data);
             console.log(res.data, 'res');
             console.log(res222.data, 'res2');
             this.setState({
               cooking: res.data,
-              Canned: res222.data
+              'Household Supplies': res222.data
             });
           });
       });
@@ -102,11 +102,19 @@ class ProductPage extends React.Component {
   searchMoreOption = search => {
     this.props.history.push(`/search?search=${search}`);
   };
+  generateSentence = string => {
+    var sentence = string.toLowerCase().split(' ');
+    for (var i = 0; i < sentence.length; i++) {
+      sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
+    }
+    console.log(sentence);
+    return sentence.join(' ');
+  };
   render() {
     return (
       <div>
         <Layout>
-          <div style={{ paddingTop: '120px' }}>
+          <div style={{ paddingTop: '50px' }}>
             {/* <Carousel /> */}
 
             <div className={classes.GridCont}>
@@ -207,47 +215,49 @@ class ProductPage extends React.Component {
             </div>
           </div>
           <div className={classes.HeightSet}>
-            {['Canned', 'cooking'].map(search => {
+            {['cooking', 'Household Supplies'].map(search => {
               return this.state[search].length > 0 ? (
                 <React.Fragment>
-                  <div className={classes.HeaderProdCont}>
-                    <h2 className={classes.ProductHeader}>
-                      {search.toUpperCase()}
-                    </h2>
-                    <p onClick={() => this.searchMoreOption(search)}>More</p>
-                  </div>
-                  <div className={classes['scrolling-wrapper']}>
-                    {this.state[search].length > 0 &&
-                      this.state[search].map((item, i) => (
-                        <span className='' key={i}>
-                          <CarouselCard
-                            goToDetail={() =>
-                              this.props.history.push(`/details/${item._id}`)
-                            }
-                            isCarousel
-                            addCart={() =>
-                              this.props.onAddToCart({
-                                productId: item._id,
-                                quantity: 1,
-                                fullProduct: item
-                              })
-                            }
-                            cart={this.props.cart}
-                            productURL={`${App.domain}public/${item.productURL[0]}`}
-                            desc={item.desc}
-                            id={item._id}
-                            productName={item.productName}
-                            price={item.price}
-                            key={`key-${i}`}
-                          />
-                        </span>
-                      ))}
+                  <div className={classes.scrollCover}>
+                    <div className={classes.HeaderProdCont}>
+                      <h2 className={classes.ProductHeader}>
+                        {this.generateSentence(search)}
+                      </h2>
+                      <p onClick={() => this.searchMoreOption(search)}>More</p>
+                    </div>
+                    <div className={classes['scrolling-wrapper']}>
+                      {this.state[search].length > 0 &&
+                        this.state[search].map((item, i) => (
+                          <span className='' key={i}>
+                            <CarouselCard
+                              goToDetail={() =>
+                                this.props.history.push(`/details/${item._id}`)
+                              }
+                              isCarousel
+                              addCart={() =>
+                                this.props.onAddToCart({
+                                  productId: item._id,
+                                  quantity: 1,
+                                  fullProduct: item
+                                })
+                              }
+                              cart={this.props.cart}
+                              productURL={`https://geetico.com/public/${item.productURL[0]}`}
+                              desc={item.desc}
+                              id={item._id}
+                              productName={item.productName}
+                              price={item.price}
+                              key={`key-${i}`}
+                            />
+                          </span>
+                        ))}
+                    </div>
                   </div>
                 </React.Fragment>
               ) : null;
             })}
 
-            {this.state['Canned'].length <= 0 ||
+            {this.state['Household Supplies'].length <= 0 ||
             this.state['cooking'].length <= 0 ? (
               <Spinner />
             ) : null}

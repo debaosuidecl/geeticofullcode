@@ -11,6 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Toggler from '../UI/Toggler/Toggler';
 import { toggleAuthModalAction, authLogOut } from '../../store/actions/auth';
+import App from '../../App';
 
 const slideForMobile = [classes.DropDown, classes.MobileOnly];
 const shouldSlideArray = slideForMobile.concat(classes.Dropped);
@@ -27,7 +28,14 @@ class SideDrawer extends React.Component {
     NavItems = (
       <div>
         <h3 className={classes.CategoriesHeader}>Categories</h3>
-        <NavigationItems clicked={this.goToCategoryHandler} />
+        {/* <NavigationItems clicked={this.goToCategoryHandler} /> */}
+        <div className={classes.Body} {...this.props}>
+          {App.allowedCategories.map((a, i) => (
+            <div key={i}>
+              <a href={`/category/${a}`}>{a}</a>
+            </div>
+          ))}
+        </div>
       </div>
     );
 
@@ -115,8 +123,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(SideDrawer)
+  connect(mapStateToProps, mapDispatchToProps)(SideDrawer)
 );

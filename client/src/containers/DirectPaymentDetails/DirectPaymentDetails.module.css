@@ -1,7 +1,43 @@
 .DirectPaymentDetails {
   margin-top: 90px;
 }
+.inputfile {
+  opacity: 0;
+  position: absolute;
+}
+.InputCont {
+  min-height: 300px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+}
+.InputCont svg {
+  width: 230px;
+  color: #bbb;
+  cursor: pointer;
+  transition: 1s;
 
+  /* background: green; */
+}
+.Rotate {
+  color: #6ce001 !important;
+  transform: rotateY(360deg);
+  transition: 1s;
+}
+.ConfirmImage button {
+  border: none;
+  padding: 12px;
+  margin-top: 4px;
+  background: #41549b;
+  color: white;
+  transition: 1s;
+}
+.ConfirmImage button:disabled {
+  background: #eee;
+  cursor: not-allowed;
+}
 .CardVerificationDetails {
   background: white;
   border-top: 7px solid #41549b;

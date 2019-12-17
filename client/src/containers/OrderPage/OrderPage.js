@@ -159,6 +159,7 @@ export class OrderPage extends Component {
         {this.state.loading ? loadingStage : null}
         {authRedirect}
         {this.state.successfulOrder ? successModal : null}
+        <div className={classes.AwaitingVerificationContainer}></div>
         <div className={classes.OrderCont}>
           <div className={classes.OrderCard}>
             <div className={classes.OrderHeader}>

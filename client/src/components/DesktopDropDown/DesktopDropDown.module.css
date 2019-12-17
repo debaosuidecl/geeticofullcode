@@ -1,0 +1,61 @@
+.DesktopDropDownCont {
+  position: fixed;
+  top: 58px;
+}
+
+.DesktopDropDown {
+  background: rgb(252, 252, 252);
+  box-shadow: 1px 0px 12px #bbb;
+  /* border: 1px solid #eee; */
+  width: 330px;
+  position: fixed;
+  height: 460px;
+  z-index: 1000;
+  overflow-y: scroll;
+}
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  position: absolute;
+  top: -8px;
+  /* font-size: 20px; */
+  transform: scale(3);
+  left: 24px;
+  /* border-bottom: 5px solid #fff; */
+  z-index: 10000;
+  border-bottom: 6px solid rgb(252, 252, 252);
+  /* border-bottom: 6px solid #fff; */
+  /* box-shadow: 0px 0px 2px; */
+}
+.DesktopDropDown::-webkit-scrollbar-track {
+  /* background: white; */
+  background: rgb(252, 252, 252);
+}
+
+.Body {
+  padding: 14px;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  /* justify-content: space-around; */
+}
+
+.Body div {
+  display: flex;
+  height: 100%;
+  /* background: #bbb; */
+  padding-bottom: 3px;
+  border-bottom: 1px solid #eee;
+  flex-flow: column;
+  justify-content: space-around;
+}
+.Body div a {
+  color: #666;
+  font-weight: 100;
+}
+.Body div a:hover {
+  color: #222;
+  font-weight: 100;
+}

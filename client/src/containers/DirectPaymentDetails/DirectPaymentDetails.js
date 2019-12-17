@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import App from '../../App';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileUpload } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import Button from '../../components/UI/Button/Button';
 import Layout from '../../components/UI/Layout/Layout';
@@ -10,9 +12,15 @@ export class DirectPaymentDetails extends Component {
     loading: true,
     bankDetails: null,
     orderDetails: null,
-    confirmPaymentInitiated: false
+    confirmPaymentInitiated: false,
+    fileName: null,
+    formValidity: false,
+    animateFileIcon: false,
+    file: null
   };
   componentDidMount() {
+    window.scrollTo(0, 0);
+
     console.log(this.props.match.params.transactionId);
     const token = localStorage.getItem('token');
     if (!token) {
@@ -26,12 +34,6 @@ export class DirectPaymentDetails extends Component {
       };
 
       let url = `${App.domain}api/users/directPaymentOrder?transactionId=${this.props.match.params.transactionId}`;
-
-      // let cart = localStorage.getItem('cart-sama');
-      // // if (cart === null) {
-      // //   this.setState({ loading: false });
-      // //   this.props.history.push('/');
-      // // }
 
       axios
         .get(url, config)
@@ -54,7 +56,8 @@ export class DirectPaymentDetails extends Component {
                 this.props.onAuthLogout();
               }
             }
-            if (err.response.noDirectPayment) {
+            console.log(err.response);
+            if (err.response.data.noDirectPayment) {
               this.props.history.push('/');
             }
           }
@@ -62,13 +65,105 @@ export class DirectPaymentDetails extends Component {
     }
   }
 
+  confirmHandler = () => {
+    this.setState({
+      loading: true
+    });
+    console.log(this.state.file);
+    let formData = new FormData();
+    formData.append('myImages', this.state.file);
+    let token = localStorage.getItem('token');
+    if (!token) return this.props.history.push('/');
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+        'x-auth-token': token
+      }
+    };
+    axios
+      .post(
+        `${App.domain}api/users/verification-image/${this.props.match.params.transactionId}`,
+        formData,
+        config
+      )
+      .then(response => {
+        console.log(response);
+        this.setState({
+          loading: false
+        });
+        this.props.history.push(`/orders?orderId=${response.data.orderId}`);
+        // alert('The file is successfully uploaded');
+        // dispatch(productAdd(userId, productInfo));
+      })
+      .catch(error => {
+        console.log(error);
+        // dispatch(productAddFail());
+        alert('Critical Failure in Adding Product');
+      });
+  };
+
+  handleImageChange = e => {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    console.log(file);
+    // return;
+    reader.onprogress = data => {
+      if (data.lengthComputable) {
+      }
+    };
+    reader.onloadend = () => {
+      this.setState(prevState => {
+        return {
+          file,
+          fileName: file.name,
+          animateFileIcon: true,
+          formValidity: true
+        };
+      });
+    };
+
+    if (file && file.type.match('image.*')) {
+      reader.readAsDataURL(file);
+    } else {
+      return;
+    }
+  };
+
   modalGenerator = () => {
     return (
       <Modal
         removeModal={() => this.setState({ confirmPaymentInitiated: false })}
         show={this.state.confirmPaymentInitiated}
       >
-        blah
+        <div className={classes.InputCont}>
+          <h5>Click on the icon below to upload proof of payment</h5>
+          <label htmlFor='directPaymentInput'>
+            <FontAwesomeIcon
+              color='green'
+              size='10x'
+              icon={faFileUpload}
+              className={this.state.animateFileIcon ? classes.Rotate : ''}
+            />
+          </label>
+          <input
+            onChange={this.handleImageChange}
+            id='directPaymentInput'
+            className={classes.inputfile}
+            type='file'
+            accept='image/jpeg, image/png'
+          />
+          {this.state.fileName ? <h5>{this.state.fileName}</h5> : null}
+          <div className={classes.ConfirmImage}>
+            <button
+              onClick={this.confirmHandler}
+              disabled={!this.state.formValidity}
+            >
+              Confirm Proof of Payment
+            </button>
+          </div>
+        </div>
       </Modal>
     );
   };

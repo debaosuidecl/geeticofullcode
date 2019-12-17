@@ -112,7 +112,7 @@
     border-radius: 10px;
     top: 40px;
     position: absolute;
-    z-index: 1000;
+    z-index: 10002;
     background: #fff;
     /* transform: rotateY(30deg); */
     opacity: 1;
@@ -154,7 +154,7 @@
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 10000;
     position: fixed;
     background: rgba(0, 0, 0, 0.7);
   }

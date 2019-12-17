@@ -71,6 +71,7 @@ class NavContainer extends React.Component {
         <div className={classes.TopMobileNavItem}>
           <div className={classes.TogglerLogoCont}>
             <Toggler
+              forceShow
               isToggled={this.props.isToggled}
               clicked={this.props.clicked}
             />
@@ -81,7 +82,14 @@ class NavContainer extends React.Component {
               Geetico.com
 
             </h1> */}
+          </div>
+          <div
+            onClick={() => this.props.history.push('/')}
+            className={classes.LogoCont}
+          >
+            {' '}
             <img src={Logo} width={30} alt='' />
+            <h1 className={classes.Header}>Geetico</h1>
           </div>
           <div className={classes.CheckoutIconContainer}>
             {this.props.isAuthenticated ? (
@@ -153,7 +161,7 @@ class NavContainer extends React.Component {
             </div>
           ) : null}
         </div>
-        <div className={classes.IconNavItems}>
+        {/* <div className={classes.IconNavItems}>
           {this.state.navIcons.map((icon, i) => (
             <a href={icon.link} rel='noreferrer' key={`${icon}${i}`}>
               <div
@@ -166,7 +174,7 @@ class NavContainer extends React.Component {
               </div>
             </a>
           ))}
-        </div>
+        </div> */}
       </div>
     );
   }

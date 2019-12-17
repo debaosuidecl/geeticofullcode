@@ -42,9 +42,20 @@
   margin: auto;
   width: 100%;
   position: relative;
+  box-shadow: 0px 1px 0px #bbb;
 }
 .MobileOnly {
   display: block;
+}
+.LogoCont {
+  /* background: green; */
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.LogoCont img {
+  margin-right: 7px;
 }
 .IconNavItems {
   display: flex;
@@ -71,19 +82,20 @@
   /* height: 50px; */
   background: white;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   z-index: 1000;
 }
 .TogglerLogoCont {
   display: flex;
   justify-content: flex-start;
   flex: 1;
+  /* background: gold; */
   align-items: center;
 }
 
 .CheckoutIconContainer {
   display: flex;
-  flex: 5;
+  flex: 1;
   /* background: green; */
   justify-content: flex-end;
   align-items: center;
@@ -112,11 +124,13 @@
 .Header {
   padding: 0;
   margin: 0;
+  margin-right: 10px;
+
   text-align: center;
-  font-size: 25px;
-  font-family: 'Kaushan Script', cursive;
-  /* color: #1d2647; */
-  color: #6ce001;
+  font-size: 30px;
+  /* font-family: 'Kaushan Script', cursive; */
+  font-family: century;
+  color: #1d2647;
 }
 @media (min-width: 950px) {
   .MobileOnly {

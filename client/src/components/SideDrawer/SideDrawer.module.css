@@ -166,7 +166,31 @@
 .ThirdLevelListContainer > .ThirdLevelList:hover {
   box-shadow: 3px 3px 3px #ccc;
 }
+.Body {
+  padding: 14px;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  /* justify-content: space-around; */
+}
 
+.Body div {
+  display: flex;
+  height: 100%;
+  /* background: #bbb; */
+  padding: 9px 0px;
+  border-bottom: 1px solid #eee;
+  flex-flow: column;
+  justify-content: space-around;
+}
+.Body div a {
+  color: #666;
+  font-weight: 100;
+}
+.Body div a:hover {
+  color: #222;
+  font-weight: 100;
+}
 @media (min-width: 950px) {
   .MobileOnly {
     display: none;
