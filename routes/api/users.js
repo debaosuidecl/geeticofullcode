@@ -540,7 +540,7 @@ router.post(
 
         let mail = {
           from: 'Geetico.com <contact@geetico.com>',
-          to: to.sellerName,
+          to: to.sellerEmail,
           subject: `verification picture submitted at geetico.com`,
           html: content
         };
@@ -548,7 +548,7 @@ router.post(
         transporter.sendMail(mail, (err, data) => {
           if (err) {
             console.log(err);
-            res.send('Failed to send your message');
+            // res.send('Failed to send your message');
           } else {
             // res.send('Your message has been sent');
           }
