@@ -540,7 +540,7 @@ router.post(
 
         let mail = {
           from: 'Geetico.com <contact@geetico.com>',
-
+          to: to.sellerName,
           subject: `verification picture submitted at geetico.com`,
           html: content
         };
