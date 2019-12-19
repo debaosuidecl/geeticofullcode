@@ -5,9 +5,8 @@ import classes from './ProductPage.module.css';
 // // import MultiCarousel from '../../components/MultiCarousel/MultiCarousel';
 import CarouselCard from '../../components/CarouselCard/CarouselCard';
 import { withRouter } from 'react-router-dom';
-import InfiniteScroll from 'react-infinite-scroll-component';
+// import InfiniteScroll from 'react-infinite-scroll-component';
 import axios from 'axios';
-
 import Breakfast from '../../shared/images/breakfast foods.jpg';
 import Beverages from '../../shared/images/beverages.jpg';
 import Herbs from '../../shared/images/Herbs spice seasoning.jpg';
@@ -57,22 +56,6 @@ class ProductPage extends React.Component {
             });
           });
       });
-
-    // axios
-    //   .get(`${App.domain}api/userproducts/1`)
-    //   .then(res => {
-    //     // console.log(res.data);
-    //     this.setState(prevState => {
-    //       return {
-    //         // page: prevState.page + 1,
-    //         hottestDeals: prevState.products.concat(res.data)
-    //         // hasMore: res.data.length > 0
-    //       };
-    //     });
-    //   })
-    //   .catch(err => {
-    //     // console.log(err.response);
-    //   });
   }
 
   fetchMoreData = () => {
@@ -218,6 +201,8 @@ class ProductPage extends React.Component {
             {['cooking', 'Household Supplies'].map(search => {
               return this.state[search].length > 0 ? (
                 <React.Fragment>
+                  {/* Beginning of Carousel */}
+
                   <div className={classes.scrollCover}>
                     <div className={classes.HeaderProdCont}>
                       <h2 className={classes.ProductHeader}>

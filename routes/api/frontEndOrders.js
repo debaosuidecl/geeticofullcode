@@ -35,77 +35,23 @@ router.get('/:page', authMiddleWare, async (req, res) => {
       .skip(resPerPage * page - resPerPage)
       .limit(resPerPage);
     return res.json(orders);
-    // try {
-    //   await Promise.all(
-    //     orders.map(o => {
-    //       return new Promise(async (resolve, reject) => {
-    //         let editedOrder = {
-    //           ...o._doc,
-    //           orderDetails: await extractProduct(o._doc.orderDetails)
-    //         };
-    //         // console.log(editedOrder, 'edit me');
-    //         if (editedOrder) {
-    //           resolve(editedOrder);
-    //         }
-    //       });
-    //     })
-    //   ).then(result => {
-    //     res.json(result);
-    //   });
-    // } catch (error) {
-    //   console.log(error, 'fetch issue');
-    //   res.status(400).json({ error, msg: 'error in fetch' });
-    // }
   } catch (error) {
     console.log(error);
     res.status(400).json({ error, msg: 'error in fetch' });
   }
 });
 
-//@route    GET api/userorders/
-//@desc     Fetch All Orders
-//@access   private
+// @route GET api/userorders/single/:orderId
+// @desc Fetch a single order
+// @access Private
 
-router.get('/all/:page', authMiddleWare, async (req, res) => {
-  const resPerPage = 10; // results per page
-  const page = req.params.page || 1; // Page
-
-  // if (req.user.id.toString() !== '5d8b3d7b29bd9b1bf0c3e546') {
-  // return res.status(400).json({
-  //   msg: 'You are not authorized to view this please'
-  // });
-  // }
+router.get('/single/:orderId', authMiddleWare, async (req, res) => {
   try {
-    // let count = await Order.estimatedDocumentCount();
-    let orders = await Order.find({})
-      .sort({ dateOfDelivery: 1, timeOfDelivery: 1 })
-      .skip(resPerPage * page - resPerPage)
-      .limit(resPerPage);
-
-    try {
-      await Promise.all(
-        orders.map(o => {
-          return new Promise(async (resolve, reject) => {
-            let editedOrder = {
-              ...o._doc,
-              orderDetails: await extractProduct(o._doc.orderDetails)
-            };
-
-            if (editedOrder) {
-              resolve(editedOrder);
-            }
-          });
-        })
-      ).then(result => {
-        res.json(result);
-      });
-    } catch (error) {
-      console.log(error, 'fetch issue');
-      res.status(400).json({ error, msg: 'error in fetch' });
-    }
+    const order = await Order.findById(req.params.orderId);
+    return res.status(200).json(order);
   } catch (error) {
-    console.log(error);
-    res.status(400).json({ error, msg: 'error in fetch' });
+    console.error(error);
+    res.status(500).send('Server Error');
   }
 });
 
@@ -130,27 +76,7 @@ router.get('/all/:status/:page', authMiddleWare, async (req, res) => {
       .skip(resPerPage * page - resPerPage)
       .limit(resPerPage);
 
-    try {
-      await Promise.all(
-        orders.map(o => {
-          return new Promise(async (resolve, reject) => {
-            let editedOrder = {
-              ...o._doc,
-              orderDetails: await extractProduct(o._doc.orderDetails)
-            };
-            // console.log(editedOrder, 'edit me');
-            if (editedOrder) {
-              resolve(editedOrder);
-            }
-          });
-        })
-      ).then(result => {
-        res.json(result);
-      });
-    } catch (error) {
-      console.log(error, 'fetch issue');
-      res.status(400).json({ error, msg: 'error in fetch' });
-    }
+    return res.json(orders);
   } catch (error) {
     console.log(error);
     res.status(400).json({ error, msg: 'error in fetch' });
@@ -179,11 +105,7 @@ router.post(
         errors: errors.array()
       });
     }
-    // if (req.user.id.toString() !== '5d8b3d7b29bd9b1bf0c3e546') {
-    //   return res.status(400).json({
-    //     msg: 'You are not authorized to view this please'
-    //   });
-    // }
+
     const { status } = req.body;
     let order = await Order.findById(req.params.orderId);
 

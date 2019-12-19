@@ -11,7 +11,7 @@ import App from '../../App';
 
 function CartPreviewCard({ c, onEditQuant, onRemove, showCart }) {
   // console.log(showCart);
-  console.log(c, 'from cart card');
+  // console.log(c, 'from cart card');
 
   const { productName, price, productURL, _id, quantity } = c;
 
@@ -65,7 +65,7 @@ function CartPreviewCard({ c, onEditQuant, onRemove, showCart }) {
   return (
     <div key={_id} className={classes.CartCard}>
       <div className={classes.ImgCont}>
-        <img src={`${App.domain}public/${productURL[0]}`} alt='' />
+        <img src={`https://geetico.com/public/${productURL[0]}`} alt='' />
       </div>
       <p className={classes.productName}>{productName}</p>
       <div className={classes.changeCont}>

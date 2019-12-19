@@ -3,9 +3,12 @@ import NavigationItem from '../NavigationItem/NavigationItem';
 import { Link, withRouter } from 'react-router-dom';
 import classes from './TopNavigationItems.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartArrowDown, faSearch } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCartArrowDown,
+  faSearch,
+  faBell
+} from '@fortawesome/free-solid-svg-icons';
 import SearchBar from '../UI/SearchBar/SearchBar';
-import { Dropdown } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import axios from 'axios';
 import DesktopDropDown from '../DesktopDropDown/DesktopDropDown';
@@ -13,16 +16,19 @@ import { connect } from 'react-redux';
 import { authLogOut } from '../../store/actions/auth';
 import Logo from '../../shared/images/minimalist-01.png';
 import App from '../../App';
-import Backdrop from '../UI/Backdrop/Backdrop';
+// import Backdrop from '../UI/Backdrop/Backdrop';
 import { fetchAllCartItems, showCartPreview } from '../../store/actions/cart';
 import CartPreview from '../CartPreview/CartPreview';
 import Toggler from '../UI/Toggler/Toggler';
+import SearchSuggestion from '../SearchSuggestions/SearchSuggestion';
+import NotificationDropDown from '../NotificationDropDown/NotificationDropDown';
 class NavigationItems extends Component {
   state = {
     search: '',
     suggestions: [],
     showDropDown: false,
-    showNavDesktop: false
+    showNavDesktop: false,
+    showNotificationDesktop: false
   };
   componentWillMount() {
     document.addEventListener('mousedown', this.closeNavDesktop);
@@ -34,7 +40,11 @@ class NavigationItems extends Component {
     if (this.node.contains(e.target)) {
       return;
     }
-    this.setState({ showDropDown: false, showNavDesktop: false });
+    this.setState({
+      showDropDown: false,
+      showNavDesktop: false,
+      showNotificationDesktop: false
+    });
   };
   componentDidMount() {
     this.props.onFetchCartItems();
@@ -75,6 +85,14 @@ class NavigationItems extends Component {
       };
     });
   };
+  showNotificationHandler = () => {
+    this.setState(prevState => {
+      return {
+        showNotificationDesktop: !prevState.showNotificationDesktop
+      };
+    });
+  };
+
   render() {
     const element = (
       <span className={classes.CartIconContainer}>
@@ -85,10 +103,7 @@ class NavigationItems extends Component {
     return (
       <ul className={classes.NavigationItems} ref={node => (this.node = node)}>
         <div className=''>
-          <DesktopDropDown
-            show={this.state.showNavDesktop}
-            //
-          />
+          <DesktopDropDown show={this.state.showNavDesktop} />
           <Toggler
             color='#333'
             forceShow
@@ -114,31 +129,10 @@ class NavigationItems extends Component {
               searchIcon={faSearch}
               keyDownHandler={this.keyDownHandler}
             />
-            {/* <div className={classes.editDrop} style={{ opacity: 0.3 }}>
-              <Backdrop
-                show={this.state.showDropDown}
-                clicked={this.onBlurHandler}
-              />
-            </div> */}
-            {this.state.showDropDown && this.state.suggestions.length > 0 ? (
-              <div className={classes.suggestions}>
-                {this.state.suggestions.length > 0 &&
-                  this.state.suggestions.map(sug => {
-                    return (
-                      <a key={sug._id} href={`/details/${sug._id}`}>
-                        <div className={classes.singleSuggestion}>
-                          <img
-                            src={`http://geetico.com/public/${sug.productURL[0]}`}
-                            className={classes.productImage}
-                            alt=''
-                          />
-                          <p>{sug.productName}</p>
-                        </div>
-                      </a>
-                    );
-                  })}
-              </div>
-            ) : null}
+            <SearchSuggestion
+              showDropDown={this.state.showDropDown}
+              suggestions={this.state.suggestions}
+            />
           </div>
           {this.props.hideCheckoutDrop ? null : (
             <div className={classes.CheckOutDrop}>
@@ -171,47 +165,19 @@ class NavigationItems extends Component {
             </NavigationItem>
           )}
         </div>
-        <div className={classes.CartAndAvatar}>
-          {this.props.isAuthenticated ? (
-            <img
-              alt='avatar'
-              width='40px'
-              src={this.props.avatar}
-              className={classes.avatar}
-            />
-          ) : null}
-          {this.props.isAuthenticated ? (
-            <span className={classes.fullName}>
-              {' '}
-              Hi {this.props.fullName.split(' ')[0]}!
-            </span>
-          ) : null}
-        </div>
-        {/* {this.props.isAuthenticated ? (
-          <Dropdown text='' color='white'>
-            <Dropdown.Menu>
-              <Dropdown.Item
-                icon='folder'
-                text=' My Orders'
-                onClick={() => {
-                  // this.props.onLogout();
-                  this.props.history.push('/orders');
-                }}
-                // description='track your orders'
-              />
+        <div
+          onClick={this.showNotificationHandler}
+          className={classes.Notification}
+          ref={node => (this.node = node)}
+        >
+          <FontAwesomeIcon icon={faBell} size='1x' />
+          <span>
+            Notifications <strong>(0)</strong>
+          </span>
+          <NotificationDropDown show={this.state.showNotificationDesktop} />
 
-              <Dropdown.Divider />
-              <Dropdown.Item
-                icon='user'
-                text='Logout'
-                onClick={() => {
-                  this.props.onLogout();
-                  this.props.history.push('/');
-                }}
-              />
-            </Dropdown.Menu>
-          </Dropdown>
-        ) : null} */}
+          {/* <span className={classes.NotificationCount}>4</span> */}
+        </div>
       </ul>
     );
   }

@@ -75,13 +75,6 @@ class NavContainer extends React.Component {
               isToggled={this.props.isToggled}
               clicked={this.props.clicked}
             />
-            {/* <h1
-              className={classes.Header}
-              onClick={() => this.props.history.push('/')}
-            >
-              Geetico.com
-
-            </h1> */}
           </div>
           <div
             onClick={() => this.props.history.push('/')}
@@ -161,20 +154,6 @@ class NavContainer extends React.Component {
             </div>
           ) : null}
         </div>
-        {/* <div className={classes.IconNavItems}>
-          {this.state.navIcons.map((icon, i) => (
-            <a href={icon.link} rel='noreferrer' key={`${icon}${i}`}>
-              <div
-                className={classes.NavIcon}
-
-                // onClick={() => this.props.history.push(`${icon.link}`)}
-              >
-                <FontAwesomeIcon size='1x' icon={icon.iconlink} />
-                <p>{icon.desc}</p>
-              </div>
-            </a>
-          ))}
-        </div> */}
       </div>
     );
   }

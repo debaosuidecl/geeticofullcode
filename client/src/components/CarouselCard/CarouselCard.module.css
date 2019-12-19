@@ -52,7 +52,7 @@
 }
 .ImageContainer img {
   /* width: 70px; */
-  height: 100px;
+  height: 90px;
   left: 50%;
   transform: translateX(-50%);
   position: absolute;
@@ -130,14 +130,14 @@
 }
 
 .TextContainer > .Title {
-  font-size: 15px;
+  font-size: 14px;
   height: 40px;
   /* background: #eee; */
   /* width: 110px; */
   min-width: 110px;
 
   /* border-bottom: 1px solid #eee; */
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 @media (min-width: 950px) {

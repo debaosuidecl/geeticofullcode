@@ -119,10 +119,10 @@ class Layout extends React.Component {
         ) : null}
         <div className={classes.ModalCont}></div>
         <SideDrawer
-          goToIndividualSeller={this.goToIndividualSeller}
-          goToBusinessSeller={this.goToBusinessSeller}
-          shouldSlideIn={this.state.shouldSlideIn}
-          isToggled={this.state.shouldSlideIn}
+          // goToIndividualSeller={this.goToIndividualSeller}
+          // goToBusinessSeller={this.goToBusinessSeller}
+          shouldslidein={this.state.shouldSlideIn}
+          istoggled={this.state.shouldSlideIn}
           clicked={this.slideInHandler}
         />
 

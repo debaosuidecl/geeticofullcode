@@ -11,7 +11,8 @@ const User = require('../../models/FrontEndUser'); // bring in the user model
 const Seller = require('../../models/User'); // bring in the seller model
 const Product = require('../../models/Product'); // bring in the product model
 const Order = require('../../models/Order'); // bring in the order model
-const Notification = require('../../models/Notification'); // bring in the notification model
+const SellerNotification = require('../../models/SellerNotification'); // bring in the notification model
+const BuyerNotification = require('../../models/BuyerNotification'); // bring in the notification model
 const authMiddleWare = require('../../middleware/auth');
 const getShippingCost = require('../../middleware/getShippingCost');
 const contentGenerator = require('../../middleware/contentGenerator');
@@ -524,13 +525,20 @@ router.post(
       console.log(mailingList);
 
       for (i = 0; i < mailingList.length; i++) {
-        let newNotification = new Notification({
+        let newSellerNotification = new SellerNotification({
           user: req.user.id,
           seller: mailingList[i].sellerID,
-          notification: `You just received a payment verification document from ${mailingList[i].buyerName}`
+          notification: `You just received a payment verification document from ${mailingList[i].buyerName}`,
+          order: order._id
         });
-        await newNotification.save();
+        await newSellerNotification.save();
       }
+      let newBuyerNotification = new BuyerNotification({
+        user: req.user.id,
+        notification: `You just Completed your order`,
+        order: order._id
+      });
+      await newBuyerNotification.save();
 
       mailingList.forEach(function(to, i, array) {
         let content = sellerVerificationEmailContent(

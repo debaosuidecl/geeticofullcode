@@ -42,7 +42,7 @@
   margin: auto;
   width: 100%;
   position: relative;
-  box-shadow: 0px 1px 0px #bbb;
+  box-shadow: 0px 1px 0px #eee;
 }
 .MobileOnly {
   display: block;
@@ -57,21 +57,7 @@
 .LogoCont img {
   margin-right: 7px;
 }
-.IconNavItems {
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  background: white;
-  padding-top: 10px;
-  color: rgb(161, 158, 158);
-  box-shadow: 0px 1px 12px #999;
-  align-items: center;
-  /* height: 40px; */
-}
-.IconNavItems svg {
-  cursor: pointer;
-  font-size: 20px;
-}
+
 .NavIcon {
   text-align: center;
 }

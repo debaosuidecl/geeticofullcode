@@ -18,7 +18,7 @@
   min-height: 500px;
   display: flex;
   position: relative;
-  flex-flow: column-reverse;
+  flex-flow: column;
 }
 .reviewAndOrderCont {
   display: flex;

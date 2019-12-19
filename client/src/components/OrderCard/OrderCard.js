@@ -27,7 +27,7 @@ function OrderCard({ order, history }) {
 
           {order.status !== 'delivered' ? (
             <p className={classes.subCont}>
-              <span className={classes.title}>delivery</span>{' '}
+              <span className={classes.title}>delivery:</span>{' '}
               <span className={classes.value}>
                 {moment(new Date(order.dateOfDelivery))
                   .add(App.valueToHours(order.timeOfDelivery), 'hours')
@@ -37,7 +37,7 @@ function OrderCard({ order, history }) {
           ) : null}
 
           <p className={classes.subCont}>
-            <span className={classes.title}>Ordered </span>{' '}
+            <span className={classes.title}>Ordered: </span>{' '}
             {/* {moment(new Date(order.dateOfDelivery)).fromNow()} */}
             <span className={classes.value}>
               {' '}

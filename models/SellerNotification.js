@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const NotificationSchema = new mongoose.Schema({
+const SellerNotificationSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'frontEndUser',
@@ -20,10 +20,15 @@ const NotificationSchema = new mongoose.Schema({
   read: {
     type: Boolean,
     default: false
+  },
+  order: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'orders',
+    required: true
   }
 });
 
 module.exports = Notification = mongoose.model(
-  'notification',
-  NotificationSchema
+  'sellerNotification',
+  SellerNotificationSchema
 ); // takes in model name and schema

@@ -9,6 +9,7 @@ import CarouselCard from '../../components/CarouselCard/CarouselCard';
 import { connect } from 'react-redux';
 import App from '../../App';
 import { initiateAddToCart } from '../../store/actions/cart';
+import Spinner from '../../components/UI/Spinner/Spinner';
 export class CategoryPage extends Component {
   state = {
     page: 2,
@@ -168,7 +169,9 @@ export class CategoryPage extends Component {
                 ))}
             </div>
           </InfiniteScroll>
-        ) : null}
+        ) : (
+          <Spinner />
+        )}
       </Layout>
     );
   }

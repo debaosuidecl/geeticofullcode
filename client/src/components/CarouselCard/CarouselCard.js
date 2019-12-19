@@ -101,8 +101,8 @@ const CarouselCard = props => {
         />
         {loading ? <img src={Spin} alt='' className={classes.spin} /> : null}
       </div>
-
-      <hr />
+      <div style={{ padding: 13 }}></div>
+      {/* {props.isCarousel ? <div style={{ padding: 13 }}></div> : <hr />} */}
       <div className={classes.TextContainer}>
         <h4 className={classes.Title} onClick={props.goToDetail}>
           {props.productName}

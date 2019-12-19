@@ -18,7 +18,7 @@
   border-bottom: 0.21px solid #ccc;
 }
 .NavigationItem.Seller a {
-  color: white;
+  color: #444;
   margin: 0;
   border: none;
   box-shadow: none;
@@ -37,7 +37,7 @@
 
 .NavigationItem a:hover {
   box-shadow: 3px 3px 3px #ccc;
-  border-top: 0.1px solid #ccc;
+  /* border-top: 0.1px solid #ccc; */
 }
 
 .NavigationItem:hover {
@@ -71,7 +71,7 @@
 }
 @media (min-width: 950px) {
   .NavigationItem a {
-    color: white;
+    color: #444;
     margin-right: 8px;
     margin-left: 8px;
     border: none;
@@ -79,7 +79,7 @@
   }
 
   .NavigationItem.Seller a {
-    color: white;
+    color: #444;
     margin: 0;
     font-size: 12px;
     border: none;
@@ -93,13 +93,13 @@
   .NavigationItem a:hover {
     background: white;
     /* color: orange; */
-    color: #41549b;
+    /* color: #41549b; */
 
     transition: 0.3s;
     box-shadow: none;
   }
   .NavigationItem.Seller a:hover {
-    color: rgb(58, 6, 117);
+    /* color: rgb(58, 6, 117); */
   }
   .NavigationItem.Seller.Active a {
     background: white;

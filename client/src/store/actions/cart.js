@@ -86,10 +86,10 @@ export const fetchAllCartItems = () => {
               .get(url)
 
               .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 // console.log(res);
                 if (res.data.deleteId) {
-                  console.log('na null oo');
+                  // console.log('na null oo');
                   dispatch(
                     initiateDeleteItemFromCart({ productId: res.data.deleteId })
                   );
@@ -116,7 +116,7 @@ export const fetchAllCartItems = () => {
     )
       .then(data => {
         console.log('please');
-        console.log(data, 'from cart');
+        // console.log(data, 'from cart');
         dispatch(setCartValue(data));
       })
       .catch(error => {

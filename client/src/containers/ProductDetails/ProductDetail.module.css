@@ -5,14 +5,13 @@ h2.PageTitle {
 }
 
 .ProductDetailContainer {
-  margin: 90px auto;
-  width: 90%;
+  margin: 44px auto;
+  width: 95%;
 }
 
 .scrolling-wrapper {
   overflow-x: scroll;
   overflow-y: hidden;
-  white-space: nowrap;
   display: flex;
   width: 90%;
   margin: 30px auto;

@@ -1,7 +1,8 @@
 .OrderCard {
   margin: 20px 20px;
   /* min-height: 120px; */
-  box-shadow: 1px 2px 5px #bbb;
+  /* box-shadow: 1px 2px 5px #bbb; */
+  border-bottom: 1px solid #eee;
   padding: 15px;
   border-radius: 10px;
   cursor: pointer;
@@ -45,16 +46,18 @@
   /* margin-top: 5px; */
 }
 .subCont .value {
-  background: #eee;
+  /* background: #eee; */
   color: #444;
   padding: 6px;
   border-radius: 10px;
   width: 100%;
-  max-width: 85px;
+  flex: 3;
+  /* max-width: 85px; */
 }
 .subCont .title {
   font-weight: 100;
   margin-right: 6px;
+  flex: 1;
 }
 .Right {
   display: flex;

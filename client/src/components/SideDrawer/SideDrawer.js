@@ -42,7 +42,7 @@ class SideDrawer extends React.Component {
     return (
       <div
         className={
-          this.props.shouldSlideIn
+          this.props.shouldslidein
             ? slideForMobile.join(' ')
             : shouldSlideArray.join(' ')
         }
@@ -50,7 +50,7 @@ class SideDrawer extends React.Component {
         <div className={classes.NavigationItemsContainer}>
           <div className={classes.TogglerLogoCont}>
             <Toggler
-              isToggled={this.props.isToggled}
+              isToggled={this.props.istoggled}
               clicked={this.props.clicked}
             />
             {/* <h1 className={classes.Header}>Geetico.ng</h1> */}
@@ -58,12 +58,12 @@ class SideDrawer extends React.Component {
           {!this.props.isAuthenticated ? (
             <div
               className={classes.AuthButtons}
-              onClick={this.props.onShowAuthModalToggle}
+              onClick={this.props.onshowauthmodaltoggle}
             >
               <button>Sign in / Sign up</button>
             </div>
           ) : (
-            <div className={classes.AuthButtons} onClick={this.props.onLogout}>
+            <div className={classes.AuthButtons} onClick={this.props.onlogout}>
               <button>Logout</button>
             </div>
           )}
@@ -116,8 +116,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     // onFetchCart: () => dispatch(fetchCart()),
-    onShowAuthModalToggle: () => dispatch(toggleAuthModalAction()),
-    onLogout: () => dispatch(authLogOut())
+    onshowauthmodaltoggle: () => dispatch(toggleAuthModalAction()),
+    onlogout: () => dispatch(authLogOut())
     // onSetAuthModalToTrue: () => dispatch(setAuthModalToTrue())
   };
 };
