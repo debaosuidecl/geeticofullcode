@@ -10,6 +10,7 @@ const path = require('path');
 connectDB();
 // init middleware
 app.use('/public', express.static(__dirname + '/public'));
+app.use('/test-public', express.static(__dirname + '/test-public'));
 // app.use(express.static('./public'));
 app.use(express.json({ extended: false }));
 app.use(function(req, res, next) {
@@ -28,6 +29,7 @@ app.use('/api/userproducts', require('./routes/api/userProductRoutes'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/userauth', require('./routes/api/frontendUserAuth'));
 app.use('/api/userorders', require('./routes/api/frontEndOrders'));
+app.use('/api/notifications', require('./routes/api/notifications'));
 
 if (process.env.NODE_ENV === 'production') {
   // app.use(
