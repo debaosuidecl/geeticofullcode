@@ -10,7 +10,7 @@ import App from '../../App';
 // import Backdrop from '../UI/Backdrop/Backdrop';
 // import Spinner from '../UI/Spinner/Spinner';
 // import App from '../../App';
-function OrderCard({ order, history, setLoadingHandler }) {
+function OrderCard({ order, isForcedCollapse, setLoadingHandler }) {
   const [isCollapsed, collapseHandler] = useState(false);
   const [statusValue, statusChangeHandler] = useState(order.status);
   // const [isLoading, setLoading] = useState(false);
@@ -59,9 +59,8 @@ function OrderCard({ order, history, setLoadingHandler }) {
   return (
     <div
       className={classes.OrderCard}
-      // onClick={() => collapseHandler(!isCollapsed)}
+      style={{ background: isForcedCollapse ? '#fff' : 'none' }}
     >
-      {/* {isLoading ? loadingStage : null} */}
       <div className={classes.NamePriceCont}>
         <h2>{order.fullName}</h2>
         <h2>
@@ -76,7 +75,6 @@ function OrderCard({ order, history, setLoadingHandler }) {
         <div className={classes.Left}>
           <div className={classes.Price}></div>
 
-          {/* {order.status !== 'delivered' ? ( */}
           <React.Fragment>
             <p className={classes.subCont}>
               <span className={classes.title}>Delivery: </span>{' '}
@@ -105,36 +103,22 @@ function OrderCard({ order, history, setLoadingHandler }) {
               {moment(new Date(order.date)).format('L')}
             </span>
           </p>
-          {/* <p className={classes.subCont}>
-            <span className={classes.title}>transaction ID:</span>{' '}
-            <span className={classes.value}>{order.transactionId}</span>
-          </p> */}
+
           <p className={classes.subCont}>
             <span className={classes.title}>Status: </span>{' '}
-            {/* <span
-              className={
-                order.status === 'delivered'
-                  ? [classes.value, classes.delivered].join(' ')
-                  : order.status === 'shipped'
-                  ? [classes.value, classes.shipped].join(' ')
-                  : classes.value
-              }
-            > */}
             <select
-              style={{
-                background:
-                  statusValue === 'delivered'
-                    ? '#99F016'
-                    : statusValue === 'shipped'
-                    ? 'gold'
-                    : '#eee'
-              }}
               className={classes.Status}
               onChange={statusChangeAsync}
               value={statusValue}
             >
               <option value={order.status}>{order.status}</option>
-              {['processing', 'shipped', 'delivered']
+              {[
+                'processing',
+                'shipped',
+                'delivered',
+                'awaiting verification',
+                'verification in progress'
+              ]
                 .filter(status => status !== order.status)
                 .map(status => (
                   <option key={status} value={status}>
@@ -146,14 +130,16 @@ function OrderCard({ order, history, setLoadingHandler }) {
           </p>
         </div>
         <div className={classes.Right}>
-          <FontAwesomeIcon
-            rotation={isCollapsed ? 180 : null}
-            color='#444'
-            style={{ transition: '.2s' }}
-            size='2x'
-            icon={faCaretUp}
-            onClick={() => collapseHandler(!isCollapsed)}
-          />
+          {isForcedCollapse ? null : (
+            <FontAwesomeIcon
+              rotation={isCollapsed ? 180 : null}
+              color='#444'
+              style={{ transition: '.2s' }}
+              size='2x'
+              icon={faCaretUp}
+              onClick={() => collapseHandler(!isCollapsed)}
+            />
+          )}
         </div>
       </div>
       <div
@@ -161,8 +147,16 @@ function OrderCard({ order, history, setLoadingHandler }) {
         style={{
           // maxHeight: isCollapsed ? '200px' : '0px'
           // minHeight: isCollapsed ? '0px' : '200px'
-          transform: !isCollapsed ? 'rotateX(90deg)' : 'rotateX(0deg)',
-          maxHeight: !isCollapsed ? '0px' : '10000px'
+          transform: isForcedCollapse
+            ? 'rotateX(0deg)'
+            : !isCollapsed
+            ? 'rotateX(90deg)'
+            : 'rotateX(0deg)',
+          maxHeight: isForcedCollapse
+            ? '100000px'
+            : !isCollapsed
+            ? '0px'
+            : '10000px'
         }}
       >
         <div className={classes.UserData}>
@@ -193,16 +187,14 @@ function OrderCard({ order, history, setLoadingHandler }) {
             <div key={i} className={classes.orderData}>
               <span>
                 <span
-                  onClick={() => history.push(`/details/${p.fullProduct._id}`)}
+                  // onClick={() => history.push(`/details/${p.fullProduct._id}`)}
                   className={classes.productName}
                 >
-                  {p.fullProduct.productName}
+                  {p.productName}
                 </span>{' '}
                 X <span className={classes.quantity}> {p.quantity}</span>
               </span>
-              <span className={classes.price}>
-                &#x20A6; {p.fullProduct.price}
-              </span>
+              <span className={classes.price}>&#x20A6; {p.price}</span>
             </div>
           );
         })}

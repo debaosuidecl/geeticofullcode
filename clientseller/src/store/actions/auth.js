@@ -29,6 +29,7 @@ export const authFail = error => {
     error: error
   };
 };
+
 export const authError = errorArray => {
   return {
     type: actionTypes.AUTH_ERROR,

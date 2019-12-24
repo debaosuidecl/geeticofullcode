@@ -28,6 +28,7 @@ app.use('/api/userproducts', require('./routes/api/userProductRoutes'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/userauth', require('./routes/api/frontendUserAuth'));
 app.use('/api/userorders', require('./routes/api/frontEndOrders'));
+app.use('/api/notifications', require('./routes/api/notifications'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(

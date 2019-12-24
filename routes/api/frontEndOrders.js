@@ -48,18 +48,20 @@ router.get('/:page', authMiddleWare, async (req, res) => {
 router.get('/single/:orderId', authMiddleWare, async (req, res) => {
   try {
     const order = await Order.findById(req.params.orderId);
+    if (!order) {
+      return res.status(404).send('resource not found');
+    }
     return res.status(200).json(order);
   } catch (error) {
     console.error(error);
     res.status(500).send('Server Error');
   }
 });
-
 //@route    GET api/userorders/:status/:page
 //@desc     Fetch  All Orders by status
 //@access   private
 
-router.get('/all/:status/:page', authMiddleWare, async (req, res) => {
+router.get('/all/:page', authMiddleWare, async (req, res) => {
   const resPerPage = 20; // results per page
   const page = req.params.page || 1; // Page
 
@@ -69,14 +71,22 @@ router.get('/all/:status/:page', authMiddleWare, async (req, res) => {
   //   });
   // }
   try {
-    let orders = await Order.find({
-      status: req.params.status
-    })
-      .sort('-date')
-      .skip(resPerPage * page - resPerPage)
-      .limit(resPerPage);
-
-    return res.json(orders);
+    // console.log(req.query.status);
+    if (req.query.status) {
+      let orders = await Order.find({
+        status: req.query.status
+      })
+        .sort('-date')
+        .skip(resPerPage * page - resPerPage)
+        .limit(resPerPage);
+      return res.json(orders);
+    } else {
+      let orders = await Order.find({})
+        .sort('-date')
+        .skip(resPerPage * page - resPerPage)
+        .limit(resPerPage);
+      return res.json(orders);
+    }
   } catch (error) {
     console.log(error);
     res.status(400).json({ error, msg: 'error in fetch' });
@@ -94,7 +104,9 @@ router.post(
     check('status', 'Status not found').isIn([
       'shipped',
       'processing',
-      'delivered'
+      'delivered',
+      'verification in progress',
+      'awaiting verification'
     ])
   ],
   async (req, res) => {

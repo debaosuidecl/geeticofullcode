@@ -3,15 +3,34 @@ import { Link, withRouter } from 'react-router-dom';
 import classes from './HeaderSeller.module.css';
 import Toggler from '../../components/UI/Toggler/Toggler';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import SellerBackendMobNavItems from '../../components/SellerBackendMobNavItems/SellerBackendMobNavItems';
 import { authLogOut } from '../../store/actions/auth';
 import Logo from '../../shared/images/minimalist-01.png';
 import SellerBackendNavigationItems from '../SellerBackendNavigationItems/SellerBackendNavigationItems';
+import Notifications from '../Notifications/Notifications';
 class HeaderSeller extends Component {
   state = {
-    isToggled: false
+    isToggled: false,
+    showNotificationDesktop: false
+  };
+
+  componentWillMount() {
+    document.addEventListener('mousedown', this.closeNavDesktop);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.closeNavDesktop);
+  }
+  closeNavDesktop = e => {
+    if (this.node && this.node.contains(e.target)) {
+      return;
+    }
+    this.setState({
+      // showDropDown: false,
+      // showNavDesktop: false,
+      showNotificationDesktop: false
+    });
   };
   onClickedHandler = navItem => {};
 
@@ -26,6 +45,14 @@ class HeaderSeller extends Component {
     this.props.onLogout();
     this.props.history.push('/sellerpage');
   };
+  showNotificationHandler = () => {
+    this.setState(prevState => {
+      return {
+        showNotificationDesktop: !prevState.showNotificationDesktop
+      };
+    });
+  };
+
   render() {
     return (
       <div className={classes.HeaderSeller}>
@@ -62,15 +89,50 @@ class HeaderSeller extends Component {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Link to='/'>
+            <Link to='/' className={classes.HeaderLink}>
               <div className={classes.Header}>
                 <img width='50px' src={Logo} />
               </div>
             </Link>
-            <div className={classes.desktopOnly}>
-              <SellerBackendNavigationItems
-                navItems={this.props.navItems}
-                clicked={this.onClickedHandler}
+            <div className={[classes.desktopOnly, classes.NavHigher].join(' ')}>
+              <div className={classes.backendNavItems}>
+                <SellerBackendNavigationItems
+                  navItems={this.props.navItems}
+                  clicked={this.onClickedHandler}
+                />
+              </div>
+            </div>
+
+            <div
+              className={[classes.TogglerCont, classes.higherIndex].join(' ')}
+            >
+              <Toggler
+                color='#6ce001'
+                background='#6ce001'
+                clicked={this.toggledHandler}
+                isToggled={this.state.isToggled}
+              />
+            </div>
+
+            <div
+              ref={node => (this.node = node)}
+              className={[classes.Notifications, classes.desktopOnly].join(' ')}
+            >
+              <FontAwesomeIcon
+                icon={faBell}
+                style={{
+                  color: this.state.showNotificationDesktop ? '#6ce001' : '#bbb'
+                }}
+              />{' '}
+              <span
+                className={classes.notificationSpan}
+                onClick={this.showNotificationHandler}
+              >
+                Notifications ({this.props.notificationCount})
+              </span>
+              <Notifications
+                show={this.state.showNotificationDesktop}
+                notifications={this.props.notifications}
               />
             </div>
             <div
@@ -88,30 +150,6 @@ class HeaderSeller extends Component {
               <span className={classes.Logout} onClick={this.logoutHandler}>
                 Logout
               </span>
-              <span className={classes.dropDown}>
-                <FontAwesomeIcon
-                  style={{ paddingTop: 7 }}
-                  size='2x'
-                  icon={faAngleDown}
-                />
-                <span className={classes.toolTipMore}>
-                  <p className={classes.signintext}>
-                    Signed in as {this.props.email}
-                  </p>
-                </span>
-                <span className={classes.toolTipExtend}></span>
-              </span>
-            </div>
-
-            <div
-              className={[classes.TogglerCont, classes.higherIndex].join(' ')}
-            >
-              <Toggler
-                color='#6ce001'
-                background='#6ce001'
-                clicked={this.toggledHandler}
-                isToggled={this.state.isToggled}
-              />
             </div>
           </React.Fragment>
         )}
@@ -125,7 +163,9 @@ const mapStateToProps = state => {
     authCheck: state.auth.loading,
     fullName: state.auth.fullName,
     email: state.auth.email,
-    avatar: state.auth.avatar
+    avatar: state.auth.avatar,
+    notificationCount: state.notification.notificationCount,
+    notifications: state.notification.notifications
   };
 };
 const mapDispatchToProps = dispatch => {

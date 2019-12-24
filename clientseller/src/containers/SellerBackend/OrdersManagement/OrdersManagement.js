@@ -25,18 +25,30 @@ export class OrdersManagement extends Component {
     pathToFetch: ''
   };
   componentDidMount() {
+    window.scrollTo(0, 0);
+
     console.log(this.props.match.path);
     if (this.props.match.path === '/sellerpage/order/processing') {
-      this.setState({ pathToFetch: '/processing' });
-      this.initFetch('/processing');
+      this.setState({ pathToFetch: 'processing' });
+      this.initFetch('processing');
     } else if (this.props.match.path === '/sellerpage/order/shipped') {
       console.log('shipped matched bro');
-      this.setState({ pathToFetch: '/shipped' });
-      this.initFetch('/shipped');
+      this.setState({ pathToFetch: 'shipped' });
+      this.initFetch('shipped');
+    } else if (
+      this.props.match.path === '/sellerpage/order/awaiting-verification'
+    ) {
+      this.setState({ pathToFetch: 'awaiting verification' });
+      this.initFetch('awaiting verification');
+    } else if (
+      this.props.match.path === '/sellerpage/order/verification-in-progress'
+    ) {
+      this.setState({ pathToFetch: 'verification in progress' });
+      this.initFetch('verification in progress');
     } else if (this.props.match.path === '/sellerpage/order/delivered') {
-      this.setState({ pathToFetch: '/delivered' });
+      this.setState({ pathToFetch: 'delivered' });
 
-      this.initFetch('/delivered');
+      this.initFetch('delivered');
     } else {
       this.initFetch('');
     }
@@ -54,7 +66,7 @@ export class OrdersManagement extends Component {
       }
     };
     let firstresp = await axios.get(
-      `${App.domain}api/userorders/all${this.state.pathToFetch}${status}/1`,
+      `${App.domain}api/userorders/all/1?${status ? 'status=' + status : ''}`,
       config
     );
     console.log(firstresp.data);
@@ -78,7 +90,9 @@ export class OrdersManagement extends Component {
       }
     };
     let firstresp = await axios.get(
-      `${App.domain}api/userorders/all${this.state.pathToFetch}/${this.state.page}`,
+      `${App.domain}api/userorders/all/${this.state.page}?${
+        this.state.pathToFetch ? 'status=' + this.state.pathToFetch : ''
+      }`,
       config
     );
     console.log(firstresp.data);
@@ -170,8 +184,25 @@ export class OrdersManagement extends Component {
                       this.props.history.push('/sellerpage/order/delivered');
                     }}
                   />
+                  <Dropdown.Item
+                    text='Awaiting Verification'
+                    onClick={() => {
+                      this.props.history.push(
+                        '/sellerpage/order/awaiting-verification'
+                      );
+                    }}
+                  />
 
-                  <Dropdown.Divider />
+                  <Dropdown.Item
+                    text='Verification in Progress'
+                    onClick={() => {
+                      this.props.history.push(
+                        '/sellerpage/order/verification-in-progress'
+                      );
+                    }}
+                  />
+
+                  {/* <Dropdown.Divider /> */}
                 </Dropdown.Menu>
               </Dropdown>
 
@@ -196,7 +227,7 @@ export class OrdersManagement extends Component {
               loader={<div style={{ textAlign: 'center' }}>...</div>}
               endMessage={
                 <p style={{ textAlign: 'center', fontWeight: 100 }}>
-                  <b>.</b>
+                  <b>End of orders</b>
                 </p>
               }
             >

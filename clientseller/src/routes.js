@@ -11,6 +11,7 @@ import SellerBackendAnalytics from './containers/SellerBackend/Analytics/Analyti
 import SellerBackendOrder from './containers/SellerBackend/OrdersManagement/OrdersManagement';
 import AddProductContainer from './containers/SellerBackend/AddProductContainer/AddProductContainer';
 import ProductDetail from './containers/SellerBackend/ProductDetail/ProductDetail';
+import SingleOrder from './containers/SellerBackend/SingleOrder/SingleOrder';
 // import LoadingPage from './containers/LoadingPage/LoadingPage';
 // import AddProductContainer2 from './containers/SellerBackend/AddProductContainer/AddProductContainer2';
 
@@ -58,9 +59,27 @@ const routes = [
   },
   {
     title: 'Success Page',
-    path: '/sellerpage/orders/delivered',
+    path: '/sellerpage/order/delivered',
     exact: true,
     component: SellerBackendOrder
+  },
+  {
+    title: 'Success Page',
+    path: '/sellerpage/order/awaiting-verification',
+    exact: true,
+    component: SellerBackendOrder
+  },
+  {
+    title: 'Success Page',
+    path: '/sellerpage/order/verification-in-progress',
+    exact: true,
+    component: SellerBackendOrder
+  },
+  {
+    title: 'Single Order Page',
+    path: '/sellerpage/single-order/:orderId',
+    exact: true,
+    component: SingleOrder
   },
   {
     title: 'SellerBackendInventory',

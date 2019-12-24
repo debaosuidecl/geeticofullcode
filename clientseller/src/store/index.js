@@ -3,9 +3,11 @@ import thunk from 'redux-thunk';
 
 import productsReducer from './reducers/products';
 import AuthReducer from './reducers/auth';
+import NotificationsReducer from './reducers/notifications';
 const rootReducer = combineReducers({
   prod: productsReducer,
-  auth: AuthReducer
+  auth: AuthReducer,
+  notification: NotificationsReducer
 });
 const composeEnhancers =
   process.env.NODE_ENV === 'development'

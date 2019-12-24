@@ -5,7 +5,8 @@
   display: flex;
   flex-flow: column;
   max-height: none;
-  box-shadow: 1px 2px 5px #bbb;
+  /* box-shadow: 1px 2px 5px #bbb; */
+  border-bottom: 1px solid #eee;
   padding: 15px;
   border-radius: 10px;
   /* cursor: pointer; */
@@ -20,7 +21,7 @@
 .Status {
   outline: none;
   border: none;
-  background: #eee;
+  /* background: #eee; */
   padding: 5px;
   border-radius: 10px;
   cursor: pointer;
@@ -67,7 +68,7 @@
 }
 .subCont .value,
 .detCont .value {
-  background: #eee;
+  /* background: #eee; */
   color: #444;
   padding: 6px;
   border-radius: 10px;

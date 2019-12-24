@@ -1,0 +1,21 @@
+.NotificationItem {
+  background: rgb(250, 249, 249);
+  padding: 13px;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.NotificationItem > div:first-child {
+  flex: 2;
+}
+.NotificationItem > div:first-child svg {
+  /* flex: 1; */
+  font-size: 30px;
+  color: #eee;
+}
+.NotificationItem p {
+  flex: 10;
+}

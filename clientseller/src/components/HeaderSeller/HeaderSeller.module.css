@@ -6,6 +6,21 @@
   width: 40px;
   border-radius: 50%;
 }
+.Notifications {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  /* background: green; */
+}
+.Notifications > svg {
+  /* background: green; */
+  margin-right: 5px;
+}
+.notificationSpan {
+  cursor: pointer;
+}
 .HeaderSeller {
   display: flex;
   justify-content: space-between;
@@ -22,6 +37,14 @@
   padding-left: 0px;
   padding-top: 10px; */
   box-shadow: 0px 0.3px 11px #bbb;
+}
+.NavHigher {
+  display: flex;
+  /* background: green; */
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row;
+  flex: 4;
 }
 .HeaderSeller a {
   text-decoration: none;
@@ -67,9 +90,14 @@ span.Logout:hover {
 
   /* color: white; */
 }
+.HeaderLink {
+  flex: 1;
+}
 
 .ProfileDetails {
   padding: 0 60px 0 0;
+  flex: 1;
+
   /* padding: 50%; */
 }
 .ProfileDetails span:nth-child(1) {
