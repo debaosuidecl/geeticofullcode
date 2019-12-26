@@ -10,7 +10,7 @@ import App from '../../App';
 // import Backdrop from '../UI/Backdrop/Backdrop';
 // import Spinner from '../UI/Spinner/Spinner';
 // import App from '../../App';
-function OrderCard({ order, isForcedCollapse, setLoadingHandler }) {
+function OrderCard({ order, isForcedCollapse, setLoadingHandler, history }) {
   const [isCollapsed, collapseHandler] = useState(false);
   const [statusValue, statusChangeHandler] = useState(order.status);
   // const [isLoading, setLoading] = useState(false);
@@ -163,6 +163,13 @@ function OrderCard({ order, isForcedCollapse, setLoadingHandler }) {
           <h2>User Details</h2>
           {[
             { title: 'Phone Number', value: order.phone },
+            {
+              title: 'Order Type',
+              value:
+                order.directPaymentMethod === true
+                  ? 'Direct Payment'
+                  : 'Paystack'
+            },
             { title: 'Suite', value: order.suite },
             { title: 'Street', value: order.street },
             { title: 'City', value: order.city },
@@ -182,6 +189,7 @@ function OrderCard({ order, isForcedCollapse, setLoadingHandler }) {
             </p>
           ))}
         </div>
+
         {order.orderDetails.map((p, i) => {
           return (
             <div key={i} className={classes.orderData}>
@@ -198,6 +206,17 @@ function OrderCard({ order, isForcedCollapse, setLoadingHandler }) {
             </div>
           );
         })}
+
+        {!isForcedCollapse ? (
+          <p
+            className={classes.More}
+            onClick={() =>
+              history.push(`/sellerpage/single-order/${order._id}`)
+            }
+          >
+            More Details
+          </p>
+        ) : null}
       </div>
     </div>
   );

@@ -25,6 +25,11 @@ const SellerNotificationSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'orders',
     required: true
+  },
+
+  date: {
+    type: Date,
+    default: Date.now
   }
 });
 

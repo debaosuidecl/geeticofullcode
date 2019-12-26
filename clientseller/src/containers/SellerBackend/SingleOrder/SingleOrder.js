@@ -17,7 +17,30 @@ export class SingleOrder extends Component {
   componentDidMount() {
     console.log(this.props, 'from single order');
     this.fetchOrderData();
+    this.changeNotification();
   }
+  changeNotification = async () => {
+    try {
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        return console.log('no access');
+      }
+      let config = {
+        headers: {
+          'x-auth-token': token
+        }
+      };
+      const result = await axios.get(
+        `${App.domain}api/notifications/changesellertoread/${this.props.match.params.orderId}`,
+        config
+      );
+      console.log(result.data);
+      if (result.data === 'success') {
+        console.log('updated');
+      }
+    } catch (error) {}
+  };
   fetchOrderData = async () => {
     const token = localStorage.getItem('token');
 
@@ -76,10 +99,18 @@ export class SingleOrder extends Component {
             order={this.state.order}
             isForcedCollapse={true}
             setLoadingHandler={this.setLoadingHandler}
-
-            // isCollapsed={true}
-            // collapseHandler={this.collapseHandler}
           />
+          {this.state.order.verificationImage ? (
+            <div className={classes.VerificationInformation}>
+              <h2>Verification image</h2>
+              <div className={classes.verificationImageCont}>
+                <img
+                  src={`https://seller.geetico.com/test-public/${this.state.order.verificationImage}`}
+                  alt=''
+                />
+              </div>
+            </div>
+          ) : null}
         </React.Fragment>
       );
     return (

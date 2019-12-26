@@ -5,7 +5,7 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 export default function NotificationItem({ item }) {
   return (
-    <Link to={`/sellerpage/single-order/${item.order}`}>
+    <a href={`/sellerpage/single-order/${item.order}`}>
       <div className={classes.NotificationItem}>
         <div>
           {' '}
@@ -19,6 +19,6 @@ export default function NotificationItem({ item }) {
           {item.notification}
         </p>
       </div>
-    </Link>
+    </a>
   );
 }

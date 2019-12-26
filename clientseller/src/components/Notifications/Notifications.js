@@ -23,10 +23,9 @@ const NotificationDropDown = props => {
           <h4>Notifications</h4>
         </div>
         <div className={classes.Body} {...props}>
-          {!Array.isArray(props.notifications) ? (
-            'loading...'
-          ) : Array.isArray(props.notifications) &&
-            props.notifications.length <= 0 ? (
+          {props.notifications === null ||
+          (Array.isArray(props.notifications) &&
+            props.notifications.length <= 0) ? (
             <div className={classes.NoNotificationCont}>
               <FontAwesomeIcon icon={faBellSlash} />
               <p>No Notifications</p>

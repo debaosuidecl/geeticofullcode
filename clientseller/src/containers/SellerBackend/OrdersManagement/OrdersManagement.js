@@ -70,6 +70,7 @@ export class OrdersManagement extends Component {
       config
     );
     console.log(firstresp.data);
+
     this.setState(prevState => {
       return {
         loading: false,
@@ -219,7 +220,9 @@ export class OrdersManagement extends Component {
                 </p>
               )}{' '}
             </div>
-
+            {this.state.loading === false && this.state.orders.length <= 0 ? (
+              <p className={classes.NoOrders}>There are no orders</p>
+            ) : null}
             <InfiniteScroll
               dataLength={this.state.orders.length}
               next={this.fetchMoreData}

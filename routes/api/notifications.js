@@ -36,4 +36,27 @@ router.get('/', authMiddleWare, async (req, res) => {
     res.status(500).send('server error');
   }
 });
+//@route    POST  api/notifications/changesellertoread/:orderId
+//@desc     Change Notification to read
+//@access   private
+
+router.get('/changesellertoread/:orderId', authMiddleWare, async (req, res) => {
+  console.log(req.params.orderId, req.user.id);
+  try {
+    let notification = await SellerNotification.findOne({
+      order: req.params.orderId,
+      seller: req.user.id,
+      read: false
+    });
+    if (!notification) {
+      return res.status(404).send('not found');
+    }
+    notification.read = true;
+    await notification.save();
+    res.send('success');
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('server error');
+  }
+});
 module.exports = router;

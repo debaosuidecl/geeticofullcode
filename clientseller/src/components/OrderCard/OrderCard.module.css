@@ -1,5 +1,5 @@
 .OrderCard {
-  margin: 20px 20px;
+  /* margin: 20px 20px; */
   /* min-height: 120px; */
   /* height: 2000px; */
   display: flex;
@@ -8,12 +8,19 @@
   /* box-shadow: 1px 2px 5px #bbb; */
   border-bottom: 1px solid #eee;
   padding: 15px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   /* cursor: pointer; */
   /* transition: 1s; */
 }
 .spinnerCont {
   position: absolute;
+}
+.More {
+  color: blueviolet;
+  width: 95%;
+  font-size: 15px;
+
+  text-align: center;
 }
 .OrderCard svg {
   cursor: pointer;
@@ -152,7 +159,7 @@
 }
 @media (min-width: 1000px) {
   .OrderCard {
-    margin: 20px 20px;
+    /* margin: 20px 20px; */
   }
   .Left {
     /* background: #eee; */

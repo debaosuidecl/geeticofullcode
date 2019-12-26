@@ -9,6 +9,11 @@
   flex-flow: column;
   justify-content: space-around;
 }
+.NoOrders {
+  font-size: 20px;
+  text-align: center;
+  padding: 20px;
+}
 
 .FilterCont {
   flex: 1;
@@ -16,7 +21,7 @@
 }
 
 .OrderFilter {
-  width: 95%;
+  width: 100%;
   /* max-width: 500px; */
 }
 
