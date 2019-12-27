@@ -31,16 +31,6 @@ app.use('/api/userorders', require('./routes/api/frontEndOrders'));
 app.use('/api/notifications', require('./routes/api/notifications'));
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(
-    '/sellerpage/',
-    express.static(path.join(__dirname, 'clientseller', 'build'))
-  );
-  app.get('/sellerpage/*', (req, res) => {
-    res.sendFile(
-      path.resolve(__dirname, 'clientseller', 'build', 'index.html')
-    );
-  });
-
   app.use(express.static('client/build'));
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
