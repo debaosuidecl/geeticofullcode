@@ -160,7 +160,7 @@ router.post(
       console.log(error, 'could not find user');
       return res.status(400).json({ msg: 'Could not find the user' });
     }
-    if (status = "verification rejected"){
+    if (status === "verification rejected"){
       
     }
     let newBuyerNotification = new BuyerNotification({
