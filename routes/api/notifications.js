@@ -12,6 +12,30 @@ const { check, validationResult } = require('express-validator');
 
 router.get('/', authMiddleWare, async (req, res) => {
   try {
+    if (req.query.buyer) {
+      // console.log("let's get the buyer");
+      const unReadNotifications = await BuyerNotification.find({
+        user: req.user.id,
+        read: false
+      });
+
+      const readNotifications = await BuyerNotification.find({
+        user: req.user.id,
+        read: true
+      });
+      let notifications = {
+        notifications: [...unReadNotifications, ...readNotifications]
+      };
+      if (req.query.getCount) {
+        let countOfUnreadMessages = await BuyerNotification.countDocuments({
+          user: req.user.id,
+          read: false
+        });
+        notifications = { notifications: notifications, countOfUnreadMessages };
+      }
+      return res.json(notifications);
+    }
+    // if it is not a buyer
     const unReadNotifications = await SellerNotification.find({
       seller: req.user.id,
       read: false
@@ -41,8 +65,20 @@ router.get('/', authMiddleWare, async (req, res) => {
 //@access   private
 
 router.get('/changesellertoread/:orderId', authMiddleWare, async (req, res) => {
-  console.log(req.params.orderId, req.user.id);
   try {
+    if (req.query.buyer) {
+      let notification = await BuyerNotification.findOne({
+        order: req.params.orderId,
+        user: req.user.id,
+        read: false
+      });
+      if (!notification) {
+        return res.status(404).send('not found');
+      }
+      notification.read = true;
+      await notification.save();
+      return res.send('success');
+    }
     let notification = await SellerNotification.findOne({
       order: req.params.orderId,
       seller: req.user.id,

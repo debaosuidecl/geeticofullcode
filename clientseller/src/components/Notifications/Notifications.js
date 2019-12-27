@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBellSlash } from '@fortawesome/free-solid-svg-icons';
 // import Category from '../../Models/Category';
-import { authLogOut } from '../../store/actions/auth';
+// import { authLogOut } from '../../store/actions/auth';
 import { withRouter } from 'react-router';
 // import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -23,9 +23,10 @@ const NotificationDropDown = props => {
           <h4>Notifications</h4>
         </div>
         <div className={classes.Body} {...props}>
-          {props.notifications === null ||
-          (Array.isArray(props.notifications) &&
-            props.notifications.length <= 0) ? (
+          {props.notificationLoading ? (
+            <p>Loading...</p>
+          ) : Array.isArray(props.notifications) &&
+            props.notifications.length <= 0 ? (
             <div className={classes.NoNotificationCont}>
               <FontAwesomeIcon icon={faBellSlash} />
               <p>No Notifications</p>
@@ -46,11 +47,13 @@ NotificationDropDown.propTypes = {
 };
 
 const mapStateToProps = state => {
+  // console.log(state, 'noteee');
   return {
     // itemCount: state.cart.itemCount,
     // isAuthenticated: state.auth.token !== null,
     fullname: state.auth.fullName,
-    avatar: state.auth.avatar
+    avatar: state.auth.avatar,
+    notificationLoading: state.notification.loading
 
     // showAuthModal: state.auth.showAuthModal
   };

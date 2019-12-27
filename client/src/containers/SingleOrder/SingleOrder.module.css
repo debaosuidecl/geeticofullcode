@@ -1,0 +1,43 @@
+.spinnerCont {
+  position: fixed;
+  z-index: 10000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.VerificationInformation {
+  margin-top: 30px;
+  min-height: 400px;
+  background: #fff;
+  width: 100%;
+}
+.verificationImageCont {
+  /* background: green; */
+  margin: auto;
+  text-align: center;
+}
+.verificationImageCont img {
+  /* width: 90%; */
+  height: 300px;
+}
+.VerificationInformation h2 {
+  font-weight: 100;
+  font-family: sans-serif;
+  text-align: center;
+}
+.bToO {
+  padding: 20px;
+}
+.NotFound {
+  padding: 20px;
+  text-align: center;
+  font-size: 23px;
+  font-weight: 100;
+  /* min-height: 300px; */
+}
+
+.SingleOrder {
+  background: #fff;
+  margin-top: 50px;
+}

@@ -1,10 +1,12 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import authReducer from './reducers/auth';
+import NotificationsReducer from './reducers/notifications';
 import cartReducer from './reducers/cart';
 import thunk from 'redux-thunk';
 const rootReducer = combineReducers({
   cart: cartReducer,
-  auth: authReducer
+  auth: authReducer,
+  notification: NotificationsReducer
 });
 const composeEnhancers =
   process.env.NODE_ENV === 'development'

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import NavigationItem from '../NavigationItem/NavigationItem';
 import classes from './SellerBackendMobNavItems.module.css';
-
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 class SellerBackendMobNavItems extends Component {
   render() {
     const { navItems } = this.props.navItems;
@@ -24,9 +25,25 @@ class SellerBackendMobNavItems extends Component {
     return (
       <ul className={[classes.NavigationItems, classes.desktopOnly].join(' ')}>
         {renderCategoryArray}
+
+        <div
+          onClick={this.props.goToNotification}
+          className={classes.NotificationLink}
+        >
+          Notifications ({this.props.notificationCount})
+        </div>
+        <div>
+          <span className={classes.Logout} onClick={this.props.logoutHandler}>
+            Logout
+          </span>
+        </div>
       </ul>
     );
   }
 }
-
-export default SellerBackendMobNavItems;
+const mapStateToProps = state => {
+  return {
+    notificationCount: state.notification.notificationCount
+  };
+};
+export default connect(mapStateToProps)(withRouter(SellerBackendMobNavItems));

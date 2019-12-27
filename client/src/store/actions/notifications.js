@@ -10,9 +10,10 @@ export const getNotificationCount = (notificationCount, notifications) => {
   };
 };
 export const notificationGet = () => {
+  console.log('may we go get am oooo');
   return dispatch => {
     let url;
-    url = `${App.domain}api/notifications?getCount=true`;
+    url = `${App.domain}api/notifications?getCount=true&buyer=true`;
     const token = localStorage.getItem('token');
     if (!token) {
       dispatch(authLogOut());

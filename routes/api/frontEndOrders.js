@@ -4,6 +4,33 @@ const router = express.Router();
 const Order = require('../../models/Order');
 const Product = require('../../models/Product');
 const { check, validationResult } = require('express-validator');
+const authConfig = require('../../config/config');
+const statusChangeEmail = require('../../middleware/statusChangeEmail');
+const nodemailer = require('nodemailer');
+const BuyerNotification = require('../../models/BuyerNotification'); // bring in the notification model
+const User = require('../../models/FrontEndUser');
+const transport = {
+  host: 'smtp.geetico.com',
+  port: 587,
+  secure: false,
+  auth: {
+    user: authConfig.USER,
+    pass: authConfig.PASSWORD
+  },
+  tls: {
+    rejectUnauthorized: false
+  },
+  debug: true
+};
+const transporter = nodemailer.createTransport(transport);
+
+transporter.verify((error, success) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Server is ready to take messages', success);
+  }
+});
 
 const extractProduct = async orderDetails => {
   let myProducts = await Promise.all(
@@ -106,7 +133,8 @@ router.post(
       'processing',
       'delivered',
       'verification in progress',
-      'awaiting verification'
+      'awaiting verification',
+      'verification rejected'
     ])
   ],
   async (req, res) => {
@@ -124,7 +152,44 @@ router.post(
     order.status = status;
 
     await order.save();
-    res.json({ status });
+    // console.log('order saved');
+    let userBuyer;
+    try {
+      userBuyer = await User.findById(order.user);
+    } catch (error) {
+      console.log(error, 'could not find user');
+      return res.status(400).json({ msg: 'Could not find the user' });
+    }
+    if (status = "verification rejected"){
+      
+    }
+    let newBuyerNotification = new BuyerNotification({
+      user: order.user,
+      notification: status === "verification rejected"? `The verification document you submitted has been rejected`:`The status of your order has been changed to ${status}`,
+      order: order._id
+    });
+    await newBuyerNotification.save();
+    // console.log('buyer notification saved');
+    let notificationText = `Hi ${order.fullName} the status of your order has been changed to ${status}`;
+    await newBuyerNotification.save();
+    let content = statusChangeEmail(notificationText, order.order_id);
+    let mail = {
+      from: 'Geetico.com <contact@geetico.com>',
+      to: userBuyer.email,
+      subject: `Status of your Order has been changed at geetico.com `,
+      html: content
+    };
+
+    transporter.sendMail(mail, (err, data) => {
+      if (err) {
+        console.log(err);
+        // res.send('Failed to send your message');
+      } else {
+        // res.send('Your message has been sent');
+        console.log('sent');
+        res.json({ status });
+      }
+    });
   }
 );
 

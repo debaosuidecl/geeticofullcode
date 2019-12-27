@@ -12,6 +12,8 @@ import SellerBackendOrder from './containers/SellerBackend/OrdersManagement/Orde
 import AddProductContainer from './containers/SellerBackend/AddProductContainer/AddProductContainer';
 import ProductDetail from './containers/SellerBackend/ProductDetail/ProductDetail';
 import SingleOrder from './containers/SellerBackend/SingleOrder/SingleOrder';
+import AllNotifications from './containers/SellerBackend/AllNotifications/AllNotifications';
+import Customers from './containers/SellerBackend/Customers/Customers';
 // import LoadingPage from './containers/LoadingPage/LoadingPage';
 // import AddProductContainer2 from './containers/SellerBackend/AddProductContainer/AddProductContainer2';
 
@@ -99,6 +101,18 @@ const routes = [
     path: '/sellerpage/products/addnewproduct',
     exact: true,
     component: AddProductContainer
+  },
+  {
+    title: 'All Notifications',
+    path: '/sellerpage/all-notifications',
+    exact: true,
+    component: AllNotifications
+  },
+  {
+    title: 'All Customers',
+    path: '/sellerpage/customers',
+    exact: true,
+    component: Customers
   },
   {
     title: 'testinput',

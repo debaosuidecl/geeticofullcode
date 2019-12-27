@@ -22,6 +22,7 @@ import CartPreview from '../CartPreview/CartPreview';
 import Toggler from '../UI/Toggler/Toggler';
 import SearchSuggestion from '../SearchSuggestions/SearchSuggestion';
 import NotificationDropDown from '../NotificationDropDown/NotificationDropDown';
+import { notificationGet } from '../../store/actions/notifications';
 class NavigationItems extends Component {
   state = {
     search: '',
@@ -48,6 +49,7 @@ class NavigationItems extends Component {
   };
   componentDidMount() {
     this.props.onFetchCartItems();
+    this.props.onNotGet();
   }
   textChangeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -172,9 +174,12 @@ class NavigationItems extends Component {
         >
           <FontAwesomeIcon icon={faBell} size='1x' />
           <span>
-            Notifications <strong>(0)</strong>
+            Notifications <strong>({this.props.notificationCount})</strong>
           </span>
-          <NotificationDropDown show={this.state.showNotificationDesktop} />
+          <NotificationDropDown
+            show={this.state.showNotificationDesktop}
+            notifications={this.props.notifications}
+          />
 
           {/* <span className={classes.NotificationCount}>4</span> */}
         </div>
@@ -183,6 +188,7 @@ class NavigationItems extends Component {
   }
 }
 const mapStateToProps = state => {
+  console.log(state, 'for notifications from tni');
   return {
     // itemCount: state.cart.itemCount,
     isAuthenticated: state.auth.token !== null,
@@ -190,14 +196,17 @@ const mapStateToProps = state => {
     fullName: state.auth.fullName,
     cart: state.cart.cartItems,
     email: state.auth.email,
-    avatar: state.auth.avatar
+    avatar: state.auth.avatar,
+    notifications: state.notification.notifications,
+    notificationCount: state.notification.notificationCount
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
     onLogout: () => dispatch(authLogOut()),
     onFetchCartItems: () => dispatch(fetchAllCartItems()),
-    onToggleCartPreview: () => dispatch(showCartPreview())
+    onToggleCartPreview: () => dispatch(showCartPreview()),
+    onNotGet: () => dispatch(notificationGet())
   };
 };
 export default withRouter(

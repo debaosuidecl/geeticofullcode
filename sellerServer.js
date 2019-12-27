@@ -30,18 +30,9 @@ app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/userauth', require('./routes/api/frontendUserAuth'));
 app.use('/api/userorders', require('./routes/api/frontEndOrders'));
 app.use('/api/notifications', require('./routes/api/notifications'));
+app.use('/api/customers', require('./routes/api/customers'));
 
 if (process.env.NODE_ENV === 'production') {
-  // app.use(
-  //   '/sellerpage/',
-  //   express.static(path.join(__dirname, 'clientseller', 'build'))
-  // );
-  // app.get('/sellerpage/*', (req, res) => {
-  //   res.sendFile(
-  //     path.resolve(__dirname, 'clientseller', 'build', 'index.html')
-  //   );
-  // });
-
   app.use(express.static('clientseller/build'));
   app.get('*', (req, res) => {
     res.sendFile(
@@ -51,8 +42,5 @@ if (process.env.NODE_ENV === 'production') {
 }
 //set port
 const PORT = process.env.PORT || 2950;
-// var server_host = process.env.YOUR_HOST || '142.93.39.91';
 
 app.listen(PORT, () => console.log(`Server Started on port ${PORT}`));
-
-// app.listen(PORT, () => console.log(`Server Started on port ${PORT}`));

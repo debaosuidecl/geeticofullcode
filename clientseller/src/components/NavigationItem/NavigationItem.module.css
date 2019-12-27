@@ -18,7 +18,7 @@
   border-bottom: 0.21px solid #ccc;
 }
 .NavigationItem.Seller a {
-  color: #6ce001;
+  color: #fff;
   margin: 0;
   border: none;
   box-shadow: none;
@@ -71,6 +71,8 @@
   border-top: none;
 }
 @media (min-width: 950px) {
+  .NavigationItem.Seller a {
+  }
   .NavigationItem a {
     /* color: white; */
     margin-right: 8px;
@@ -81,6 +83,7 @@
 
   .NavigationItem.Seller a {
     /* color: white; */
+    color: #6ce001;
     margin: 0;
     font-size: 12px;
     border: none;

@@ -17,13 +17,13 @@ export class Home extends Component {
   }
   state = {
     cardDetails: {
-      // analytics: {
-      //   title: 'Analytics',
-      //   desc:
-      //     'Checkout your order count, profit, customer base and much more. Project your annual revenue and set benchmarks',
-      //   imageLink: OrderManagementIcon,
-      //   navLink: '/sellerpage/analytics'
-      // },
+      customers: {
+        title: 'Customers',
+        desc:
+          'Checkout your  customer details such as email address phone number and full name',
+        imageLink: ProductIcon,
+        navLink: '/sellerpage/customers'
+      },
 
       Products: {
         title: 'Products',
@@ -31,12 +31,7 @@ export class Home extends Component {
         imageLink: ProductCardIcon,
         navLink: '/sellerpage/products'
       },
-      // inventory: {
-      //   title: 'Inventory',
-      //   desc: 'Manage your inventory. Update quantity stock of products',
-      //   imageLink: InventoryIcon,
-      //   navLink: '/sellerpage/inventory'
-      // },
+      //
       OrderManagement: {
         title: 'Orders',
         desc:

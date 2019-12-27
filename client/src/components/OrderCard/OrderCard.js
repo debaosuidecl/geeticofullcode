@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import App from '../../App';
 // import App from '../../App';
-function OrderCard({ order, history }) {
+function OrderCard({ order, history, isForcedCollapse }) {
   const [isCollapsed, collapseHandler] = useState(false);
   return (
     <div
@@ -77,10 +77,16 @@ function OrderCard({ order, history }) {
       <div
         className={classes.collapsible}
         style={{
-          // maxHeight: isCollapsed ? '200px' : '0px'
-          // minHeight: isCollapsed ? '0px' : '200px'
-          transform: !isCollapsed ? 'rotateX(90deg)' : 'rotateX(0deg)',
-          maxHeight: !isCollapsed ? '0px' : '500px'
+          transform: isForcedCollapse
+            ? 'rotateX(0deg)'
+            : !isCollapsed
+            ? 'rotateX(90deg)'
+            : 'rotateX(0deg)',
+          maxHeight: isForcedCollapse
+            ? '100000px'
+            : !isCollapsed
+            ? '0px'
+            : '10000px'
         }}
       >
         {order.orderDetails.map((p, i) => {
@@ -99,6 +105,16 @@ function OrderCard({ order, history }) {
             </div>
           );
         })}
+        {!isForcedCollapse ? (
+          <p
+            className={classes.More}
+            onClick={() =>
+              history.push(`/sellerpage/single-order/${order._id}`)
+            }
+          >
+            More Details
+          </p>
+        ) : null}
       </div>
     </div>
   );

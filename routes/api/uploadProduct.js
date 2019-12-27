@@ -6,7 +6,6 @@ const User = require('../../models/User');
 const { check, validationResult } = require('express-validator');
 const request = require('request');
 const escapeRegex = require('../../middleware/escapeRegex');
-
 const config = require('config');
 const multer = require('multer');
 const uuid = require('uuid');
@@ -29,6 +28,7 @@ const allowedCategories = [
   'Condiments & Salad Dressings',
   'Household Supplies'
 ];
+
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, 'public');

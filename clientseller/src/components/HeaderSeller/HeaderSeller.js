@@ -52,6 +52,9 @@ class HeaderSeller extends Component {
       };
     });
   };
+  goToNotificationHandler = () => {
+    this.props.history.push('/sellerpage/all-notifications');
+  };
 
   render() {
     return (
@@ -65,7 +68,11 @@ class HeaderSeller extends Component {
                 )
           }
         >
-          <SellerBackendMobNavItems navItems={this.props.navItems} />
+          <SellerBackendMobNavItems
+            navItems={this.props.navItems}
+            logoutHandler={this.logoutHandler}
+            goToNotification={this.goToNotificationHandler}
+          />
         </div>
         <div
           className={
@@ -106,6 +113,11 @@ class HeaderSeller extends Component {
             <div
               className={[classes.TogglerCont, classes.higherIndex].join(' ')}
             >
+              {this.props.notificationCount > 0 ? (
+                <span className={classes.circularNotCount}>
+                  {this.props.notificationCount}
+                </span>
+              ) : null}
               <Toggler
                 color='#6ce001'
                 background='#6ce001'
