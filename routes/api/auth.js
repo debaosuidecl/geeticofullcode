@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const bcrypt = require('bcryptjs');
 const gravatar = require('gravatar');
+
 //@route    GET api/auth
 //@desc     test Route
 //@access   public
@@ -60,6 +61,7 @@ router.post(
           .status(400)
           .json({ errors: [{ msg: 'Incorrect email or password entered. ' }] }); //bad request
       }
+      console.log('just about');
 
       const payload = {
         user: {

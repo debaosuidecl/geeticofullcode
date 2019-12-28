@@ -30,13 +30,11 @@ export const notificationGet = () => {
           dispatch(
             getNotificationCount(
               res.data.countOfUnreadMessages,
-              res.data.notifications.notifications
+              res.data.notifications
             )
           );
         } else {
-          dispatch(
-            getNotificationCount(0, res.data.notifications.notifications)
-          );
+          dispatch(getNotificationCount(0, res.data.notifications));
         }
       });
     }

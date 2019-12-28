@@ -101,6 +101,11 @@ class NavigationItems extends Component {
         <FontAwesomeIcon size='lg' icon={faCartArrowDown} />
       </span>
     );
+    {
+      this.props.authSuccessReload
+        ? document.querySelector('#authSuccess').click()
+        : document.querySelector('#authSuccess').blur();
+    }
 
     return (
       <ul className={classes.NavigationItems} ref={node => (this.node = node)}>
@@ -167,22 +172,24 @@ class NavigationItems extends Component {
             </NavigationItem>
           )}
         </div>
-        <div
-          onClick={this.showNotificationHandler}
-          className={classes.Notification}
-          ref={node => (this.node = node)}
-        >
-          <FontAwesomeIcon icon={faBell} size='1x' />
-          <span>
-            Notifications <strong>({this.props.notificationCount})</strong>
-          </span>
-          <NotificationDropDown
-            show={this.state.showNotificationDesktop}
-            notifications={this.props.notifications}
-          />
+        {!this.props.isAuthenticated ? null : (
+          <div
+            onClick={this.showNotificationHandler}
+            className={classes.Notification}
+            ref={node => (this.node = node)}
+          >
+            <FontAwesomeIcon icon={faBell} size='1x' />
+            <span>
+              Notifications <strong>({this.props.notificationCount})</strong>
+            </span>
+            <NotificationDropDown
+              show={this.state.showNotificationDesktop}
+              notifications={this.props.notifications}
+            />
 
-          {/* <span className={classes.NotificationCount}>4</span> */}
-        </div>
+            {/* <span className={classes.NotificationCount}>4</span> */}
+          </div>
+        )}
       </ul>
     );
   }
@@ -198,7 +205,8 @@ const mapStateToProps = state => {
     email: state.auth.email,
     avatar: state.auth.avatar,
     notifications: state.notification.notifications,
-    notificationCount: state.notification.notificationCount
+    notificationCount: state.notification.notificationCount,
+    authSuccessReload: state.auth.authSuccessReload
   };
 };
 const mapDispatchToProps = dispatch => {

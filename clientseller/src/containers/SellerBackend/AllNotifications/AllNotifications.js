@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { notificationGet } from '../../../store/actions/notifications';
 import classes from './AllNotifications.module.css';
 import NotificationItem from '../../../components/NotificationItem/NotificationItem';
-export class AllNotifications extends Component {
+
+class AllNotifications extends Component {
   componentDidMount() {
     this.props.notGet();
   }

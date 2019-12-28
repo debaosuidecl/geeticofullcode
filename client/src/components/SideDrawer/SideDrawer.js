@@ -98,7 +98,14 @@ class SideDrawer extends React.Component {
               </div>
             </div>
           </div>
-
+          <div className=''>
+            <p
+              className={classes.Notification}
+              onClick={() => this.props.history.push('/')}
+            >
+              Notifications ({this.props.notificationCount})
+            </p>
+          </div>
           {selectedCat}
           {NavItems}
         </div>
@@ -110,7 +117,8 @@ const mapStateToProps = state => {
   return {
     cart: state.cart.cartItems,
     isAuthenticated: state.auth.token !== null,
-    itemCount: state.cart.itemCount
+    itemCount: state.cart.itemCount,
+    notificationCount: state.notification.notificationCount
   };
 };
 const mapDispatchToProps = dispatch => {

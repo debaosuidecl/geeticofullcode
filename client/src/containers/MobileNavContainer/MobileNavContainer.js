@@ -70,6 +70,11 @@ class NavContainer extends React.Component {
       <div className={navContainerArray.join(' ')}>
         <div className={classes.TopMobileNavItem}>
           <div className={classes.TogglerLogoCont}>
+            {this.props.notificationCount > 0 ? (
+              <span className={classes.circularNotCount}>
+                {this.props.notificationCount}
+              </span>
+            ) : null}
             <Toggler
               forceShow
               isToggled={this.props.isToggled}
@@ -168,7 +173,8 @@ const mapStateToProps = state => {
     fullName: state.auth.fullName,
     cart: state.cart.cartItems,
     email: state.auth.email,
-    avatar: state.auth.avatar
+    avatar: state.auth.avatar,
+    notificationCount: state.notification.notificationCount
   };
 };
 const mapDispatchToProps = dispatch => {

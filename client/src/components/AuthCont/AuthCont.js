@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import SimpleReactValidator from 'simple-react-validator';
 // import queryString from 'query-string';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 import classes from './AuthCont.module.css';
 import Button from '../UI/Button/Button';
 import { connect } from 'react-redux';
@@ -10,6 +10,7 @@ import {
   faUserAlt,
   faEnvelope,
   faLock,
+  faPhone,
   faTimes
 } from '@fortawesome/free-solid-svg-icons';
 import SpinnerTwo from '../UI/Spinner2/Spinner2';
@@ -21,7 +22,8 @@ export class AuthCont extends Component {
     email: '',
     password: '',
     isSignIn: false,
-    loading: false
+    loading: false,
+    phoneNumber: ''
   };
 
   onEditChange = e => {
@@ -43,14 +45,25 @@ export class AuthCont extends Component {
       this.state.email,
       this.state.password,
       this.state.fullName,
-      this.state.isSignIn
+      this.state.isSignIn,
+      this.state.phoneNumber
     );
   };
   render() {
-    const { fullName, email, password } = this.state;
+    this.props.tellUserToVerify || this.props.redirectToEmailVerificationPage
+      ? document.querySelector('#vemail').click()
+      : document.querySelector('#vemail').blur();
+    const { fullName, email, password, phoneNumber } = this.state;
+
     // const { validator } = this;
     return (
-      <div className={classes.AuthInput}>
+      <form
+        className={classes.AuthInput}
+        onSubmit={e => {
+          e.preventDefault();
+          this.onSubmit();
+        }}
+      >
         <div className={classes.Header}>
           <h4>
             {this.state.isSignIn ? 'Sign in' : 'Sign up'} and start shopping
@@ -108,6 +121,22 @@ export class AuthCont extends Component {
             name='password'
           />
         </div>
+        {!this.state.isSignIn ? (
+          <div className={classes.InputCont}>
+            <FontAwesomeIcon icon={faPhone} size='1x' />
+            <input
+              type='text'
+              value={phoneNumber}
+              required
+              placeholder='Phone Number (080..)'
+              className={classes.Input}
+              onChange={e => {
+                this.onEditChange(e);
+              }}
+              name='phoneNumber'
+            />
+          </div>
+        ) : null}
         <div className={classes.BtnCont}>
           <Button
             btnType='Geetico'
@@ -138,27 +167,26 @@ export class AuthCont extends Component {
             </span>
           </p>
         </div>
-      </div>
+      </form>
     );
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (email, password, fullName, isSignIn) =>
-      dispatch(auth(email, password, fullName, isSignIn))
+    onAuth: (email, password, fullName, isSignIn, phoneNumber) =>
+      dispatch(auth(email, password, fullName, isSignIn, phoneNumber))
   };
 };
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.auth.token !== null,
     loading: state.auth.loading,
-    error: state.auth.error
+    error: state.auth.error,
+    tellUserToVerify: state.auth.tellUserToVerify,
+    redirectToEmailVerificationPage: state.auth.redirectToEmailVerificationPage
   };
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(AuthCont)
+  connect(mapStateToProps, mapDispatchToProps)(AuthCont)
 );

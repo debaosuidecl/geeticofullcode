@@ -14,8 +14,10 @@ const initialState = {
   email: null,
   avatar: null,
   authCheckBeforeOpLoading: false,
-
-  showAuthModal: false
+  authSuccessReload: false,
+  tellUserToVerify: false,
+  showAuthModal: false,
+  redirectToEmailVerificationPage: false
 };
 
 const authStart = (state, action) => {
@@ -56,7 +58,8 @@ const authSuccess = (state, action) => {
     fullName: action.fullName,
     email: action.email,
     avatar: action.avatar,
-    authCheckBeforeOpLoading: false
+    authCheckBeforeOpLoading: false,
+    authSuccessReload: action.authSuccessReload
   });
 };
 const authFail = (state, action) => {
@@ -74,7 +77,7 @@ const authLogOut = (state, action) => {
   return updateObject(state, {
     error: null,
     firstLoad: 1,
-
+    authSuccessReload: action.reload,
     authCheckBeforeOpLoading: false,
 
     token: null,
@@ -107,6 +110,16 @@ const setAuthRedirectPath = (state, action) => {
     firstLoad: 1
   });
 };
+const tellUserToVerify = (state, action) => {
+  return updateObject(state, {
+    tellUserToVerify: true
+  });
+};
+const setRedirectToEmailVerificationPage = (state, action) => {
+  return updateObject(state, {
+    redirectToEmailVerificationPage: true
+  });
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -128,6 +141,10 @@ const reducer = (state = initialState, action) => {
       return toggleAuthModal(state, action);
     case actionTypes.SET_AUTH_MODAL_TO_TRUE:
       return setAuthModalToTrue(state, action);
+    case actionTypes.TELL_USER_TO_VERIFY:
+      return tellUserToVerify(state, action);
+    case actionTypes.SET_REDIRECT_TO_EMAIL_VERIFICATION_PAGE:
+      return setRedirectToEmailVerificationPage(state, action);
     default:
       return state;
   }

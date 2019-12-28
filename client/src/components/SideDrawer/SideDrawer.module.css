@@ -191,6 +191,13 @@
   color: #222;
   font-weight: 100;
 }
+.Notification {
+  /* text-align: center; */
+  font-size: 15px;
+  margin-left: 10px;
+  padding-bottom: 4px;
+  color: #444;
+}
 @media (min-width: 950px) {
   .MobileOnly {
     display: none;

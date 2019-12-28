@@ -12,6 +12,10 @@ const FrontEndUserSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  isConfirmed: {
+    type: Boolean,
+    default: false
+  },
   password: {
     type: String,
     required: true

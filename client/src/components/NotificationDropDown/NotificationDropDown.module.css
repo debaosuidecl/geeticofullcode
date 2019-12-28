@@ -13,6 +13,11 @@
   /* height: 520px; */
   z-index: 1000;
 }
+.viewAll {
+  text-align: center;
+  color: #444;
+  padding: 2px;
+}
 
 .arrow-up {
   width: 0;

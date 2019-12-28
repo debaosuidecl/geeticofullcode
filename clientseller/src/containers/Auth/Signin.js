@@ -135,11 +135,7 @@ class SignUp extends Component {
     individualSellerSelected: true,
     businessSellerSelected: false
   };
-  componentDidMount() {
-    //  if(!this.props.buildingBurger && this.props.authRedirectPath !== '/'){
-    //     this.props.onSetAuthRedirectPath()
-    //     }
-  }
+  componentDidMount() {}
 
   onChangeHandler = (event, controlName) => {
     console.log(event.target);

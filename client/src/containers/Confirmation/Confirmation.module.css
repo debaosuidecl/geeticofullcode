@@ -1,0 +1,13 @@
+.IconForSuccess {
+}
+
+.Confirmation {
+  padding-top: 70px;
+  text-align: center;
+}
+
+.Confirmation svg {
+  font-size: 50px;
+
+  color: #6ce001;
+}

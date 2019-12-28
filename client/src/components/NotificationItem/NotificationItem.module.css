@@ -1,13 +1,14 @@
 .NotificationItemCont {
-  background: rgb(250, 249, 249);
+  background: white;
+  /* margin-bottom: 20px; */
 }
 .date {
   text-align: center;
-  color: #444;
+  color: #999;
 }
 
 .NotificationItem {
-  padding: 13px;
+  padding: 15px;
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
@@ -25,4 +26,5 @@
 }
 .NotificationItem p {
   flex: 10;
+  margin: 0;
 }

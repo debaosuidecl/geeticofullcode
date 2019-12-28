@@ -7,7 +7,7 @@ import moment from 'moment';
 export default function NotificationItem({ item }) {
   const now = moment(item.date).fromNow();
   return (
-    <a href={`/sellerpage/single-order/${item.order}`}>
+    <a href={`/single-order/${item.order}`}>
       <div className={classes.NotificationItemCont}>
         <div className={classes.date}>{now}</div>
 
@@ -20,7 +20,13 @@ export default function NotificationItem({ item }) {
             />{' '}
           </div>
 
-          <p style={{ color: item.read == false ? '#333' : '#bbb' }}>
+          <p
+            style={{
+              color: item.read == false ? '#333' : '#bbb',
+              padding: 0,
+              margin: 0
+            }}
+          >
             {item.notification}
           </p>
         </div>

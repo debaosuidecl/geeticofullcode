@@ -38,6 +38,14 @@ const NotificationDropDown = props => {
             ))
           )}
         </div>
+        <p
+          className={classes.viewAll}
+          onClick={() => props.history.push('/all-notifications')}
+        >
+          {props.notifications !== null && props.notifications.length > 0
+            ? 'View All'
+            : null}
+        </p>
       </div>
     </div>
   );

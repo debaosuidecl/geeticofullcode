@@ -10,6 +10,7 @@ import { withRouter } from 'react-router';
 // import { Link } from 'react-router-dom';
 
 const DesktopDropDown = props => {
+  console.log(props, 'from d drop');
   return (
     <div
       ref={props.customReference}
@@ -73,7 +74,7 @@ const DesktopDropDown = props => {
               <h4
                 onClick={() => {
                   props.onLogout();
-                  window.location.href = '/';
+                  // window.location.href = '/';
                 }}
               >
                 Logout

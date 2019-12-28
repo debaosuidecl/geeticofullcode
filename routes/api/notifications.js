@@ -10,50 +10,52 @@ const { check, validationResult } = require('express-validator');
 //@desc     get seller specific notifications
 //@access   private
 
-router.get('/', authMiddleWare, async (req, res) => {
+router.get('/:page', authMiddleWare, async (req, res) => {
   try {
+    const resPerPage = 50; // results per page
+    const page = req.params.page || 1; // Page
+    let notifications;
+
     if (req.query.buyer) {
       // console.log("let's get the buyer");
-      const unReadNotifications = await BuyerNotification.find({
-        user: req.user.id,
-        read: false
-      });
-
-      const readNotifications = await BuyerNotification.find({
-        user: req.user.id,
-        read: true
-      });
-      let notifications = {
-        notifications: [...unReadNotifications, ...readNotifications]
-      };
+      let newNotifications = await BuyerNotification.find({
+        user: req.user.id
+      })
+        .sort('-date')
+        .skip(resPerPage * page - resPerPage)
+        .limit(resPerPage);
+      // console.log(newNotifications);
       if (req.query.getCount) {
         let countOfUnreadMessages = await BuyerNotification.countDocuments({
           user: req.user.id,
           read: false
         });
-        notifications = { notifications: notifications, countOfUnreadMessages };
+        notifications = {
+          notifications: newNotifications,
+          countOfUnreadMessages
+        };
       }
+      // console.log(notifications);
       return res.json(notifications);
     }
     // if it is not a buyer
-    const unReadNotifications = await SellerNotification.find({
-      seller: req.user.id,
-      read: false
-    });
 
-    const readNotifications = await SellerNotification.find({
-      seller: req.user.id,
-      read: true
-    });
-    let notifications = {
-      notifications: [...unReadNotifications, ...readNotifications]
-    };
+    let newNotifications = await SellerNotification.find({
+      seller: req.user.id
+    })
+      .sort('-date')
+      .skip(resPerPage * page - resPerPage)
+      .limit(resPerPage);
+
     if (req.query.getCount) {
       let countOfUnreadMessages = await SellerNotification.countDocuments({
         seller: req.user.id,
         read: false
       });
-      notifications = { notifications: notifications, countOfUnreadMessages };
+      notifications = {
+        notifications: newNotifications,
+        countOfUnreadMessages
+      };
     }
     return res.json(notifications);
   } catch (error) {

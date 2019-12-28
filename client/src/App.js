@@ -53,12 +53,10 @@ class App extends Component {
     'Surulere Lagos State'
   ];
   static hours = [
-    { displayValue: '7am - 9am', value: 1 },
-    { displayValue: '9am - 11am', value: 2 },
-    { displayValue: '11am - 1pm', value: 3 },
-    { displayValue: '1pm - 3pm', value: 4 },
-    { displayValue: '3pm - 5pm', value: 5 },
-    { displayValue: '5pm - 7pm', value: 6 }
+    { displayValue: '7am - 10am', value: 1 },
+    { displayValue: '10am - 1pm', value: 2 },
+    { displayValue: '1pm - 4pm', value: 3 },
+    { displayValue: '4pm - 7pm', value: 4 }
   ];
   static valueToHours = value => {
     switch (value) {
@@ -114,10 +112,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(App)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
 // export default App;

@@ -73,11 +73,13 @@ router.post(
     check('fullName', 'Your full name is required')
       .not()
       .isEmpty(),
-
+    check('phoneNumber', 'Please enter a valid Nigerian Phone Number').matches(
+      /^[0]\d{10}/
+    ),
     check('email', 'Use a valid Email').isEmail(),
     check(
       'password',
-      'Please Enter a password with 6 or more characters'
+      'Please Enter a password with 8 or more characters'
     ).isLength({ min: 8 })
   ],
   async (req, res) => {
@@ -89,7 +91,7 @@ router.post(
       });
     }
 
-    const { fullName, email, password } = req.body;
+    const { fullName, email, password, phoneNumber } = req.body;
 
     try {
       // we want to see if the user exist
@@ -115,7 +117,8 @@ router.post(
         fullName,
         email,
         avatar,
-        password
+        password,
+        phone: phoneNumber
       });
       const salt = await bcrypt.genSalt(10); // create the salt
       user.password = await bcrypt.hash(password, salt); // to encrypt the user password
@@ -131,7 +134,18 @@ router.post(
       jwt.sign(payload, config.get('jwtSecret'), null, (error, token) => {
         if (error) throw error;
 
-        res.json({ token, avatar: user.avatar, fullName: user.fullName });
+        const url = `https://geetico.com/confirmation/${token}`;
+
+        transporter.sendMail({
+          from: 'Geetico.com <contact@geetico.com>',
+          to: user.email,
+          subject: 'Please confirm your email address with geetico.com',
+          html: `Hi ${user.fullName}!. <br> <p> Thanks a lot for registering on geetico.com. Please click this link to confirm your email: <a href="${url}">${url}</a></p>`
+        });
+        res.json({
+          timeToVerifyUser: true
+        });
+        // res.json({ token, avatar: user.avatar, fullName: user.fullName });
       });
     } catch (e) {
       console.error(e);
@@ -139,6 +153,49 @@ router.post(
     }
   }
 );
+
+// @route GET /api/users/confirmation/:token
+// @DESC  confirm the user
+// @ public...
+
+router.get('/confirmation/:token', async (req, res) => {
+  try {
+    const {
+      user: { id }
+    } = jwt.verify(req.params.token, config.get('jwtSecret'));
+    let userToConfirm = await User.findById(id);
+    if (!userToConfirm) {
+      return res.status(404).json({
+        success: false,
+        msg: 'User not found'
+      });
+    }
+    console.log('found user');
+    userToConfirm.isConfirmed = true;
+    userToConfirm.save();
+    const payload = {
+      user: {
+        id: userToConfirm.id
+      }
+    };
+
+    jwt.sign(payload, config.get('jwtSecret'), null, (error, token) => {
+      if (error) throw error;
+
+      res.json({
+        token,
+        email: userToConfirm.email,
+        fullName: userToConfirm.fullName,
+        _id: userToConfirm.id,
+        avatar: userToConfirm.avatar
+      });
+    });
+
+    // return res.json({ success: true });
+  } catch (error) {
+    return res.status(500).send('server error');
+  }
+});
 
 const extractProduct = async orderDetails => {
   let myProducts = await Promise.all(
@@ -200,14 +257,7 @@ router.post(
 
     check('phone', 'Phone number is required and must be Real').isNumeric(),
     check('dateOfDelivery', 'Delivery Date is required').isISO8601(),
-    check('timeOfDelivery', 'Delivery time is required').isIn([
-      1,
-      2,
-      3,
-      4,
-      5,
-      6
-    ])
+    check('timeOfDelivery', 'Delivery time is required').isIn([1, 2, 3, 4])
   ],
   async (req, res) => {
     const errors = validationResult(req);

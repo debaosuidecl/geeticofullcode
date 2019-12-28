@@ -10,6 +10,9 @@ import OrderPage from './containers/OrderPage/OrderPage';
 import ProductSearchPage from './containers/ProductSearchPage/ProductSearchPage';
 import DirectPaymentDetails from './containers/DirectPaymentDetails/DirectPaymentDetails';
 import SingleOrder from './containers/SingleOrder/SingleOrder';
+import AllNotifications from './containers/AllNotifications/AllNotifications';
+import CheckEmailForVerification from './containers/CheckEmailForVerification/CheckEmailForVerification';
+import Confirmation from './containers/Confirmation/Confirmation';
 const routes = [
   {
     title: 'Product Page',
@@ -68,7 +71,7 @@ const routes = [
   },
   {
     title: 'Single Order',
-    path: '/sellerpage/single-order/:orderId',
+    path: '/single-order/:orderId',
     exact: true,
     component: SingleOrder
   },
@@ -77,6 +80,25 @@ const routes = [
     path: '/category/:category',
     exact: true,
     component: CategoryPage
+  },
+  {
+    title: 'Get All Notifications',
+    path: '/all-notifications',
+    exact: true,
+    component: AllNotifications
+  },
+  {
+    title: 'Check email for verification page',
+    path: '/check-email-for-verification',
+    exact: true,
+    component: CheckEmailForVerification
+  },
+
+  {
+    title: 'Confirmation Link',
+    path: '/confirmation/:token',
+    exact: true,
+    component: Confirmation
   },
   {
     title: 'Cart Page',

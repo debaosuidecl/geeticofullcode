@@ -6,7 +6,31 @@ const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
+const authConfig = require('../../config/config');
 
+const transport = {
+  host: 'smtp.geetico.com',
+  port: 587,
+  secure: false,
+  auth: {
+    user: authConfig.USER,
+    pass: authConfig.PASSWORD
+  },
+  tls: {
+    rejectUnauthorized: false
+  },
+  debug: true
+};
+const transporter = nodemailer.createTransport(transport);
+
+transporter.verify((error, success) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Server is ready to take messages', success);
+  }
+});
 //@route    GET api/auth
 //@desc     test Route
 //@access   public
@@ -68,6 +92,35 @@ router.post(
         return res
           .status(400)
           .json({ errors: [{ msg: 'Incorrect email or password entered. ' }] }); //bad request
+      }
+
+      if (user.isConfirmed !== true) {
+        console.log('gotem');
+        const payload = {
+          user: {
+            id: user.id
+          }
+        };
+
+        return jwt.sign(
+          payload,
+          config.get('jwtSecret'),
+          null,
+          (error, token) => {
+            if (error) throw error;
+
+            const url = `https://geetico.com/confirmation/${token}`;
+
+            transporter.sendMail({
+              from: 'Geetico.com <contact@geetico.com>',
+              to: user.email,
+              subject: 'Please confirm your email address with geetico.com',
+              html: `Hi ${user.fullName}!. <br> <p> Thanks a lot for registering on geetico.com. Please click this link to confirm your email: <a href="${url}">${url}</a></p>`
+            });
+
+            res.status(400).json({ notConfirmed: true });
+          }
+        );
       }
 
       const payload = {

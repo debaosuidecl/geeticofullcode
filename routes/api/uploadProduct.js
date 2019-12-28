@@ -82,7 +82,7 @@ router.post(
         errors: errors.array()
       });
     }
-
+    ``;
     try {
       console.log(req.body);
       const user = await User.findById(req.user.id);

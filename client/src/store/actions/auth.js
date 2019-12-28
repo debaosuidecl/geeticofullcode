@@ -13,14 +13,28 @@ export const authCheckStart = () => {
   };
 };
 
-export const authSuccess = (token, _id, fullName, email, avatar) => {
+export const tellUserToVerify = () => {
+  return {
+    type: actionTypes.TELL_USER_TO_VERIFY
+  };
+};
+
+export const authSuccess = (
+  token,
+  _id,
+  fullName,
+  email,
+  avatar,
+  authSuccessReload
+) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
     _id,
     fullName,
     email,
-    avatar
+    avatar,
+    authSuccessReload: authSuccessReload ? authSuccessReload : false
     // userId: userId
   };
 };
@@ -48,11 +62,12 @@ export const setAuthModalToTrue = () => {
   };
 };
 
-export const authLogOut = () => {
+export const authLogOut = reload => {
   localStorage.removeItem('token');
 
   return {
-    type: actionTypes.AUTH_LOGOUT
+    type: actionTypes.AUTH_LOGOUT,
+    reload
   };
 };
 
@@ -64,7 +79,7 @@ export const authExpires = expirationTime => {
   };
 };
 
-export const auth = (email, password, fullName, isSignin) => {
+export const auth = (email, password, fullName, isSignin, phoneNumber) => {
   return dispatch => {
     dispatch(authStart());
 
@@ -80,26 +95,31 @@ export const auth = (email, password, fullName, isSignin) => {
       authData = {
         email,
         fullName,
-        password
+        password,
+        phoneNumber
       };
       url = `${App.domain}api/users/`;
     }
 
-    // let url = 'http://localhost:5000/api/auth';
     axios
       .post(url, authData)
       .then(response => {
-        // console.log(response);
-        // console.log(response.data, 'authAc');
-        const { token, errors, _id, fullName, email, avatar } = response.data;
+        const { errors } = response.data;
         if (errors) {
           // throw new Error()
-          dispatch(authFail(response.data.errors));
+          return dispatch(authFail(response.data.errors));
         }
+        if (isSignin) {
+          const { token, _id, fullName, email, avatar } = response.data;
 
-        if (token) {
-          localStorage.setItem('token', token);
-          dispatch(authSuccess(token, _id, fullName, email, avatar));
+          if (token) {
+            localStorage.setItem('token', token);
+            dispatch(authSuccess(token, _id, fullName, email, avatar, true));
+          }
+        } else {
+          if (response.data.timeToVerifyUser) {
+            dispatch(tellUserToVerify());
+          }
         }
       })
 
@@ -110,7 +130,16 @@ export const auth = (email, password, fullName, isSignin) => {
         if (error.response.data.errors) {
           dispatch(authFail(error.response.data.errors));
         }
+        if (error.response.data.notConfirmed) {
+          dispatch(setRedirectToEmailVerificationPage());
+        }
       });
+  };
+};
+
+const setRedirectToEmailVerificationPage = () => {
+  return {
+    type: actionTypes.SET_REDIRECT_TO_EMAIL_VERIFICATION_PAGE
   };
 };
 

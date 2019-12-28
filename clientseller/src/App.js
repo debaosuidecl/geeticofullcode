@@ -39,15 +39,12 @@ class App extends Component {
       case 1:
         return 9;
       case 2:
-        return 11;
+        return 12;
       case 3:
-        return 13;
-      case 4:
         return 15;
-      case 5:
-        return 17;
-      case 6:
+      case 4:
         return 18;
+
       default:
         return '';
     }
