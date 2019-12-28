@@ -101,7 +101,7 @@ class SideDrawer extends React.Component {
           <div className=''>
             <p
               className={classes.Notification}
-              onClick={() => this.props.history.push('/')}
+              onClick={() => this.props.history.push('/all-notifications')}
             >
               Notifications ({this.props.notificationCount})
             </p>

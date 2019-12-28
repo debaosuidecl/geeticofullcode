@@ -12,7 +12,7 @@ export const getNotificationCount = (notificationCount, notifications) => {
 export const notificationGet = () => {
   return dispatch => {
     let url;
-    url = `${App.domain}api/notifications?getCount=true`;
+    url = `${App.domain}api/notifications/1?getCount=true`;
     const token = localStorage.getItem('token');
     if (!token) {
       dispatch(authLogOut());
@@ -24,7 +24,7 @@ export const notificationGet = () => {
         }
       };
       axios.get(url, config).then(res => {
-        console.log(res.data);
+        console.log(res.data, 'this is the freaking stuff');
 
         if (res.data.countOfUnreadMessages) {
           dispatch(
