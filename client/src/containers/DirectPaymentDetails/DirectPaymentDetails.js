@@ -16,7 +16,8 @@ export class DirectPaymentDetails extends Component {
     fileName: null,
     formValidity: false,
     animateFileIcon: false,
-    file: null
+    file: null,
+    verificationRejected: false
   };
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -42,7 +43,9 @@ export class DirectPaymentDetails extends Component {
           localStorage.removeItem('cart-sama');
           this.setState({
             bankDetails: result.data.bankDetails,
-            orderDetails: result.data._doc.amount / 100
+            orderDetails: result.data._doc.amount / 100,
+            verificationRejected:
+              result.data._doc.status === 'verification rejected'
           });
           // console.log(result.data);
         })
@@ -181,8 +184,22 @@ export class DirectPaymentDetails extends Component {
                 : 'rotateX(90deg)'
             }}
           >
-            <h2 className={classes.header}>Thank You for shopping Geetico.</h2>
-            <h2 className={classes.orderDetailHeader}>ORDER DETAILS</h2>
+            {!this.state.verificationRejected ? (
+              <React.Fragment>
+                <h2 className={classes.header}>
+                  Thank You for shopping Geetico.
+                </h2>
+                <h2 className={classes.orderDetailHeader}>ORDER DETAILS</h2>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <h2 className={classes.rejected}>
+                  The Verification image you submitted was rejected. Please
+                  upload a new image and ensure it clearly shows the amount
+                  transfered - preferably a screenshot
+                </h2>
+              </React.Fragment>
+            )}
 
             <h2 className={classes.header}>
               TOTAL:{' '}
@@ -233,10 +250,6 @@ export class DirectPaymentDetails extends Component {
               </div>
             </div>
           </div>
-          {/* <div
-            className={classes.CardVerificationDetails}
-            
-          ></div> */}
         </div>
       </Layout>
     );

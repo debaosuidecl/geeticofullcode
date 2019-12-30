@@ -117,7 +117,8 @@ function OrderCard({ order, isForcedCollapse, setLoadingHandler, history }) {
                 'shipped',
                 'delivered',
                 'awaiting verification',
-                'verification in progress'
+                'verification in progress',
+                'verification rejected'
               ]
                 .filter(status => status !== order.status)
                 .map(status => (

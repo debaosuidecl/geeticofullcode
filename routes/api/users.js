@@ -511,20 +511,27 @@ router.get('/directPaymentOrder', authMiddleWare, async (req, res) => {
     // let user = await User.findById(req.user.id);
     let directPaymentOrder = await Order.findOne({
       transactionId: req.query.transactionId,
-      directPaymentMethod: true,
-      status: 'awaiting verification'
+      directPaymentMethod: true
+      // status: 'awaiting verification'
     });
     if (!directPaymentOrder) {
       return res.status(400).json({ noDirectPayment: true });
     }
-    return res.json({
-      ...directPaymentOrder,
-      bankDetails: {
-        bank: 'GTBank',
-        accountNumber: '0122958763',
-        accountName: 'Geetico HQ'
-      }
-    });
+    if (
+      directPaymentOrder.status === 'verification rejected' ||
+      directPaymentOrder.status === 'awaiting verification'
+    ) {
+      return res.json({
+        ...directPaymentOrder,
+        bankDetails: {
+          bank: 'GTBank',
+          accountNumber: '0122958763',
+          accountName: 'Geetico HQ'
+        }
+      });
+    } else {
+      return res.status(400).json({ noDirectPayment: true });
+    }
   } catch (error) {
     res.status(500).send('Server Error');
   }
@@ -544,13 +551,33 @@ router.post(
       let user = await User.findById(req.user.id);
       let order = await Order.findOne({
         transactionId: req.params.transactionId,
-        status: 'awaiting verification',
+        // status: 'awaiting verification',
         directPaymentMethod: true
       });
       console.log(order);
+      let isRejected = order.status === 'verification rejected';
       if (!order) {
         return res.status(400).send('No order awaiting verification found');
       }
+      // if(order === "verification rejected")
+
+      if (order.status === 'verification rejected') {
+        try {
+          fs.unlinkSync(
+            path.join(
+              __dirname,
+              '..',
+              '..',
+              'test-public',
+              order.verificationImage
+            )
+          );
+          console.log('unlink success');
+        } catch (error) {
+          console.log(error, "image doesn't exist");
+        }
+      }
+
       order.status = 'verification in progress';
       order.verificationImage = req.files[0].filename;
       // console.log(order.transactionId, 'the tranac');
@@ -578,14 +605,20 @@ router.post(
         let newSellerNotification = new SellerNotification({
           user: req.user.id,
           seller: mailingList[i].sellerID,
-          notification: `You just received a payment verification document from ${mailingList[i].buyerName}`,
+          notification: `You just received a payment verification document from ${
+            mailingList[i].buyerName
+          } ${isRejected ? 'whose document was previously rejected.' : ''}`,
           order: order._id
         });
         await newSellerNotification.save();
       }
       let newBuyerNotification = new BuyerNotification({
         user: req.user.id,
-        notification: `You just Completed your order`,
+        notification: `${
+          isRejected
+            ? 'Your document has been resubmitted and will be verified with our team shortly'
+            : 'You just Completed your order'
+        }`,
         order: order._id
       });
       await newBuyerNotification.save();

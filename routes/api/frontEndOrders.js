@@ -160,19 +160,23 @@ router.post(
       console.log(error, 'could not find user');
       return res.status(400).json({ msg: 'Could not find the user' });
     }
-    if (status === "verification rejected"){
-      
-    }
+
     let newBuyerNotification = new BuyerNotification({
       user: order.user,
-      notification: status === "verification rejected"? `The verification document you submitted has been rejected`:`The status of your order has been changed to ${status}`,
+      notification:
+        status === 'verification rejected'
+          ? `The verification document you submitted has been rejected`
+          : `The status of your order has been changed to ${status}`,
       order: order._id
     });
     await newBuyerNotification.save();
     // console.log('buyer notification saved');
     let notificationText = `Hi ${order.fullName} the status of your order has been changed to ${status}`;
     await newBuyerNotification.save();
-    let content = statusChangeEmail(notificationText, order.order_id);
+    let content =
+      status === 'verification rejected'
+        ? statusChangeEmail(notificationText, order.order_id, true)
+        : statusChangeEmail(notificationText, order.order_id, false); // third argument is the reject clause
     let mail = {
       from: 'Geetico.com <contact@geetico.com>',
       to: userBuyer.email,

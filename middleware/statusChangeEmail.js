@@ -1,4 +1,4 @@
-module.exports = (NotificationMessage, orderId) => {
+module.exports = (NotificationMessage, orderId, isRejected) => {
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html>
   
@@ -745,8 +745,12 @@ module.exports = (NotificationMessage, orderId) => {
                                                                                   <tr>
                                                                                       <td class="esd-block-text es-p5t es-p5b es-p40r es-p40l" align="center">
                                                                                           <p style="color: rgb(51, 51, 51);">
-                                                                                          ${NotificationMessage}. You can track your order on the <a 
-                                                                                         style="color: blueviolet" href="https://geetico.com/sellerpage/single-order/${orderId}"> Geetico website </a> </p>
+                                                                                          ${
+                                                                                            isRejected
+                                                                                              ? 'We are sorry to inform you that the verification document you submitted for the verification of your order has been rejected as it does not fully verify the payment of the ordered products.'
+                                                                                              : NotificationMessage
+                                                                                          }. You can track your order on the <a 
+                                                                                         style="color: blueviolet" href="https://geetico.com/single-order/${orderId}"> Geetico website </a> </p>
                                                                                         
                                                                                       </td>
                                                                                   </tr>

@@ -108,9 +108,7 @@ function OrderCard({ order, history, isForcedCollapse }) {
         {!isForcedCollapse ? (
           <p
             className={classes.More}
-            onClick={() =>
-              history.push(`/sellerpage/single-order/${order._id}`)
-            }
+            onClick={() => history.push(`/single-order/${order._id}`)}
           >
             More Details
           </p>
