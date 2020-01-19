@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom';
 // import InfiniteScroll from 'react-infinite-scroll-component';
 import axios from 'axios';
 import Breakfast from '../../shared/images/breakfast foods.jpg';
+import CustomOrderPic from '../../shared/images/geetico-19.jpg';
 import Beverages from '../../shared/images/beverages.jpg';
 import Herbs from '../../shared/images/Herbs spice seasoning.jpg';
 import Drinks from '../../shared/images/drinks.jpg';
@@ -26,6 +27,14 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import { connect } from 'react-redux';
 import { initiateAddToCart } from '../../store/actions/cart';
 import App from '../../App';
+import Button from '../../components/UI/Button/Button';
+import {
+  toggleAuthModalAction,
+  authLogOut,
+  authSuccess
+} from '../../store/actions/auth';
+import Backdrop from '../../components/UI/Backdrop/Backdrop';
+// import Spinner from '../../components/UI/Spinner/Spinner';
 
 class ProductPage extends React.Component {
   state = {
@@ -34,7 +43,8 @@ class ProductPage extends React.Component {
     'Household Supplies': [],
     hottestDeals: [],
     cooking: [],
-    hasMore: true
+    hasMore: true,
+    loading: false
   };
 
   componentDidMount() {
@@ -93,12 +103,67 @@ class ProductPage extends React.Component {
     console.log(sentence);
     return sentence.join(' ');
   };
+  checkAuthBeforeCheckout = () => {
+    // this.props.checkAuthState();
+    this.setState({ loading: true });
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      // dispatch(authLogOut());
+      this.setState({ loading: false });
+      this.props.onAuthLogout();
+
+      // dispatch(authFail(''));
+      this.props.onShowAuthModalToggle();
+    } else {
+      let config = {
+        headers: {
+          'x-auth-token': token
+        }
+      };
+      let url = `${App.domain}api/userauth`;
+      axios
+        .get(url, config)
+        .then(response => {
+          // console.log(response.data);
+          // const { email, _id, fullName, avatar } = response.data;
+          setTimeout(() => {
+            // this.props.onAuthSuccess(token, _id, fullName, email, avatar);
+            this.props.history.push('/custom-order-page');
+          }, 500);
+        })
+
+        .catch(error => {
+          // console.log(error.response.data);
+          // if (error.response.data.msg) {
+          this.setState({ loading: true });
+          this.props.onAuthLogout();
+          this.props.onShowAuthModalToggle();
+
+          // }
+        });
+    }
+  };
+
   render() {
+    let loadingStage = (
+      <div className=''>
+        <Backdrop forceWhite show={true} />
+
+        <div className={classes.spinnerCont}>
+          <Spinner />
+        </div>
+      </div>
+    );
     return (
       <div>
+        {this.state.loading ? loadingStage : null}
         <Layout>
           <div style={{ paddingTop: '50px' }}>
             {/* <Carousel /> */}
+            <div className={classes.CustomOrderPic}>
+              <img src={CustomOrderPic} alt='' />
+            </div>
 
             <div className={classes.GridCont}>
               <div className={classes['grid-container']}>
@@ -247,6 +312,12 @@ class ProductPage extends React.Component {
               <Spinner />
             ) : null}
           </div>
+          <div className={classes.MakeACustomOffer}>
+            <p>Can't find what you are looking for?</p>
+            <Button clicked={this.checkAuthBeforeCheckout} btnType='Geetico'>
+              Make a custom order
+            </Button>
+          </div>
         </Layout>
       </div>
     );
@@ -259,9 +330,16 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
+    // onFetchCartItems: () => dispatch(fetchAllCartItems()),
+    // onEmptyCart: () => dispatch(initiateEmptyCart()),
+    onShowAuthModalToggle: () => dispatch(toggleAuthModalAction()),
+    onAuthLogout: () => dispatch(authLogOut()),
+    onAuthSuccess: () => dispatch(authSuccess()),
     onAddToCart: prodData => dispatch(initiateAddToCart(prodData))
+    // onAuthFail: ()=>dispatch(aut)
   };
 };
+
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(ProductPage)
 );

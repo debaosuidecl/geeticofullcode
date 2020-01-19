@@ -1,6 +1,62 @@
 import React, { Component } from 'react';
-
+import classes from "./VerificationImageUpload.module.css"
+import Modal from '../UI/Modal/Modal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileUpload } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 export class VerificationImageUpload extends Component {
+
+
+  state = {
+    loading: true,
+    bankDetails: null,
+    orderDetails: null,
+    confirmPaymentInitiated: false,
+    fileName: null,
+    formValidity: false,
+    animateFileIcon: false,
+    file: null
+  };
+
+
+  
+  confirmHandler = () => {
+    this.setState({
+      loading: true
+    });
+    console.log(this.state.file);
+    let formData = new FormData();
+    formData.append('myImages', this.state.file);
+    let token = localStorage.getItem('token');
+    if (!token) return this.props.history.push('/');
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+        'x-auth-token': token
+      }
+    };
+    axios
+      .post(
+        `${App.domain}api/users/verification-image/${this.props.match.params.transactionId}`,
+        formData,
+        config
+      )
+      .then(response => {
+        console.log(response);
+        this.setState({
+          loading: false
+        });
+        this.props.history.push(`/orders?orderId=${response.data.orderId}`);
+        // alert('The file is successfully uploaded');
+        // dispatch(productAdd(userId, productInfo));
+      })
+      .catch(error => {
+        console.log(error);
+        // dispatch(productAddFail());
+        alert('Critical Failure in Adding Product');
+      });
+  };
+
   modalGenerator = () => (
     <Modal
       removeModal={() => this.setState({ confirmPaymentInitiated: false })}
@@ -36,7 +92,7 @@ export class VerificationImageUpload extends Component {
     </Modal>
   );
   render() {
-    return <div></div>;
+    return this.modalGenerator();
   }
 }
 

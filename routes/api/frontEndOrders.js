@@ -2,6 +2,7 @@ const express = require('express');
 const authMiddleWare = require('../../middleware/auth');
 const router = express.Router();
 const Order = require('../../models/Order');
+const CustomOrder = require('../../models/CustomOrder');
 const Product = require('../../models/Product');
 const { check, validationResult } = require('express-validator');
 const authConfig = require('../../config/config');
@@ -119,6 +120,64 @@ router.get('/all/:page', authMiddleWare, async (req, res) => {
     res.status(400).json({ error, msg: 'error in fetch' });
   }
 });
+
+//@route    POST api/userorders/custom-order-post
+//@desc     Accepting A custom order
+//@access   private
+
+router.post(
+  '/custom-order-post',
+  authMiddleWare,
+  [
+    check('productDetails', 'productDetails are required')
+      .not()
+      .isEmpty()
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // if there are errors
+      return res.status(400).json({
+        errors: errors.array()
+      });
+    }
+    try {
+      const user = await User.findById(req.user.id);
+      if (!user) {
+        return res.status(400).json({ msg: 'user not found' });
+      }
+      const newCustomOrder = new CustomOrder({
+        user: req.user.id,
+        productDetails: req.body.productDetails
+      });
+
+      let mail = {
+        from: 'Geetico.com <contact@geetico.com>',
+        to: 'contact@geetico.com',
+        subject: `A custom order just came  from ${user.fullName}`,
+        html: `A custom order just came in from  ${user.fullName}. Check your seller dashboard to view the custom order at <a href="https://seller.geetico.com">Your seller page</a>`
+      };
+
+      transporter.sendMail(mail, (err, data) => {
+        if (err) {
+          console.log(err);
+          res.send('Failed to send your message');
+        } else {
+          // res.send('Your message has been sent');
+          res.json({
+            success: true
+          });
+        }
+        console.log(data, 'data');
+      });
+    } catch (error) {
+      res.status(500).send('server error');
+    }
+
+    // const { productDetails } = req.body;
+  }
+);
 
 //@route    POST api/userorders/all/statusChange
 //@desc     Change Status

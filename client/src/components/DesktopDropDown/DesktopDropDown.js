@@ -37,7 +37,7 @@ const DesktopDropDown = props => {
             </div>
           ) : (
             <div className={classes.welcomeNoLogIn}>
-              <p> Welocome to Geetico</p>
+              <p> Welcome to Geetico</p>
             </div>
           )}
         </div>

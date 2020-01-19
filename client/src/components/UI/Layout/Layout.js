@@ -39,6 +39,11 @@ class Layout extends React.Component {
       this.props.isAuthenticated
     ) {
       this.props.history.push('/orders');
+    } else if (
+      queryString.parse(this.props.location.search).redirect === 'custom' &&
+      this.props.isAuthenticated
+    ) {
+      this.props.history.push('/custom-order-page');
     }
     this.props.onFetchCart();
     // this.scrollHandler();

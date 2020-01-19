@@ -197,6 +197,49 @@ router.get('/confirmation/:token', async (req, res) => {
   }
 });
 
+// @route GET /api/users/confirmation/:token
+// @DESC  confirm the user and redirect to page of choice
+// @ public...
+
+router.get('/confirmation-from-email/:token', async (req, res) => {
+  try {
+    const {
+      user: { id }
+    } = jwt.verify(req.params.token, config.get('jwtSecret'));
+    let userToConfirm = await User.findById(id);
+    if (!userToConfirm) {
+      return res.status(404).json({
+        success: false,
+        msg: 'User not found'
+      });
+    }
+    console.log('found user');
+    userToConfirm.isConfirmed = true;
+    userToConfirm.save();
+    const payload = {
+      user: {
+        id: userToConfirm.id
+      }
+    };
+
+    jwt.sign(payload, config.get('jwtSecret'), null, (error, token) => {
+      if (error) throw error;
+
+      res.json({
+        token,
+        email: userToConfirm.email,
+        fullName: userToConfirm.fullName,
+        _id: userToConfirm.id,
+        avatar: userToConfirm.avatar
+      });
+    });
+
+    // return res.json({ success: true });
+  } catch (error) {
+    return res.status(500).send('server error');
+  }
+});
+
 const extractProduct = async orderDetails => {
   let myProducts = await Promise.all(
     orderDetails.map(prod => {
@@ -380,16 +423,6 @@ router.post(
         // save the user details
         let newOrder = new Order(data);
         await newOrder.save();
-
-        // console.log(newArray);
-
-        // let notification =- new Notification({
-        //   seller:
-        // })
-        // let {name, email, message} = req.body;
-        // let orderdetails = data.orderDetails.map(
-        //   prod => `<p>${prod.productName} X ${prod.quantity} </p>`
-        // );
         let content = contentGenerator(
           data,
           data.orderDetails,
@@ -559,7 +592,6 @@ router.post(
       if (!order) {
         return res.status(400).send('No order awaiting verification found');
       }
-      // if(order === "verification rejected")
 
       if (order.status === 'verification rejected') {
         try {

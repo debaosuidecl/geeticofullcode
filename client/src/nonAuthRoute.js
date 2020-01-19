@@ -13,6 +13,7 @@ import SingleOrder from './containers/SingleOrder/SingleOrder';
 import AllNotifications from './containers/AllNotifications/AllNotifications';
 import CheckEmailForVerification from './containers/CheckEmailForVerification/CheckEmailForVerification';
 import Confirmation from './containers/Confirmation/Confirmation';
+import CustomOrders from './containers/CustomOrders/CustomOrders';
 const routes = [
   {
     title: 'Product Page',
@@ -105,6 +106,12 @@ const routes = [
     path: '/cart',
     exact: true,
     component: Cart
+  },
+  {
+    title: 'custom',
+    path: '/custom-order-page',
+    component: CustomOrders,
+    exact: true
   },
   {
     title: 'Check Out Page',
