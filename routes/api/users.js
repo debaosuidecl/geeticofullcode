@@ -11,6 +11,7 @@ const User = require('../../models/FrontEndUser'); // bring in the user model
 const Seller = require('../../models/User'); // bring in the seller model
 const Product = require('../../models/Product'); // bring in the product model
 const Order = require('../../models/Order'); // bring in the order model
+const CustomOrder = require('../../models/CustomOrder'); // bring in the order model
 const SellerNotification = require('../../models/SellerNotification'); // bring in the notification model
 const BuyerNotification = require('../../models/BuyerNotification'); // bring in the notification model
 const authMiddleWare = require('../../middleware/auth');
@@ -255,6 +256,21 @@ const extractProduct = async orderDetails => {
   return myProducts;
 };
 
+//@route    GET api/userorders/custom-order-count
+//@desc     count custom order
+//@access   private});
+
+router.get('/custom-order-count', async (req, res) => {
+  try {
+    console.log('Here');
+    let count = await CustomOrder.countDocuments({ read: false });
+    console.log(count);
+    res.json({ count });
+  } catch (error) {
+    res.status(500).send('Server error');
+  }
+});
+
 // @route    POST api/users/userOrderUpdate
 // @desc     Update User address before Order
 // @access   private
@@ -496,6 +512,8 @@ router.get('/paystack/callback', authMiddleWare, async (req, res) => {
       reference,
       amount,
       // email: customer.email,
+      directPaymentMethod: false,
+
       user: req.user.id,
       fullName: metadata.fullName,
       referenceNumber: reference,
@@ -523,7 +541,63 @@ router.get('/paystack/callback', authMiddleWare, async (req, res) => {
     let newOrder = new Order(data);
     try {
       const order = await newOrder.save();
-      return res.json({ success: true, order });
+      let idList = order.orderDetails.map(p => p.user.toString());
+
+      const set = new Set(idList);
+      const newArray = [...set];
+      for (i = 0; i < newArray.length; i++) {
+        let seller = await Seller.findById(newArray[i]);
+        mailingList.push({
+          sellerEmail: seller.email,
+          sellerName: seller.fullName,
+          sellerID: seller._id,
+          buyerName: user.fullName
+        });
+      }
+      console.log(mailingList);
+
+      for (i = 0; i < mailingList.length; i++) {
+        let newSellerNotification = new SellerNotification({
+          user: req.user.id,
+          seller: mailingList[i].sellerID,
+          notification: `You just received an order from  ${mailingList[i].buyerName} `,
+          order: order._id
+        });
+        await newSellerNotification.save();
+      }
+      let newBuyerNotification = new BuyerNotification({
+        user: req.user.id,
+        notification: 'You just Completed your order',
+        order: order._id
+      });
+      await newBuyerNotification.save();
+
+      mailingList.forEach(function(to, i, array) {
+        let content = sellerVerificationEmailContent(
+          to.sellerName,
+          to.buyerName
+        );
+
+        let mail = {
+          from: 'Geetico.com <contact@geetico.com>',
+          to: to.sellerEmail,
+          subject: `verification picture submitted at geetico.com`,
+          html: content
+        };
+
+        transporter.sendMail(mail, (err, data) => {
+          if (err) {
+            console.log(err);
+            // res.send('Failed to send your message');
+          } else {
+            // res.send('Your message has been sent');
+          }
+        });
+        if (i === mailingList.length - 1) {
+          // res.json({ msg: 'done', orderId: order.transactionId });
+          return res.json({ success: true, order });
+        }
+      });
     } catch (error) {
       console.log(error);
       // console.log(error.name);
@@ -541,11 +615,9 @@ router.get('/paystack/callback', authMiddleWare, async (req, res) => {
 
 router.get('/directPaymentOrder', authMiddleWare, async (req, res) => {
   try {
-    // let user = await User.findById(req.user.id);
     let directPaymentOrder = await Order.findOne({
       transactionId: req.query.transactionId,
       directPaymentMethod: true
-      // status: 'awaiting verification'
     });
     if (!directPaymentOrder) {
       return res.status(400).json({ noDirectPayment: true });
@@ -618,8 +690,7 @@ router.post(
       let mailingList = [];
 
       let idList = order.orderDetails.map(p => p.user.toString());
-      // let users = await User.find().populate('-email');
-      // console.log(idList);
+
       const set = new Set(idList);
       const newArray = [...set];
       for (i = 0; i < newArray.length; i++) {

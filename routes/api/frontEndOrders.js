@@ -121,6 +121,38 @@ router.get('/all/:page', authMiddleWare, async (req, res) => {
   }
 });
 
+//@route    GET api/userorders/custom-order-post
+//@desc     Accepting A custom order
+//@access   private
+
+router.get('/update-custom-to-read', async (req, res) => {
+  try {
+    await User.updateMany({ read: false }, { $set: { read: true } });
+    res.json({ msg: 'success' });
+  } catch (error) {
+    res.status(500).send('Server error');
+  }
+});
+
+//@route    GET api/userorders/custom-order-post
+//@desc     Accepting A custom order
+//@access   private
+
+router.get('/customorders/:page', authMiddleWare, async (req, res) => {
+  try {
+    const resPerPage = 20; // results per page
+    const page = req.params.page || 1; // Page
+    const orders = await CustomOrder.find({})
+      .sort('-date')
+      .skip(resPerPage * page - resPerPage)
+      .limit(resPerPage);
+
+    return res.json(orders);
+  } catch (error) {
+    res.status(500).send('server error');
+  }
+});
+
 //@route    POST api/userorders/custom-order-post
 //@desc     Accepting A custom order
 //@access   private
@@ -149,9 +181,13 @@ router.post(
       }
       const newCustomOrder = new CustomOrder({
         user: req.user.id,
+        fullName: user.fullName,
+        email: user.email,
+        phone: user.phone,
+
         productDetails: req.body.productDetails
       });
-
+      await newCustomOrder.save();
       let mail = {
         from: 'Geetico.com <contact@geetico.com>',
         to: 'contact@geetico.com',

@@ -1,4 +1,5 @@
 module.exports = {
   USER: 'contact@geetico.com',
-  PASSWORD: 'IpqGe)sQx2'
+  PASSWORD: 'Robinho@007'
+  // PASSWORD: 'IpqGe)sQx2'
 };

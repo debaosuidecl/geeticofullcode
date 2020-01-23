@@ -14,6 +14,8 @@ import AllNotifications from './containers/AllNotifications/AllNotifications';
 import CheckEmailForVerification from './containers/CheckEmailForVerification/CheckEmailForVerification';
 import Confirmation from './containers/Confirmation/Confirmation';
 import CustomOrders from './containers/CustomOrders/CustomOrders';
+import Privacy from './containers/Privacy/Privacy';
+import Terms from './containers/Terms/Terms';
 const routes = [
   {
     title: 'Product Page',
@@ -69,6 +71,18 @@ const routes = [
     path: '/details/:productId',
     exact: true,
     component: ProductDetails
+  },
+  {
+    title: 'PRIVACY Details',
+    path: '/privacy-policy',
+    exact: true,
+    component: Privacy
+  },
+  {
+    title: 'Terms Details',
+    path: '/terms',
+    exact: true,
+    component: Terms
   },
   {
     title: 'Single Order',

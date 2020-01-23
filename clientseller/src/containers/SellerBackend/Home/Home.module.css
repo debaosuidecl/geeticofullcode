@@ -9,6 +9,14 @@
   /* text-align: center; */
   /* background: green; */
 }
+.Custom {
+  text-align: center;
+  padding: 10px;
+  width: 90%;
+  margin: 20px auto;
+  background: #fff;
+  border-left: 4px solid #6ce001;
+}
 .CardsCont {
   width: 50%;
   max-width: 350px;

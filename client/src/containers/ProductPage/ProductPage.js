@@ -7,16 +7,16 @@ import CarouselCard from '../../components/CarouselCard/CarouselCard';
 import { withRouter } from 'react-router-dom';
 // import InfiniteScroll from 'react-infinite-scroll-component';
 import axios from 'axios';
-import Breakfast from '../../shared/images/breakfast foods.jpg';
+import CookingNew from '../../shared/images/cookingNew.png';
 import CustomOrderPic from '../../shared/images/geetico-19.jpg';
 import Beverages from '../../shared/images/beverages.jpg';
-import Herbs from '../../shared/images/Herbs spice seasoning.jpg';
+import JamsNew from '../../shared/images/jamsNew.png';
 import Drinks from '../../shared/images/drinks.jpg';
 import SweetSpreads from '../../shared/images/sweet spreads.jpg';
 import Beans from '../../shared/images/beans rice grains.jpg';
 import Beers from '../../shared/images/beer wines and spirit.jpg';
 import bake from '../../shared/images/cooking & baking.jpg';
-import cupboard from '../../shared/images/food cupboard.jpg';
+import Food from '../../shared/images/foodCupboardNew.png';
 import SaladSpread from '../../shared/images/salad spread.jpg';
 import Choco from '../../shared/images/Candy&Chocolate.jpg';
 import household from '../../shared/images/household.jpg';
@@ -162,68 +162,76 @@ class ProductPage extends React.Component {
           <div style={{ paddingTop: '50px' }}>
             {/* <Carousel /> */}
             <div className={classes.CustomOrderPic}>
-              <img src={CustomOrderPic} alt='' />
+              <img
+                onClick={this.checkAuthBeforeCheckout}
+                src={CustomOrderPic}
+                alt=''
+              />
             </div>
-
+<div className={classes.OurCategoriesHeader}>
+      <h2>Our Categories</h2>
+</div>
             <div className={classes.GridCont}>
               <div className={classes['grid-container']}>
                 <div
                   className={classes.item1}
-                  onClick={() => this.goToCatHandler('Breakfast Foods')}
+                  onClick={() =>
+                    this.goToCatHandler(
+                      'Cooking, Spices and Baking Ingredients'
+                    )
+                  }
                 >
-                  <img src={Breakfast} alt='bf' />
+                  <img src={CookingNew} alt='bf' />
                 </div>
                 <div
                   className={classes.item2}
-                  onClick={() => this.goToCatHandler('Beverages')}
+                  onClick={() => this.goToCatHandler('Beer, Wine and Spirit')}
                 >
-                  <img src={Beverages} alt='bv' />
+                  <img src={Beers} alt='bv' />
                 </div>
                 <div
                   className={classes.item3}
-                  onClick={() =>
-                    this.goToCatHandler('Dried Beans, Grains & Rice')
-                  }
-                >
-                  <img src={Beans} alt='' />
-                </div>
-                <div
-                  className={classes.item4}
-                  onClick={() => this.goToCatHandler('Food Cupboard')}
-                >
-                  <img src={cupboard} alt='' />
-                </div>
-                <div
-                  className={classes.item5}
-                  onClick={() =>
-                    this.goToCatHandler('Herbs Spices & Seasoning')
-                  }
-                >
-                  <img src={Herbs} alt='bv' />
-                </div>
-                <div
-                  className={classes.item6}
                   onClick={() => this.goToCatHandler('Drinks')}
                 >
                   <img src={Drinks} alt='' />
                 </div>
                 <div
-                  className={classes.item7}
+                  className={classes.item4}
                   onClick={() =>
-                    this.goToCatHandler('Condiments & Salad Dressings')
+                    this.goToCatHandler('Food Cupboard and Breakfast Food')
                   }
                 >
-                  <img src={SaladSpread} alt='' />
+                  <img src={Choco} alt='' />
+                </div>
+                <div
+                  className={classes.item5}
+                  onClick={() => this.goToCatHandler('Beverages')}
+                >
+                  <img src={Beverages} alt='bv' />
+                </div>
+                <div
+                  className={classes.item6}
+                  onClick={() =>
+                    this.goToCatHandler('Food Cupboard and Breakfast Food')
+                  }
+                >
+                  <img src={Food} alt='' />
+                </div>
+                <div
+                  className={classes.item7}
+                  onClick={() =>
+                    this.goToCatHandler('Jams, Canned and Packaged Condiments')
+                  }
+                >
+                  <img src={JamsNew} alt='' />
                 </div>
                 <div
                   className={classes.item8}
-                  onClick={() =>
-                    this.goToCatHandler('Jams, Jellies & Sweet Spreads')
-                  }
+                  onClick={() => this.goToCatHandler('Household Supplies')}
                 >
-                  <img src={SweetSpreads} alt='' />
+                  <img src={household} alt='' />
                 </div>
-                <div
+                {/* <div
                   className={classes.item9}
                   onClick={() =>
                     this.goToCatHandler('Canned, Jarred & Packaged Foods')
@@ -258,7 +266,7 @@ class ProductPage extends React.Component {
                   }
                 >
                   <img src={Choco} alt='' />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -312,12 +320,12 @@ class ProductPage extends React.Component {
               <Spinner />
             ) : null}
           </div>
-          <div className={classes.MakeACustomOffer}>
+          {/* <div className={classes.MakeACustomOffer}>
             <p>Can't find what you are looking for?</p>
             <Button clicked={this.checkAuthBeforeCheckout} btnType='Geetico'>
               Make a custom order
             </Button>
-          </div>
+          </div> */}
         </Layout>
       </div>
     );

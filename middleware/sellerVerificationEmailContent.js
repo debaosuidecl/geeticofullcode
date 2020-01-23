@@ -791,7 +791,7 @@ module.exports = (sellerName, buyerName) => {
                                                                                  
                                                                                   <tr>
                                                                                       <td class="esd-block-text es-p5t es-m-txt-c" align="left">
-                                                                                          <p><a target="_blank" href="tel:+80012345678">+800 1234 5678</a><br><a target="_blank" href="mailto:contact@geetico.com">contact@geetico.com</a></p>
+                                                                                          <p><a target="_blank" href="tel:+2349050901021">+2349050901021</a><br><a target="_blank" href="mailto:contact@geetico.com">contact@geetico.com</a></p>
                                                                                       </td>
                                                                                   </tr>
                                                                               </tbody>

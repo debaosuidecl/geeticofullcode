@@ -14,6 +14,7 @@ import ProductDetail from './containers/SellerBackend/ProductDetail/ProductDetai
 import SingleOrder from './containers/SellerBackend/SingleOrder/SingleOrder';
 import AllNotifications from './containers/SellerBackend/AllNotifications/AllNotifications';
 import Customers from './containers/SellerBackend/Customers/Customers';
+import CustomOrder from './containers/SellerBackend/CustomOrder/CustomOrder';
 // import LoadingPage from './containers/LoadingPage/LoadingPage';
 // import AddProductContainer2 from './containers/SellerBackend/AddProductContainer/AddProductContainer2';
 
@@ -32,6 +33,13 @@ const routes = [
     exact: true,
 
     component: SellerBackendProducts
+  },
+  {
+    title: 'CustomOrder',
+    path: '/sellerpage/customproducts',
+    exact: true,
+
+    component: CustomOrder
   },
   {
     title: 'SellerBackendProducts',

@@ -89,12 +89,8 @@ class AddProductContainer extends Component {
               displayValue: '--Select Category--'
             },
             {
-              value: 'Beer, Wine & Spirit',
-              displayValue: 'Beer, Wine & Spirit'
-            },
-            {
-              value: 'Food Cupboard',
-              displayValue: 'Food Cupboard'
+              value: 'Beer, Wine and Spirit',
+              displayValue: 'Beer, Wine and Spirit'
             },
             {
               value: 'Beverages',
@@ -105,41 +101,30 @@ class AddProductContainer extends Component {
               displayValue: 'Drinks'
             },
             {
+              value: 'Cooking, Spices and Baking Ingredients',
+              displayValue: 'Cooking, Spices and Baking Ingredients'
+            },
+            {
               value: 'Cooking, Baking & Ingredients',
               displayValue: 'Cooking, Baking & Ingredients'
             },
             {
-              value: 'Dried Beans, Grains & Rice',
-              displayValue: 'Dried Beans, Grains & Rice'
+              value: 'Food Cupboard and Breakfast Food',
+              displayValue: 'Food Cupboard and Breakfast Food'
             },
             {
-              value: 'Breakfast Foods',
-              displayValue: 'Breakfast Foods'
+              value: 'Biscuits, Candy and Chocolate',
+              displayValue: 'Biscuits, Candy and Chocolate'
+            },
+            {
+              value: 'Jams, Canned and Packaged Condiments',
+              displayValue: 'Jams, Canned and Packaged Condiments'
             },
             {
               value: 'Household Supplies',
               displayValue: 'Household Supplies'
             },
-            {
-              value: 'Herbs Spices & Seasoning',
-              displayValue: 'Herbs Spices & Seasoning'
-            },
-            {
-              value: 'Biscuits, Candy & Chocolate',
-              displayValue: 'Biscuits, Candy & Chocolate'
-            },
-            {
-              value: 'Canned, Jarred & Packaged Foods',
-              displayValue: 'Canned, Jarred & Packaged Foods'
-            },
-            {
-              value: 'Jams, Jellies & Sweet Spreads',
-              displayValue: 'Jams, Jellies & Sweet Spreads'
-            },
-            {
-              value: 'Condiments & Salad Dressings',
-              displayValue: 'Condiments & Salad Dressings'
-            }
+          
           ]
         },
         value: '',

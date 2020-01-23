@@ -1,0 +1,13 @@
+.Header {
+  margin-top: 60px;
+  padding: 10px;
+  border-left: 7px solid #6ce001;
+  background: #fff;
+  margin-bottom: 20px;
+  box-shadow: 1px 0px 14px #eee;
+}
+.Privacy {
+  padding: 20px;
+  padding-top: 0px;
+  padding-bottom: 50px;
+}

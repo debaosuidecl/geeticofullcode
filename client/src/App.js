@@ -16,18 +16,21 @@ class App extends Component {
   static domain =
     process.env.NODE_ENV === 'development' ? 'http://localhost:2900/' : '/';
   static allowedCategories = [
-    'Beer, Wine & Spirit',
-    'Food Cupboard',
+    'Beer, Wine and Spirit',
     'Beverages',
     'Drinks',
-    'Cooking, Baking & Ingredients',
-    'Dried Beans, Grains & Rice',
-    'Breakfast Foods',
-    'Herbs Spices & Seasoning',
-    'Biscuits, Candy & Chocolate',
-    'Canned, Jarred & Packaged Foods',
-    'Jams, Jellies & Sweet Spreads',
-    'Condiments & Salad Dressings',
+    'Cooking, Spices and Baking Ingredients',
+    // 'Cooking, Baking & Ingredients',
+    // 'Herbs Spices & Seasoning',
+    // 'Dried Beans, Grains & Rice',
+    'Food Cupboard and Breakfast Food',
+    // 'Food Cupboard',
+    // 'Breakfast Foods',
+    'Biscuits, Candy and Chocolate',
+    'Jams, Canned and Packaged Condiments',
+    // 'Canned, Jarred & Packaged Foods',
+    // 'Jams, Jellies & Sweet Spreads',
+    // 'Condiments & Salad Dressings',
     'Household Supplies'
   ];
   static lagos = [
@@ -53,15 +56,13 @@ class App extends Component {
     'Surulere Lagos State'
   ];
   static hours = [
-    { displayValue: '7am - 10am', value: 1 },
+    // { displayValue: '7am - 10am', value: 1 },
     { displayValue: '10am - 1pm', value: 2 },
     { displayValue: '1pm - 4pm', value: 3 },
     { displayValue: '4pm - 7pm', value: 4 }
   ];
   static valueToHours = value => {
     switch (value) {
-      case 1:
-        return 9;
       case 2:
         return 11;
       case 3:

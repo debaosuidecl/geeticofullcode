@@ -20,6 +20,13 @@
   color: #333;
   padding: 6px 0px;
 }
+.firstcatCont {
+  flex: 2;
+  padding: 15px;
+}
+.catCont {
+  flex: 1;
+}
 
 .FooterPage h2 {
   font-family: Arial, Helvetica, sans-serif;

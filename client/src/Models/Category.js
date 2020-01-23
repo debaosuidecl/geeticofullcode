@@ -21,15 +21,15 @@ export default class Category {
 
   iconReturn() {
     switch (this.category) {
-      case 'Beer, Wine & Spirit':
+      case 'Beer, Wine and Spirit':
         return faBeer;
-      case 'Food Cupboard':
+      case 'Food Cupboard and Breakfast Food':
         return faAppleAlt;
       case 'Beverages':
         return faCoffee;
       case 'Drinks':
         return faWineGlassAlt;
-      case 'Cooking, Baking & Ingredients':
+      case 'Cooking, Spices and Baking Ingredients':
         return faBirthdayCake;
       case 'Dried Beans, Grains & Rice':
         return faConciergeBell;
@@ -37,9 +37,9 @@ export default class Category {
         return faEgg;
       case 'Herbs Spices & Seasoning':
         return faLeaf;
-      case 'Biscuits, Candy & Chocolate':
+      case 'Biscuits, Candy and Chocolate':
         return faCookie;
-      case 'Jams, Jellies & Sweet Spreads':
+      case 'Jams, Canned and Packaged Condiments':
         return faMortarPestle;
       case 'Household Supplies':
         return faSprayCan;

@@ -16,7 +16,9 @@ router.get('/', authMiddleWare, async (req, res) => {
   // res.send("auth Route");
   // console.log('here');
   try {
-    const user = await User.findById(req.user.id).select('-password'); // req.user was already stored in the middle ware as the the user payload from the decoded json and the select is used to add or remove properties// in this case -password  removes the password from the user
+    const user = await User.findById(req.user.id).select('-password');
+
+    // req.user was already stored in the middle ware as the the user payload from the decoded json and the select is used to add or remove properties// in this case -password  removes the password from the user
     res.json(user);
   } catch (error) {
     res.status(500).json({ msg: 'Server Error' });
@@ -35,7 +37,6 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      // if there are errors
       return res.status(200).json({
         errors: errors.array()
       });
@@ -50,7 +51,7 @@ router.post(
       if (!user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'Incorrect email or password entered. ' }] }); //bad request
+          .json({ errors: [{ msg: 'Incorrect email or password entered.' }] }); //bad request
       }
 
       const isMatch = await bcrypt.compare(password, user.password); // first arg is plain text password from request, second is the encrypted password, we want to check if these 2 match
@@ -92,7 +93,7 @@ router.post(
   }
 );
 
-// user seller\
+// user seller
 // @route    POST api/users
 // @desc     Register User
 // @access   public

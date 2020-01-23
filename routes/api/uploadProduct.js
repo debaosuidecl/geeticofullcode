@@ -14,18 +14,21 @@ const fs = require('fs');
 // const { check, validationResult } = require('express-validator');
 
 const allowedCategories = [
-  'Beer, Wine & Spirit',
-  'Food Cupboard',
+  'Beer, Wine and Spirit',
   'Beverages',
   'Drinks',
-  'Cooking, Baking & Ingredients',
-  'Dried Beans, Grains & Rice',
-  'Breakfast Foods',
-  'Herbs Spices & Seasoning',
-  'Biscuits, Candy & Chocolate',
-  'Canned, Jarred & Packaged Foods',
-  'Jams, Jellies & Sweet Spreads',
-  'Condiments & Salad Dressings',
+  'Cooking, Spices and Baking Ingredients',
+  // 'Cooking, Baking & Ingredients',
+  // 'Herbs Spices & Seasoning',
+  // 'Dried Beans, Grains & Rice',
+  'Food Cupboard and Breakfast Food',
+  // 'Food Cupboard',
+  // 'Breakfast Foods',
+  'Biscuits, Candy and Chocolate',
+  'Jams, Canned and Packaged Condiments',
+  // 'Canned, Jarred & Packaged Foods',
+  // 'Jams, Jellies & Sweet Spreads',
+  // 'Condiments & Salad Dressings',
   'Household Supplies'
 ];
 
@@ -95,7 +98,6 @@ router.post(
         });
       const product = await Product.findOne({
         _id: req.params.productId
-        // user: req.user.id
       });
 
       console.log(product, 'line 89');
@@ -143,7 +145,7 @@ router.post(
   upload,
   async (req, res) => {
     // console.log(req.files);
-    if (req.files[0].size > 200000) {
+    if (req.files[0].size > 2000000) {
       return res.status(400).json({
         errors: {
           msg: 'Image To large. Please compress below 2 mb'
@@ -169,10 +171,6 @@ router.post(
         msg: req.files[0].filename
       });
     } catch (error) {}
-
-    // if (req.files) {
-    //   console.log(req.files[0], 'line 90');
-    // }
   }
 );
 
@@ -190,23 +188,17 @@ router.delete(
         _id: req.params.productId,
         user: req.user.id
       });
-      // console.log(req.body);
-      // console.log(req.params.imageToDelete);
 
       if (
         fs.existsSync(
           path.join(__dirname, '..', '..', 'public', req.params.imageToDelete)
         )
       ) {
-        //file exists
-        // console.log('it exists');
         try {
           fs.unlinkSync(
             path.join(__dirname, '..', '..', 'public', req.params.imageToDelete)
           );
-          // console.log('successfully deleted image');
 
-          // time to delete reference from db
           let newProductArray = product.productURL.filter(img => {
             return img !== req.params.imageToDelete;
           });
@@ -244,10 +236,6 @@ router.delete(
         }
       });
     }
-
-    // if (req.files) {
-    //   console.log(req.files[0], 'line 90');
-    // }
   }
 );
 
@@ -338,7 +326,6 @@ router.post('/', authMiddleWare, upload, async (req, res) => {
       msg: 'Error Adding Product'
     });
     console.log(error);
-    // process.exit(1);
   }
 });
 
@@ -370,8 +357,6 @@ router.get('/getAll/:page', authMiddleWare, async (req, res) => {
     const page = req.params.page || 1; // Page
 
     if (req.query.search) {
-      // Declaring query based/search variables
-      //  const searchQuery = req.query.search,
       regex = new RegExp(escapeRegex(req.query.search), 'gi');
       // Find Demanded Products - Skipping page values, limit results       per page
       const foundProducts = await Product.find({
@@ -406,8 +391,6 @@ router.get('/usersp/:page', authMiddleWare, async (req, res) => {
     const page = req.params.page || 1; // Page
 
     if (req.query.search) {
-      // Declaring query based/search variables
-      //  const searchQuery = req.query.search,
       regex = new RegExp(escapeRegex(req.query.search), 'gi');
       // Find Demanded Products - Skipping page values, limit results       per page
       const foundProducts = await Product.find({

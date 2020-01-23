@@ -151,7 +151,7 @@ class Layout extends React.Component {
         </div>
         {this.props.hideFooter ? null : <FooterPage />}
         <div className={classes.CopyRight}>
-          © 2019 Geetico. All Rights Reserved.
+          © {new Date().getFullYear()} Geetico. All Rights Reserved.
         </div>
       </div>
     );

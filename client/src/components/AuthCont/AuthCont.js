@@ -150,8 +150,8 @@ export class AuthCont extends Component {
         {this.state.isSignIn ? null : (
           <div className={classes.Terms}>
             <p>
-              By signing up, you agree to our <Link to='/'>Terms of Use</Link>{' '}
-              and <Link to='/'>Privacy Policy.</Link>
+              By signing up, you agree to our <a href='/terms'>Terms of Use</a>{' '}
+              and <a href='/privacy-policy'>Privacy Policy.</a>
             </p>
           </div>
         )}

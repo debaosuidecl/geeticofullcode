@@ -23,18 +23,21 @@ const { check, validationResult } = require('express-validator');
 // ];
 
 const allowedCategories = [
-  'Beer, Wine & Spirit',
-  'Food Cupboard',
+  'Beer, Wine and Spirit',
   'Beverages',
   'Drinks',
-  'Cooking, Baking & Ingredients',
-  'Dried Beans, Grains & Rice',
-  'Breakfast Foods',
-  'Herbs Spices & Seasoning',
-  'Biscuits, Candy & Chocolate',
-  'Canned, Jarred & Packaged Foods',
-  'Jams, Jellies & Sweet Spreads',
-  'Condiments & Salad Dressings',
+  'Cooking, Spices and Baking Ingredients',
+  // 'Cooking, Baking & Ingredients',
+  // 'Herbs Spices & Seasoning',
+  // 'Dried Beans, Grains & Rice',
+  'Food Cupboard and Breakfast Food',
+  // 'Food Cupboard',
+  // 'Breakfast Foods',
+  'Biscuits, Candy and Chocolate',
+  'Jams, Canned and Packaged Condiments',
+  // 'Canned, Jarred & Packaged Foods',
+  // 'Jams, Jellies & Sweet Spreads',
+  // 'Condiments & Salad Dressings',
   'Household Supplies'
 ];
 //@route    GET api/userproducts

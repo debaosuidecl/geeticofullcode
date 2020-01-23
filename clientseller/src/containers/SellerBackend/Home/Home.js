@@ -9,13 +9,25 @@ import { authCheckOnContainer } from '../../../store/actions/auth';
 import SellerBackendCards from '../../../components/SellerBackendCards/SellerBackendCards';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 import LoadingPage from '../../LoadingPage/LoadingPage';
+import App from '../../../App';
 
 export class Home extends Component {
   componentWillMount() {
     this.props.onCheckAuth();
+    axios
+      .get(`${App.domain}api/users/custom-order-count`)
+      .then(res => {
+        console.log(res);
+        this.setState({ countForCustom: res.data.count });
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
   }
   state = {
+    countForCustom: 0,
     cardDetails: {
       customers: {
         title: 'Customers',
@@ -23,6 +35,12 @@ export class Home extends Component {
           'Checkout your  customer details such as email address phone number and full name',
         imageLink: ProductIcon,
         navLink: '/sellerpage/customers'
+      },
+      customOrders: {
+        title: 'Custom Orders',
+        desc: 'Checkout custom orders',
+        imageLink: OrderManagementIcon,
+        navLink: '/sellerpage/customproducts'
       },
 
       Products: {
@@ -106,6 +124,16 @@ export class Home extends Component {
           <title>Geetico seller Portal</title>
         </Helmet>
         {this.props.authCheck ? <LoadingPage /> : null}
+        {this.state.countForCustom ? (
+          <p
+            onClick={() =>
+              this.props.history.push('/sellerpage/customproducts')
+            }
+            className={classes.Custom}
+          >
+            You have {this.state.countForCustom} unread custom orders
+          </p>
+        ) : null}
         {this.props.isAuthenticated ? content : null}
       </SellerBackendLayout>
     );
