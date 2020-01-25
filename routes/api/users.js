@@ -632,9 +632,9 @@ router.get('/directPaymentOrder', authMiddleWare, async (req, res) => {
       return res.json({
         ...directPaymentOrder,
         bankDetails: {
-          bank: 'GTBank',
-          accountNumber: '0122958763',
-          accountName: 'Geetico HQ'
+          bank: 'ACCESS BANK',
+          accountNumber: '1231401158',
+          accountName: 'GEETICO HQ'
         }
       });
     } else {

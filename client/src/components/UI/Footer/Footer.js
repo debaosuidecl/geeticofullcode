@@ -30,9 +30,15 @@ const FooterPage = () => {
         </div>
         <div className={classes.catCont}>
           <strong>Social</strong>
-          <a href={`/`}>Instagram</a>
-          <a href={`/`}>Facebook</a>
-          <a href={`/`}>Twitter</a>
+          <a href={`https://instagram.com/geetico_?igshid=1wo9h9gjyp6br`}>
+            Instagram
+          </a>
+          <a
+            href={`https://m.facebook.com/Geetico/?msite_modal=composer&notif_t=aymt_simplified_make_page_post&notif_id=1579188592731743&ref=m_notif`}
+          >
+            Facebook
+          </a>
+          <a href={`https://twitter.com/geetico_?s=20`}>Twitter</a>
         </div>
         <div className={classes.catCont}>
           <strong>Legal</strong>
