@@ -65,30 +65,44 @@ export class CustomOrders extends Component {
         {this.state.loading ? loadingStage : null}
         <div className={classes.CustomOrders}>
           {/* {this.state.productDetails.map(pr)} */}
-          <p>
-            Please Enter a short description of your custom order and we will be
-            in touch with you shortly
-          </p>
+          {!this.state.success ? (
+            <React.Fragment>
+              <p>
+                Please Enter a short description of your custom order and we
+                will be in touch with you shortly
+              </p>
 
-          <textarea
-            placeholder='Please enter a custom product(s) as well as the quantities you require'
-            name='productDetails'
-            id=''
-            onChange={e => {
-              this.setState({ [e.target.name]: e.target.value });
-            }}
-            cols='30'
-            rows='10'
-          ></textarea>
-          <div className={classes.Submit}>
-            <Button clicked={this.submitCustomOrder} btnType='Geetico'>
-              Submit Custom Order
-            </Button>
-          </div>
+              <textarea
+                placeholder='Please enter a custom product(s) as well as the quantities you require'
+                name='productDetails'
+                id=''
+                onChange={e => {
+                  this.setState({ [e.target.name]: e.target.value });
+                }}
+                cols='30'
+                rows='10'
+              ></textarea>
+              <div className={classes.Submit}>
+                <Button clicked={this.submitCustomOrder} btnType='Geetico'>
+                  Submit Custom Order
+                </Button>
+              </div>
+            </React.Fragment>
+          ) : null}
           {this.state.success ? (
-            <p className={classes.Success}>
-              You've just made custom order and you will be contacted soon
-            </p>
+            <React.Fragment>
+              <p className={classes.Success}>
+                You've just made custom order and you will be contacted soon
+              </p>
+              <div className={classes.Submit}>
+                <Button
+                  clicked={() => this.props.history.push('/')}
+                  btnType='Geetico'
+                >
+                  Back To Home
+                </Button>
+              </div>
+            </React.Fragment>
           ) : null}
         </div>
       </Layout>

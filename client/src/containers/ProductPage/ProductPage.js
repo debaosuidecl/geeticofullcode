@@ -168,9 +168,9 @@ class ProductPage extends React.Component {
                 alt=''
               />
             </div>
-<div className={classes.OurCategoriesHeader}>
-      <h2>Our Categories</h2>
-</div>
+            <div className={classes.OurCategoriesHeader}>
+              <h2>Our Categories</h2>
+            </div>
             <div className={classes.GridCont}>
               <div className={classes['grid-container']}>
                 <div
@@ -320,12 +320,12 @@ class ProductPage extends React.Component {
               <Spinner />
             ) : null}
           </div>
-          {/* <div className={classes.MakeACustomOffer}>
+          <div className={classes.MakeACustomOffer}>
             <p>Can't find what you are looking for?</p>
             <Button clicked={this.checkAuthBeforeCheckout} btnType='Geetico'>
               Make a custom order
             </Button>
-          </div> */}
+          </div>
         </Layout>
       </div>
     );

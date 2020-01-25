@@ -439,35 +439,38 @@ router.post(
         // save the user details
         let newOrder = new Order(data);
         await newOrder.save();
-        let content = contentGenerator(
-          data,
-          data.orderDetails,
-          getShippingCost(amount, directSelected)
-        );
-        let mail = {
-          from: 'Geetico.com <contact@geetico.com>',
-          to: user.email,
-          subject: `Verify your order at geetico.com`,
-          html: content
-        };
 
-        transporter.sendMail(mail, (err, data) => {
-          if (err) {
-            console.log(err);
-            res.send('Failed to send your message');
-          } else {
-            // res.send('Your message has been sent');
-            res.json({
-              bankDetails: {
-                bank: 'GTBank',
-                accountNumber: '0122958763',
-                accountName: 'Geetico HQ',
-                newOrder
-              }
-            });
+        res.json({
+          bankDetails: {
+            bank: 'Access Bank',
+            accountNumber: '1231401158',
+            accountName: 'Geetico HQ',
+            newOrder
           }
-          console.log(data, 'data');
         });
+
+        // let content = contentGenerator(
+        //   data,
+        //   data.orderDetails,
+        //   getShippingCost(amount, directSelected)
+        // );
+        // let mail = {
+        //   from: 'Geetico.com <contact@geetico.com>',
+        //   to: user.email,
+        //   subject: `Verify your order at geetico.com`,
+        //   html: content
+        // };
+
+        // transporter.sendMail(mail, (err, data) => {
+        //   if (err) {
+        //     console.log(err);
+        //     res.send('Failed to send your message');
+        //   } else {
+        //     // res.send('Your message has been sent');
+
+        //   }
+        //   console.log(data, 'data');
+        // });
       } else {
         initializePayment(form, (error, body) => {
           if (error) {

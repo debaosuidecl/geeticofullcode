@@ -15,13 +15,27 @@ class CustomOrder extends Component {
   state = {
     customorders: [],
     loading: true,
-    page: 2
+    page: 2,
+    hasMore: true
   };
   componentDidMount() {
     this.initFetch();
-    axios.get(`${App.domain}api/userorders/update-custom-to-read`).then(res=> {
-      
-    });
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      return console.log('no access');
+    }
+    let config = {
+      headers: {
+        'x-auth-token': token
+      }
+    };
+    axios
+      .get(`${App.domain}api/update-custom-to-read-true`)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(e => console.log(e.response.data));
   }
   initFetch = async status => {
     const token = localStorage.getItem('token');
@@ -61,7 +75,7 @@ class CustomOrder extends Component {
       }
     };
     let firstresp = await axios.get(
-      `${App.domain}api/customorders/${this.state.page}`,
+      `${App.domain}api/userorders/customorders/${this.state.page}`,
       config
     );
     console.log(firstresp.data);

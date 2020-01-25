@@ -125,15 +125,6 @@ router.get('/all/:page', authMiddleWare, async (req, res) => {
 //@desc     Accepting A custom order
 //@access   private
 
-router.get('/update-custom-to-read', async (req, res) => {
-  try {
-    await User.updateMany({ read: false }, { $set: { read: true } });
-    res.json({ msg: 'success' });
-  } catch (error) {
-    res.status(500).send('Server error');
-  }
-});
-
 //@route    GET api/userorders/custom-order-post
 //@desc     Accepting A custom order
 //@access   private

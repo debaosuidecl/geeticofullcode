@@ -3,7 +3,7 @@ const connectDB = require('./config/db');
 require('dotenv').config();
 const app = express();
 const path = require('path');
-
+const CustomOrder = require('./models/CustomOrder');
 // console.log(process.env);
 // connect database
 
@@ -22,7 +22,16 @@ app.use(function(req, res, next) {
   next();
 });
 // define routes
-
+app.get('/api/update-custom-to-read-true', async (req, res) => {
+  try {
+    console.log('blah');
+    await CustomOrder.updateMany({ read: false }, { $set: { read: true } });
+    res.json({ msg: 'success' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Server error');
+  }
+});
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/upload', require('./routes/api/uploadProduct'));
 app.use('/api/userproducts', require('./routes/api/userProductRoutes'));
