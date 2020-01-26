@@ -63,7 +63,10 @@ var storage = multer.diskStorage({
     cb(null, Date.now() + '-' + uuid() + file.originalname);
   }
 });
-var upload = multer({ storage: storage }).array('myImages');
+var upload = multer({
+  storage: storage,
+  limits: { fileSize: 200000000 }
+}).array('myImages');
 
 // @route    POST api/users
 // @desc     Register User
