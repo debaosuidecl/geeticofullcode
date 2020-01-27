@@ -198,7 +198,7 @@ class ProductPage extends React.Component {
                 <div
                   className={classes.item4}
                   onClick={() =>
-                    this.goToCatHandler('Food Cupboard and Breakfast Food')
+                    this.goToCatHandler('Biscuits, Candy and Chocolate')
                   }
                 >
                   <img src={Choco} alt='' />
